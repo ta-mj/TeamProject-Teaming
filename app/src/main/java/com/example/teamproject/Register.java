@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class register extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 
     private Button btn_register;
     public static Context context_register;
@@ -24,7 +24,7 @@ public class register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         //Intent 설정
-        Intent registerToLogin = new Intent(register.this, MainActivity.class);
+        Intent registerToLogin = new Intent(Register.this, Login.class);
         context_register = this;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //EtitText 정보

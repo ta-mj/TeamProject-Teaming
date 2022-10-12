@@ -1,20 +1,16 @@
 package com.example.teamproject;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationBarView;
-
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
     public static Context context_main;
     private Button btn_register,btn_login;
     private EditText id,pw;
@@ -29,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         //context 설정
         context_main = this;
         //Intent 설정
-        Intent loginToRegister = new Intent(MainActivity.this,register.class);
+        Intent loginToRegister = new Intent(Login.this,Register.class);
         //텍스트필드 id로 연결
         id = findViewById(R.id.et_id);
         pw = findViewById(R.id.et_password);
