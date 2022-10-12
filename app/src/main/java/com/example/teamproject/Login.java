@@ -21,7 +21,7 @@ public class Login extends AppCompatActivity {
         //유저 미리 만들어두기
         Users.makeUser("taewoo9240","ptwmju2199@","ptwmju2199@","박태우","01020449240","kiatae0722@naver.com");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         //context 설정
         context_main = this;
         //Intent 설정
