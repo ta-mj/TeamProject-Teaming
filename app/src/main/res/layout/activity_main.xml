@@ -17,4 +17,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="160dp"
+        android:layout_height="75dp"
+        app:srcCompat="@drawable/logo_with_bg"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="-12dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
