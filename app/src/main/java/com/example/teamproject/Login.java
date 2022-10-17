@@ -26,6 +26,7 @@ public class Login extends AppCompatActivity {
         context_main = this;
         //Intent 설정
         Intent loginToRegister = new Intent(Login.this,Register.class);
+        Intent loginToMain = new Intent(Login.this,MainActivity.class);
         //텍스트필드 id로 연결
         id = findViewById(R.id.et_id);
         pw = findViewById(R.id.et_password);
@@ -42,6 +43,7 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "이름:" + Users.selectedUser.getName(), Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), "전화번호:" + Users.selectedUser.getPhoneNum(), Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), "이메일:" + Users.selectedUser.getEmail(), Toast.LENGTH_SHORT).show();
+                    startActivity(loginToMain);
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "로그인 실패,,,,", Toast.LENGTH_SHORT).show();
