@@ -15,6 +15,7 @@ public class AlarmFileTest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_alarm_file_test);
         fileButton = findViewById(R.id.file_button);
         fileButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,9 +27,10 @@ public class AlarmFileTest extends AppCompatActivity {
         alarmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "알람ㅅㅁㄷ 버튼 클릭!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "알람 버튼 클릭!", Toast.LENGTH_SHORT).show();
             }
         });
-        setContentView(R.layout.activity_alarm_file_test);
+
     }
+
 }
