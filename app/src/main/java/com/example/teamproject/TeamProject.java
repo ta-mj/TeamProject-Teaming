@@ -1,6 +1,8 @@
 package com.example.teamproject;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 public class TeamProject {
@@ -10,6 +12,7 @@ public class TeamProject {
     private ArrayList<User> myUser = new ArrayList<>();
     //업무
     private LinkedList<Task> myTask = new LinkedList<>();
+    //브레인스토밍
     //일정
     //알림
     TeamProject(String s, User u){
@@ -22,20 +25,14 @@ public class TeamProject {
     public void addUser(User u) {
         myUser.add(u);
     }
-    public void addTask(Task t) {
-        myTask.add(t);
+    public void makeTask(String n, User m, LocalDate t, String ex){
+        Task newTask = new Task(n,m,t,ex);
+        myTask.add(newTask);
     }
     public void sortTaskByStartDate() {
-        System.out.println("등록일을 기준으로 정렬합니다.");
+        myTask.sort(new StartDateComparator());
     }
     public void sortTaskByTargetDate() {
-        System.out.println("마감일을 기준으로 정렬합니다.");
-    }
-    public void printProject() {
-        System.out.println("프로젝트명:" + subject);
-        for(int i = 0 ; i < myUser.size() ; i++) {
-            System.out.println("팀원정보");
-            System.out.println(myUser.get(i).getName());
-        }
+        myTask.sort(new TargetDateComparator());
     }
 }
