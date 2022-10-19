@@ -41,9 +41,6 @@ public class Login extends AppCompatActivity {
                 if(Users.Login(id_str,pw_str) == true){
                     Toast.makeText(getApplicationContext(), "로그인 성공!", Toast.LENGTH_SHORT).show();
                     Users.selectedUser = Users.myusers.get(id_str);
-                    Toast.makeText(getApplicationContext(), "이름:" + Users.selectedUser.getName(), Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), "전화번호:" + Users.selectedUser.getPhoneNum(), Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), "이메일:" + Users.selectedUser.getEmail(), Toast.LENGTH_SHORT).show();
                     startActivity(loginToMain);
                 }
                 else{
