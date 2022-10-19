@@ -26,6 +26,7 @@ public class Login extends AppCompatActivity {
         context_main = this;
         //Intent 설정
         Intent loginToRegister = new Intent(Login.this,Register.class);
+        Intent loginToMain = new Intent(Login.this, MainActivity.class);
         //텍스트필드 id로 연결
         id = findViewById(R.id.et_id);
         pw = findViewById(R.id.et_password);
@@ -34,6 +35,10 @@ public class Login extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity((loginToMain)); // 메인화면으로 이동
+
+
+                /*  메인 화면 전환이 되면 필요가 없음
                 id_str = id.getText().toString();
                 pw_str = pw.getText().toString();
                 if(Users.Login(id_str,pw_str) == true){
@@ -45,7 +50,7 @@ public class Login extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "로그인 실패,,,,", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
         btn_register = findViewById(R.id.btn_register);
