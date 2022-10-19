@@ -14,8 +14,11 @@
         android:theme="@style/Theme.TeamProject"
         tools:targetApi="31">
         <activity
+            android:name=".AlarmFileTest"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Register"
             android:exported="true">
