@@ -13,7 +13,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="#6200ED"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,11 +52,11 @@
             android:id="@+id/button7"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:background="#6200EC"
             android:backgroundTint="#6200EC"
             android:drawableTop="@drawable/ic_person_size"
-            android:layout_gravity="center"
             android:paddingTop="10dp"
             android:src="@drawable/person"
             android:text="개인" />
