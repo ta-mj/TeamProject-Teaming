@@ -20,6 +20,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //유저 미리 만들어두기
         Users.makeUser("taewoo9240","ptwmju2199@","ptwmju2199@","박태우","01020449240","kiatae0722@naver.com");
+        Users.makeUser("ckdtlr2000","125125","125125","김창식","01063729793","ckdtlr2000@naver.com");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //context 설정
