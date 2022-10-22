@@ -3,6 +3,9 @@
 
     <item
         android:drawable="@drawable/person"
-        android:width="24dp"
-        android:height="24dp"/>
+        android:width="20dp"
+        android:height="20dp"/>
 </layer-list>
+
+<!--메인 화면에서 프로젝트 버튼 아이콘과 크기가 비슷하게 수정했음,
+    다른 곳에서 쓰려면 _size2파일 만들 것-->
