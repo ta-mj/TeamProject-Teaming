@@ -69,7 +69,7 @@ public class AlarmFileTest extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "파일 저장 버튼 클릭!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "파일 저장 버튼 클릭!!", Toast.LENGTH_SHORT).show();
                 Intent savefile = new Intent(Intent.ACTION_CREATE_DOCUMENT);
                 savefile.addCategory(Intent.CATEGORY_OPENABLE);
                 savefile.setType("*/*");
