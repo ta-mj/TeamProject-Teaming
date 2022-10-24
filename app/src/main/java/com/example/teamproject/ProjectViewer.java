@@ -26,7 +26,7 @@ public class ProjectViewer extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.projectitem,this,true);
 
-        textView = (TextView)findViewById(R.id.textView);
+        textView = (TextView)findViewById(R.id.teamNameView);
         imageView = (ImageView) findViewById(R.id.teamImage);
     }
 

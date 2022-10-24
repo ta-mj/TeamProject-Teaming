@@ -33,9 +33,19 @@ public class TeamProjectUI extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teamproject);
 
-        //view들 id로 연결
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        GridView gridView = findViewById(R.id.gridView);
+        Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
+        setSupportActionBar(toolbar_bell);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        gridView = findViewById(R.id.gridView);
+        addButton = findViewById(R.id.addButton);
+        projectNameText = findViewById(R.id.projectNameText);
+
+        projectAdapter = new ProjectAdapter();
+        projectAdapter.addItem(new ProjectItem("팀프로젝트", R.drawable.team));
+
+        gridView.setAdapter(projectAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -43,41 +53,18 @@ public class TeamProjectUI extends AppCompatActivity {
 
             }
         });
-        projectNameText = findViewById(R.id.projectNameText);
-        addButton = findViewById(R.id.addButton);
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String projectName = projectNameText.getText().toString();
-                projectAdapter.addItem(new ProjectItem(projectName,R.drawable.team));
+                String text = projectNameText.getText().toString();
+                projectAdapter.addItem(new ProjectItem(text,R.drawable.team));
+                //아이템추가
                 projectAdapter.notifyDataSetChanged();
             }
         });
-
-
-        Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
-        setSupportActionBar(toolbar_bell);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.bell_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.navigation_notifications:
-                return true;
-        }
-        return true;
-    }
     class ProjectAdapter extends BaseAdapter {
         ArrayList<ProjectItem> items = new ArrayList<ProjectItem>();
         @Override
