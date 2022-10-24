@@ -43,7 +43,7 @@
             android:layout_weight="1"
             android:background="#6200EC"
             android:backgroundTint="#6200EC"
-            android:drawableTop="@drawable/ic_home_size"
+            android:drawableTop="@drawable/ic_team_size"
             android:paddingTop="10dp"
             android:src="@drawable/team"
             android:text="프로젝트" />
