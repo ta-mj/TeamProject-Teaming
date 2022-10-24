@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Users {
     public static HashMap<String,User> myusers = new HashMap<>();
     public static User selectedUser;
+    public static TeamProject selectedProject;
     public static int makeUser(String id,String pw,String checkpw,String name,String ph,String email) {
         if(myusers.containsKey(id)) {
             return -1;

@@ -3,18 +3,21 @@ package com.example.teamproject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     private View decorView;
     private int uiOption;
-
+    private Intent mainToProjectUI;
+    private Button projectButton,mainButton,personalButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
         setSupportActionBar(toolbar_bell);
+
+        //인텐트 설정
+        mainToProjectUI = new Intent(MainActivity.this,TeamProjectUI.class);
 
         //하단 네비게이션바를 숨겨주는 코드(하단을 쓸어올리거나 상단을 쓸어내리면 다시 나옴)
         decorView = getWindow().getDecorView();
@@ -36,7 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
         decorView.setSystemUiVisibility( uiOption );
 
-
+        //프로젝트 버튼
+        projectButton = findViewById(R.id.projectbutton);
+        projectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(mainToProjectUI);
+            }
+        });
 
 
     }

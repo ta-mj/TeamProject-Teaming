@@ -30,11 +30,9 @@ public class User {
     public String printInfo() {
          return "이름" + getName() + "이메일:" + getEmail() + "전화번호:" + getPhoneNum() + "\n";
     }
-    public TeamProject makeProject() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("프로젝트명을 입력하세요.");
-        TeamProject newProject = new TeamProject(sc.nextLine(),this);
-        return newProject;
+    public void makeProject(String s) {
+        TeamProject newProject = new TeamProject(s,this);
+        Users.selectedProject = newProject;
     }
 
 }
