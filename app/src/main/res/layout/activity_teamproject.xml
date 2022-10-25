@@ -8,7 +8,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".MainActivity">
+tools:context=".TeamProjectUI">
 
 <include
     layout="@layout/toolbar_bell"
@@ -23,14 +23,14 @@ tools:context=".MainActivity">
     android:orientation="horizontal">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="추가" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/projectNameText"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -38,12 +38,12 @@ tools:context=".MainActivity">
         android:inputType="text" />
 </LinearLayout>
 
-<GridView
-    android:id="@+id/gridView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/linearLayout"
-    android:numColumns="2" />
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:numColumns="2" />
 
 
 </RelativeLayout>

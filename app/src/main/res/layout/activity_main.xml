@@ -21,8 +21,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
+
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/homebutton"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_gravity="center"
@@ -34,22 +35,21 @@
             android:src="@drawable/ic_home_black_24dp"
             android:text="홈" />
 
-
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/projectbutton"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="#6200EC"
             android:backgroundTint="#6200EC"
-            android:drawableTop="@drawable/ic_home_size"
+            android:drawableTop="@drawable/ic_team_size"
             android:paddingTop="10dp"
-            android:src="@drawable/team"
+            android:src="@drawable/person"
             android:text="프로젝트" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/personalbutton"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_weight="1"
