@@ -2,19 +2,13 @@ package com.example.teamproject;
 
 //프로젝트 화면(설계도 상 4번째 화면) 관련 .java 파일
 
-import static com.example.teamproject.Users.selectedUser;
-
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -31,7 +25,7 @@ public class TeamProjectUI extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teamproject);
+        setContentView(R.layout.activity_teamproject_ui);
 
         Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
         setSupportActionBar(toolbar_bell);
