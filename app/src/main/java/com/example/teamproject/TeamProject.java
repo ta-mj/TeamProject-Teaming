@@ -18,6 +18,7 @@ public class TeamProject {
     TeamProject(String s, User u){
         subject = s;
         myUser.add(u);
+        Users.selectedProject = this;
     }
     public void setSubject(String s) {
         subject = s;
@@ -25,6 +26,7 @@ public class TeamProject {
     public void addUser(User u) {
         myUser.add(u);
     }
+    public String getSubject() { return this.subject; }
     public void makeTask(String n, User m, LocalDate t, String ex){
         Task newTask = new Task(n,m,t,ex);
         myTask.add(newTask);

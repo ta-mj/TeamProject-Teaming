@@ -2,8 +2,10 @@ package com.example.teamproject;
 
 //프로젝트 화면(설계도 상 4번째 화면) 관련 .java 파일
 
+import static com.example.teamproject.Users.selectedProject;
 import static com.example.teamproject.Users.selectedUser;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,6 +30,7 @@ public class TeamProjectUI extends AppCompatActivity {
     private Button addButton;
     private EditText projectNameText;
     private ProjectAdapter projectAdapter;
+    private Intent projectUIToProjectInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,19 +41,22 @@ public class TeamProjectUI extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        projectUIToProjectInfo = new Intent(TeamProjectUI.this, TeamProjectInformation.class);
+
         gridView = findViewById(R.id.gridView);
         addButton = findViewById(R.id.addButton);
         projectNameText = findViewById(R.id.projectNameText);
 
         projectAdapter = new ProjectAdapter();
-        projectAdapter.addItem(new ProjectItem("팀프로젝트", R.drawable.team));
+        projectAdapter.addItem(new ProjectItem(R.drawable.team , new TeamProject("팀프로젝트1", selectedUser)));
 
         gridView.setAdapter(projectAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(),"팀프로젝트 : "+ projectAdapter.getItem(i).getText().toString(), Toast.LENGTH_LONG).show();
-
+                Toast.makeText(getApplicationContext(),"팀프로젝트 : "+ projectAdapter.getItem(i).getProject().getSubject(), Toast.LENGTH_SHORT).show();
+                selectedProject = projectAdapter.getItem(i).getProject();
+                startActivity(projectUIToProjectInfo);
             }
         });
 
@@ -58,7 +64,8 @@ public class TeamProjectUI extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String text = projectNameText.getText().toString();
-                projectAdapter.addItem(new ProjectItem(text,R.drawable.team));
+                TeamProject newProject = new TeamProject(text,selectedUser);
+                projectAdapter.addItem(new ProjectItem(R.drawable.team,newProject));
                 //아이템추가
                 projectAdapter.notifyDataSetChanged();
             }
