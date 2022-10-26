@@ -34,7 +34,7 @@ public class TeamProjectUI extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teamproject);
+        setContentView(R.layout.activity_teamproject_ui);
 
         Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
         setSupportActionBar(toolbar_bell);
