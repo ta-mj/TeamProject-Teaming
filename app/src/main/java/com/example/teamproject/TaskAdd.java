@@ -5,7 +5,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -39,7 +38,7 @@ public class TaskAdd extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initDatePicker(); //DatePicker 초기화
-        dateButton = findViewById(R.id.datePickerButton);
+        dateButton = findViewById(R.id.fileButton);
         dateButton.setText(getTodaysDate());
     }
 
@@ -73,7 +72,8 @@ public class TaskAdd extends AppCompatActivity{
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
-        int style = AlertDialog.THEME_HOLO_LIGHT;
+        //int style = AlertDialog.THEME_HOLO_LIGHT;
+        int style = android.R.style.Theme_Material_Light_Dialog_Alert;
 
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
         //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());  //스피너 달력에 표시되는 최대 년도, 월, 일을 제한 하는 코드
@@ -85,7 +85,17 @@ public class TaskAdd extends AppCompatActivity{
         return year + " " + month + "월 " + day + "일    "; //스피너 달력으로 마감일 설정시 버튼에 출력되는 양식, 일 뒤에 띄어쓰기 4칸은 좀 더 이쁘게 출력하기 위함.
     }
 
-    /* private String getMonthFormat(int month)  //원래 복붙했을 당시 코드로 지정한 월을 영어 형식으로 변환해서 출력해주던 메소드. 오류 발생 시 복원용으로 남겨둠.
+    public void openDatePicker(View view) //DatePicker 달력을 보여주는 메소드
+    {
+        datePickerDialog.show();
+    }
+
+
+
+}
+
+
+/* private String getMonthFormat(int month)  //원래 복붙했을 당시 코드로 지정한 월을 영어 형식으로 변환해서 출력해주던 메소드. 오류 발생 시 복원용으로 남겨둠.
     {
         if(month == 1)
             return "1월";
@@ -115,13 +125,6 @@ public class TaskAdd extends AppCompatActivity{
         //default should never happen
         return "1월";
     } */
-
-    public void openDatePicker(View view) //DatePicker 달력을 보여주는 메소드
-    {
-        datePickerDialog.show();
-    }
-
-}
 
 
 
