@@ -32,6 +32,9 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity
+            android:name=".AlarmUI"
+            android:exported="true" />
+        <activity
             android:name=".Register"
             android:exported="true">
             <meta-data

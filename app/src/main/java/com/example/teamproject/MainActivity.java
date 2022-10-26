@@ -65,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.navigation_notifications:
-                return true;
+                Intent mainToAlram = new Intent (this, AlarmUI.class);
+                startActivity(mainToAlram);
         }
         return true;
     }

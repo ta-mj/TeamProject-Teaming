@@ -3,26 +3,19 @@ package com.example.teamproject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.app.DatePickerDialog;
-import android.widget.TextView;
 
 import java.util.Calendar;
 
 public class TaskAdd extends AppCompatActivity{
 
-    //View 관련 변수
-    private TextView category_view,manager_view,work_view,explain_view;
-    private Button taskAddConfirmButton;
-    //마감일 관련 변수
     private DatePickerDialog datePickerDialog;  //스피너 달력 변수
     private Button dateButton;  //이 버튼을 누르면 스피너 달력이 뜸
-    //Intent 변수
-    private Intent taskAddToTaskUI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +35,6 @@ public class TaskAdd extends AppCompatActivity{
         dateButton.setText(getTodaysDate());
     }
 
-
-    /*마감일 관련 함수 모음*/
     private String getTodaysDate() //오늘 날짜를 얻어오는 함수
     {
         Calendar cal = Calendar.getInstance();
@@ -72,8 +63,7 @@ public class TaskAdd extends AppCompatActivity{
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
-        //int style = AlertDialog.THEME_HOLO_LIGHT;
-        int style = android.R.style.Theme_Material_Light_Dialog_Alert;
+        int style = AlertDialog.THEME_HOLO_LIGHT;
 
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
         //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());  //스피너 달력에 표시되는 최대 년도, 월, 일을 제한 하는 코드
