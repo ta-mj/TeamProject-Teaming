@@ -27,7 +27,7 @@ public class Login extends AppCompatActivity {
         context_main = this;
         //Intent 설정
         Intent loginToRegister = new Intent(Login.this,Register.class);
-        Intent loginToMain = new Intent(Login.this,MainActivity.class);
+        Intent loginToMain = new Intent(Login.this,TaskAdd.class);
         //텍스트필드 id로 연결
         id = findViewById(R.id.et_id);
         pw = findViewById(R.id.et_password);

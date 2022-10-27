@@ -20,7 +20,7 @@ public class TaskAdd extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task_ui);
+        setContentView(R.layout.activity_task_add);
 
         Toolbar toolbar_back = (Toolbar) findViewById(R.id.toolbar_back);
         setSupportActionBar(toolbar_back);
@@ -31,7 +31,7 @@ public class TaskAdd extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initDatePicker(); //DatePicker 초기화
-        dateButton = findViewById(R.id.fileButton);
+        dateButton = findViewById(R.id.calendarButton);
         dateButton.setText(getTodaysDate());
     }
 
@@ -72,7 +72,7 @@ public class TaskAdd extends AppCompatActivity{
 
     private String makeDateString(int day, int month, int year)
     {
-        return year + " " + month + "월 " + day + "일    "; //스피너 달력으로 마감일 설정시 버튼에 출력되는 양식, 일 뒤에 띄어쓰기 4칸은 좀 더 이쁘게 출력하기 위함.
+        return year + " " + month + "월 " + day + "일"; //스피너 달력으로 마감일 설정시 버튼에 출력되는 양식, 일 뒤에 띄어쓰기 4칸은 좀 더 이쁘게 출력하기 위함.
     }
 
     public void openDatePicker(View view) //DatePicker 달력을 보여주는 메소드
