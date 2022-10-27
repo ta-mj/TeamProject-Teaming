@@ -1,21 +1,13 @@
 package com.example.teamproject;
 
 public class ProjectItem {
-    private String text;
     private int image;
+    private TeamProject myProject;
 
-    public ProjectItem(String text, int image){
-        this.text = text;
+    public ProjectItem(int image, TeamProject pr){
         this.image = image;
+        this.myProject = pr;
     }
-
-    public String getText(){
-        return text;
-    }
-    public void setText(String text){
-        this.text = text;
-    }
-
     public int getImage(){
         return image;
     }
@@ -23,4 +15,8 @@ public class ProjectItem {
     public void setImage(int image){
         this.image = image;
     }
+
+    public TeamProject getProject() { return myProject; }
+
+    public void setProject(TeamProject pr) { this.myProject = pr; }
 }

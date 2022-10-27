@@ -31,7 +31,7 @@ public class ProjectViewer extends LinearLayout {
     }
 
     public void setItem(ProjectItem projectItem){
-        textView.setText(projectItem.getText());
+        textView.setText(projectItem.getProject().getSubject());
         imageView.setImageResource(projectItem.getImage());
     }
 }

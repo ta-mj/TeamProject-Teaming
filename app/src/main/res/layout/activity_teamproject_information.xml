@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/project_taskbutton"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_gravity="center"
@@ -38,7 +38,7 @@
 
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/project_brainstromingbutton"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_gravity="center"
@@ -51,7 +51,7 @@
             android:text="브레인스토밍" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/project_schedulebutton"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_gravity="center"
@@ -65,73 +65,83 @@
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/progressBar2"
+        android:id="@+id/team_progressbar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="160dp"
         android:layout_height="30dp"
         android:layout_marginStart="70dp"
         android:layout_marginTop="60dp"
         android:scaleY="3"
+        android:max = "100"
+        android:progress="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <ProgressBar
-        android:id="@+id/progressBar3"
+        android:id="@+id/member1_progressbar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="160dp"
         android:layout_height="30dp"
         android:layout_marginTop="50dp"
         android:scaleY="3"
+        android:max = "100"
+        android:progress="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.652"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar2" />
+        app:layout_constraintTop_toBottomOf="@+id/team_progressbar" />
 
     <ProgressBar
-        android:id="@+id/progressBar4"
+        android:id="@+id/member2_progressbar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="160dp"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
         android:scaleY="3"
+        android:max = "100"
+        android:progress="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.652"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar3" />
+        app:layout_constraintTop_toBottomOf="@+id/member1_progressbar" />
 
     <ProgressBar
-        android:id="@+id/progressBar5"
+        android:id="@+id/member3_progressbar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="160dp"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
         android:scaleY="3"
+        android:max = "100"
+        android:progress="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.652"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar4" />
+        app:layout_constraintTop_toBottomOf="@+id/member2_progressbar" />
 
     <ProgressBar
-        android:id="@+id/progressBar6"
+        android:id="@+id/membet4_progressbar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="160dp"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
         android:scaleY="3"
+        android:max = "100"
+        android:progress="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.652"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar5" />
+        app:layout_constraintTop_toBottomOf="@+id/member3_progressbar" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="60dp"
-        android:text="구현했조(8조)"
+        android:text="팀 전체 진행도"
         android:textSize="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/progressBar2"
+        app:layout_constraintEnd_toStartOf="@+id/team_progressbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -140,10 +150,10 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="50dp"
-        android:text="김창식"
+        android:text="팀원1"
         android:textSize="16dp"
         android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/progressBar3"
+        app:layout_constraintEnd_toStartOf="@+id/member1_progressbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -152,10 +162,10 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
-        android:text="TextView"
+        android:text="팀원2"
         android:textSize="16dp"
         android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/progressBar4"
+        app:layout_constraintEnd_toStartOf="@+id/member2_progressbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -164,10 +174,10 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
-        android:text="TextView"
+        android:text="팀원3"
         android:textSize="16dp"
         android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/progressBar5"
+        app:layout_constraintEnd_toStartOf="@+id/member3_progressbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -176,10 +186,10 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
-        android:text="TextView"
+        android:text="팀원4"
         android:textSize="16dp"
         android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/progressBar6"
+        app:layout_constraintEnd_toStartOf="@+id/membet4_progressbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 

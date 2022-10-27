@@ -14,6 +14,12 @@
         android:theme="@style/Theme.TeamProject"
         tools:targetApi="31">
         <activity
+            android:name=".TaskAdd"
+            android:exported="true"/>
+        <activity
+            android:name=".TaskUI"
+            android:exported="true"/>
+        <activity
             android:name=".TeamProjectInformation"
             android:exported="true"/>
         <activity
@@ -24,6 +30,9 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AlarmUI"
             android:exported="true" />
         <activity
             android:name=".Register"
