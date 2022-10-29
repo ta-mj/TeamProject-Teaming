@@ -18,6 +18,7 @@ public class TeamProject {
     TeamProject(String s, User u){
         subject = s;
         myUser.add(u);
+        Users.selectedUser.addProject(this);
         Users.selectedProject = this;
     }
     public void setSubject(String s) {

@@ -49,12 +49,15 @@ public class TeamProjectUI extends AppCompatActivity {
 
         projectAdapter = new ProjectAdapter();
         projectAdapter.addItem(new ProjectItem(R.drawable.team , new TeamProject("팀프로젝트1", selectedUser)));
+        //반복문으로 소속된 프로젝트들 가지고 오기
+        for(int i = 0 ; i < selectedUser.getProjectNum() ; i++){
+            projectAdapter.addItem(new ProjectItem(R.drawable.team , selectedUser.getProject(i)));
+        }
 
         gridView.setAdapter(projectAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(),"팀프로젝트 : "+ projectAdapter.getItem(i).getProject().getSubject(), Toast.LENGTH_SHORT).show();
                 selectedProject = projectAdapter.getItem(i).getProject();
                 startActivity(projectUIToProjectInfo);
             }

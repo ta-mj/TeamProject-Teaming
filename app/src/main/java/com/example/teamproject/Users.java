@@ -34,6 +34,12 @@ public class Users {
             return false;
         }
     }
+    public boolean findUser(int id){
+        return myusers.containsKey(id);
+    }
+    public User getUser(int id) {
+        return myusers.get(id);
+    }
 
 }
 

@@ -27,12 +27,13 @@ public class User {
     public String getPhoneNum() {
         return phone;
     }
+    public int getProjectNum() { return myProject.size(); }
+    public TeamProject getProject(int i) { return myProject.get(i); }
     public String printInfo() {
          return "이름" + getName() + "이메일:" + getEmail() + "전화번호:" + getPhoneNum() + "\n";
     }
-    public void makeProject(String s) {
-        TeamProject newProject = new TeamProject(s,this);
-        Users.selectedProject = newProject;
+    public void addProject(TeamProject t){
+        this.myProject.add(t);
     }
 
 }
