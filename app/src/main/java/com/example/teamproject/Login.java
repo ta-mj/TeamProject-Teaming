@@ -27,7 +27,7 @@ public class Login extends AppCompatActivity {
         context_main = this;
         //Intent 설정
         Intent loginToRegister = new Intent(Login.this,Register.class);
-        Intent loginToMain = new Intent(Login.this,TeamProjectUI.class);  //팀원 추가 버튼 확인을 위해 프로젝트 UI로 연결함
+        Intent loginToMain = new Intent(Login.this,TeamProjectInformation.class);  //팀원 추가 버튼 확인을 위해 프로젝트 정보로 연결함
         //텍스트필드 id로 연결
         id = findViewById(R.id.et_id);
         pw = findViewById(R.id.et_password);
