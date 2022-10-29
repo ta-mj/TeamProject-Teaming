@@ -38,14 +38,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/teamProgressView"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_back"
-        app:layout_constraintVertical_bias="0.681" />
+        app:layout_constraintVertical_bias="0.73" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="75p"
         android:text="카테고리"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:text="담당자"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:text="업무 제목"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,66 +80,69 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="50dp"
         android:text="설명"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <EditText
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="80dp"
-        android:text="TextView"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.718"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_back" />
-
-    <Button
-        android:id="@+id/managerAddButton"
-        android:layout_width="90dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="40dp"
-        android:text="추가"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-    <EditText
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.46"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/managerAddButton" />
-
-    <EditText
-        android:id="@+id/textView14"
-        android:layout_width="153dp"
-        android:layout_height="95dp"
-        android:layout_marginTop="40dp"
-        android:text="TextView"
+        android:id="@+id/EditText11"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="65dp"
+        android:ellipsize="start"
+        android:hint="내용을 입력해주세요."
+        android:singleLine="true"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.802"
+        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_back" />
+
+    <EditText
+        android:id="@+id/EditText12"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:hint="내용을 입력해주세요."
+        android:singleLine="true"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/EditText11" />
+
+    <EditText
+        android:id="@+id/EditText13"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:hint="내용을 입력해주세요."
+        android:singleLine="true"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/EditText12" />
+
+    <EditText
+        android:id="@+id/EditText14"
+        android:layout_width="195dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="20dp"
+        android:hint="내용을 입력해주세요."
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.69"
         app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintTop_toBottomOf="@+id/EditText13" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="확인"
-        android:textSize="30dp"
+        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
