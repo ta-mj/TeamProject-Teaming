@@ -19,12 +19,12 @@ import java.io.FileOutputStream;
 
 
 public class Calendar extends AppCompatActivity {
-    public String readDay = null;  //선택한 일자 읽어오는 변수
-    public String str = null; //EditText에 입력되는 내용을 저장하는 변수
-    public CalendarView calendarView; //캘린더뷰 변수
-    public Button changeButton, deleteButton, saveButton; //수정, 삭제, 저장 버튼
-    public TextView diaryTextView, contentTextView; //diaryTextView = 선택한 날짜를 표시해줌, contentTextView = 일정 내용(str변수의 값)을 저장하는 변수
-    public EditText contextEditText; //입력 창 관련 변수
+    public String readDay = null;
+    public String str = null;
+    public CalendarView calendarView;
+    public Button changeButton, deleteButton, saveButton;
+    public TextView diaryTextView, contentTextView;
+    public EditText contextEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,19 +41,19 @@ public class Calendar extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        //캘린더뷰 관련 변수들
         calendarView = findViewById(R.id.calendarView);
         diaryTextView = findViewById(R.id.diaryTextView);
         saveButton = findViewById(R.id.saveButton);
         deleteButton = findViewById(R.id.deleteButton);
         changeButton = findViewById(R.id.changeButton);
         contentTextView = findViewById(R.id.contentTextView);
+        //textView3 = findViewById(R.id.textView3);
         contextEditText = findViewById(R.id.contextEditText);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
         {
             @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) //일자 클릭 시 일자를 받아 처리하는 메소드
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth)
             {
                 diaryTextView.setVisibility(View.VISIBLE);
                 saveButton.setVisibility(View.VISIBLE);
@@ -66,7 +66,7 @@ public class Calendar extends AppCompatActivity {
                 checkDay(year, month, dayOfMonth);
             }
         });
-        saveButton.setOnClickListener(new View.OnClickListener()  //저장 버튼을 누르면 입력한 내용을 해당 일자에 저장하는 메소드 / 저장 버튼 클릭 이벤트 처리
+        saveButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -84,7 +84,7 @@ public class Calendar extends AppCompatActivity {
         });
     }
 
-    public void checkDay(int cYear, int cMonth, int cDay) //선택한 일자를 readDay 변수에 저장하는 메소드
+    public void checkDay(int cYear, int cMonth, int cDay)
     {
         readDay = "" + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt";
         FileInputStream fis;
@@ -107,7 +107,7 @@ public class Calendar extends AppCompatActivity {
             changeButton.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);
 
-            changeButton.setOnClickListener(new View.OnClickListener() //수정 버튼을 누르면 입력한 내용을 불러와 수정할 수 있게 해주는 메소드 / 수정 버튼 클릭 이벤트 처리
+            changeButton.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View view)
@@ -123,7 +123,7 @@ public class Calendar extends AppCompatActivity {
                 }
 
             });
-            deleteButton.setOnClickListener(new View.OnClickListener() //삭제 버튼을 누르면 해당 일자에 저장된 일정을 삭제해주는 메소드 / 삭제 버튼 클릭 이벤트 처리
+            deleteButton.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View view)
@@ -155,7 +155,7 @@ public class Calendar extends AppCompatActivity {
     }
 
     @SuppressLint("WrongConstant")
-    public void removeDiary(String readDay) //선택한 일자에 저장한 내용을 삭제하는 메소드
+    public void removeDiary(String readDay)
     {
         FileOutputStream fos;
         try
@@ -173,7 +173,7 @@ public class Calendar extends AppCompatActivity {
     }
 
     @SuppressLint("WrongConstant")
-    public void saveDiary(String readDay) //선택한 일자에 입력 내용을 저장하는 메소드
+    public void saveDiary(String readDay)
     {
         FileOutputStream fos;
         try
