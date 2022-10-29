@@ -4,17 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.app.DatePickerDialog;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.Calendar;
 
 public class TaskAdd extends AppCompatActivity{
 
+    private Intent taskAddToTaskMangerAdd;
+    private Button managerAddButton;
     private DatePickerDialog datePickerDialog;  //스피너 달력 변수
     private Button dateButton;  //이 버튼을 누르면 스피너 달력이 뜸
 
@@ -31,6 +35,9 @@ public class TaskAdd extends AppCompatActivity{
         //툴바 뒤로가기 보이게 하는 코드
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //담당자 설정
+
+        //마감일 설정
         initDatePicker(); //DatePicker 초기화
         dateButton = findViewById(R.id.calendarButton);
         dateButton.setText(getTodaysDate());

@@ -34,10 +34,10 @@ public class Users {
             return false;
         }
     }
-    public boolean findUser(int id){
+    public static boolean findUser(String id){
         return myusers.containsKey(id);
     }
-    public User getUser(int id) {
+    public static User getUser(String id) {
         return myusers.get(id);
     }
 

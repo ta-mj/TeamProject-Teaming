@@ -28,11 +28,15 @@ public class TeamProject {
         myUser.add(u);
     }
     public String getSubject() { return this.subject; }
-    public User getMyUser(int i){ return this.myUser.get(i); }
+    public ArrayList<User> getAllUser(){ return this.myUser;}
+    public User getOneUser(int i){ return this.myUser.get(i); }
     public int getUserNum() { return this.myUser.size(); }
     public void makeTask(String n, User m, LocalDate t, String ex){
         Task newTask = new Task(n,m,t,ex);
         myTask.add(newTask);
+    }
+    public boolean findUser(User u){
+        return myUser.contains(u);
     }
     public void sortTaskByStartDate() {
         myTask.sort(new StartDateComparator());

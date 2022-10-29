@@ -48,7 +48,6 @@ public class TeamProjectUI extends AppCompatActivity {
         projectNameText = findViewById(R.id.projectNameText);
 
         projectAdapter = new ProjectAdapter();
-        projectAdapter.addItem(new ProjectItem(R.drawable.team , new TeamProject("팀프로젝트1", selectedUser)));
         //반복문으로 소속된 프로젝트들 가지고 오기
         for(int i = 0 ; i < selectedUser.getProjectNum() ; i++){
             projectAdapter.addItem(new ProjectItem(R.drawable.team , selectedUser.getProject(i)));
@@ -120,6 +119,7 @@ public class TeamProjectUI extends AppCompatActivity {
             case android.R.id.home: //뒤로가기 버튼 클릭 시 이벤트 처리
                //Intent teamProjectToMain = new Intent(this, MainActivity.class);
                 //startActivity(teamProjectToMain);
+
         }
         return true;
     }

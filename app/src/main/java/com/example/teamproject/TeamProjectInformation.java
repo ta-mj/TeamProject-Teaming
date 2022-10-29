@@ -17,9 +17,9 @@ import androidx.appcompat.widget.Toolbar;
 
 public class TeamProjectInformation extends AppCompatActivity {
     //변수 선언
-    private Button taskbutton,brainstromingbutton,personalbutton;
+    private Button taskButton, brainstromingButton, schelduleButton,addUserButton;
     private ProgressBar teamprogress;
-    private Intent projectInfoToTaskUI;
+    private Intent projectInfoToTaskUI,projectInfoToCalender;
     private TextView[] memberView;
     private ProgressBar[] memberProgressBar;
     @Override
@@ -29,13 +29,15 @@ public class TeamProjectInformation extends AppCompatActivity {
 
         //Intent 설정
         projectInfoToTaskUI = new Intent(TeamProjectInformation.this,TaskUI.class);
+        projectInfoToCalender = new Intent(TeamProjectInformation.this, Calendar.class);
 
         //id로 view 연결
         Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
         setSupportActionBar(toolbar_bell);
-        taskbutton = findViewById(R.id.project_taskbutton);
-        brainstromingbutton = findViewById(R.id.project_brainstromingbutton);
-        personalbutton = findViewById(R.id.project_schedulebutton);
+        taskButton = findViewById(R.id.project_taskbutton);
+        brainstromingButton = findViewById(R.id.project_brainstromingbutton);
+        schelduleButton = findViewById(R.id.project_schedulebutton);
+        addUserButton = findViewById(R.id.navigation_team_add);
         teamprogress = (ProgressBar) findViewById((R.id.team_progressbar));
 
         memberView = new TextView[4];
@@ -54,14 +56,24 @@ public class TeamProjectInformation extends AppCompatActivity {
         //멤버 수만큼 progressbar visibillity 설정
         for(int i  = 0 ; i < Users.selectedProject.getUserNum() ; i++){
             memberView[i].setText(Users.selectedProject.getMyUser(i).getName());
+            memberView[i].setVisibility(View.VISIBLE);
             memberProgressBar[i].setVisibility(View.VISIBLE);
         }
 
         //button onclickevent 설정
-        taskbutton.setOnClickListener(new View.OnClickListener() {
+        taskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(projectInfoToTaskUI);
+            }
+        });
+
+
+
+        schelduleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(projectInfoToCalender);
             }
         });
 
@@ -78,14 +90,14 @@ public class TeamProjectInformation extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.navigation_notifications:
-                Intent teamProjectInformationToAlarm = new Intent (this, AlarmUI.class);
+                Intent teamProjectInformationToAlarm = new Intent(this, AlarmUI.class);
                 startActivity(teamProjectInformationToAlarm);
 
             case R.id.navigation_team_add: //플러스 버튼 클릭 시 이벤트 처리
-                // Intent teamProjectToTeamAdd = new Intent(this, -----.class);  //팀원 추가 액티비티와 연결할 것
-                // startActivity(teamProjectToTeamAdd);
+                AddUserDialog addUserDialog = new AddUserDialog(TeamProjectInformation.this);
+                addUserDialog.callFunction();
         }
         return true;
     }

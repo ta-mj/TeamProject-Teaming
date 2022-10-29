@@ -2,6 +2,7 @@ package com.example.teamproject;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class User {
+    private int image;
     private String pw;
     private String name;
     private String email;
@@ -10,6 +11,7 @@ public class User {
     //project 객체
     //user 생성자
     public User(String p , String n , String e, String ph){
+        image = R.drawable.person;
         pw = p;
         name = n;
         email = e;

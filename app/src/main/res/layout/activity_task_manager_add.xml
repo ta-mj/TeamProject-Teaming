@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!--TaskUI.java와 관련된 xml파일-->
-
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TaskUI">
+    tools:context=".TaskManagerAdd">
 
     <include
-        layout="@layout/toolbar_bell"
-        android:id="@+id/toolbar_bell"/>
+        android:id="@+id/toolbar_bell"
+        layout="@layout/toolbar_bell" />
 
     <ListView
         android:id="@+id/listview1"
