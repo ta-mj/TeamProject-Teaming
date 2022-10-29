@@ -16,7 +16,7 @@
         android:id="@+id/teamProgressView"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
         android:text="첨부파일"
         android:textSize="25sp"
         app:layout_constraintHorizontal_bias="0.188"
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="45dp"
         android:text="담당자"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="45dp"
         android:text="마감일"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="45dp"
         android:text="내 작업"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,58 +64,64 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:text="설명"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="40dp"
-        android:text="TextView"
-        android:textSize="25sp"
+    <EditText
+        android:id="@+id/EditText19"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="35dp"
+        android:ellipsize="start"
+        android:hint="내용을 입력해주세요."
+        android:singleLine="true"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.718"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_back" />
 
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="40dp"
-        android:text="TextView"
-        android:textSize="25sp"
+    <EditText
+        android:id="@+id/EditText20"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:ellipsize="start"
+        android:hint="내용을 입력해주세요."
+        android:singleLine="true"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+        app:layout_constraintTop_toBottomOf="@+id/EditText19" />
 
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="40dp"
-        android:text="TextView"
-        android:textSize="25sp"
+    <EditText
+        android:id="@+id/EditText21"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:ellipsize="start"
+        android:hint="내용을 입력해주세요."
+        android:singleLine="true"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintTop_toBottomOf="@+id/EditText20" />
 
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="153dp"
+    <EditText
+        android:id="@+id/EditText22"
+        android:layout_width="190dp"
         android:layout_height="95dp"
-        android:layout_marginTop="40dp"
-        android:text="TextView"
-        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:hint="내용을 입력해주세요."
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.763"
+        app:layout_constraintHorizontal_bias="0.634"
         app:layout_constraintStart_toEndOf="@+id/textView18"
-        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+        app:layout_constraintTop_toBottomOf="@+id/EditText21" />
 
     <Button
         android:id="@+id/button2"
@@ -137,7 +143,8 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_back"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintVertical_bias="0.72" />
 </androidx.constraintlayout.widget.ConstraintLayout>

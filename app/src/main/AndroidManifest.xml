@@ -29,6 +29,9 @@
             android:name=".TeamProjectUI"
             android:exported="true"/>
         <activity
+            android:name=".FileUpload"
+            android:exported="true"/>
+        <activity
             android:name=".AlarmFileTest"
             android:exported="true" />
         <activity

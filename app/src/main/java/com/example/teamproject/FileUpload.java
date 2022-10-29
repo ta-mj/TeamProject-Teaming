@@ -11,7 +11,7 @@ public class FileUpload extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task_ui);
+        setContentView(R.layout.activity_file_upload);
 
         Toolbar toolbar_back = (Toolbar) findViewById(R.id.toolbar_back);
         setSupportActionBar(toolbar_back);
