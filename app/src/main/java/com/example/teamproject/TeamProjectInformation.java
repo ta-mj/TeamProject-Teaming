@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -18,8 +19,9 @@ public class TeamProjectInformation extends AppCompatActivity {
     //변수 선언
     private Button taskbutton,brainstromingbutton,personalbutton;
     private ProgressBar teamprogress;
-    private ProgressBar memberprogress1, memberprogress2, memberprogress3, memberprogress4;
     private Intent projectInfoToTaskUI;
+    private TextView[] memberView;
+    private ProgressBar[] memberProgressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +37,25 @@ public class TeamProjectInformation extends AppCompatActivity {
         brainstromingbutton = findViewById(R.id.project_brainstromingbutton);
         personalbutton = findViewById(R.id.project_schedulebutton);
         teamprogress = (ProgressBar) findViewById((R.id.team_progressbar));
-        memberprogress1 = (ProgressBar) findViewById((R.id.member1_progressbar));
-        memberprogress2 = (ProgressBar) findViewById((R.id.member2_progressbar));
-        memberprogress3 = (ProgressBar) findViewById((R.id.member3_progressbar));
-        memberprogress4 = (ProgressBar) findViewById((R.id.membet4_progressbar));
+
+        memberView = new TextView[4];
+        memberView[0] = findViewById(R.id.member0ProgressView);
+        memberView[1] = findViewById(R.id.member1ProgressView);
+        memberView[2] = findViewById(R.id.member2ProgressView);
+        memberView[3] = findViewById(R.id.member3ProgressView);
+
+        memberProgressBar = new ProgressBar[4];
+        memberProgressBar[0] = findViewById(R.id.member0_progressbar);
+        memberProgressBar[1] = findViewById(R.id.member1_progressbar);
+        memberProgressBar[2] = findViewById(R.id.member2_progressbar);
+        memberProgressBar[3] = findViewById(R.id.member3_progressbar);
+
+
+        //멤버 수만큼 progressbar visibillity 설정
+        for(int i  = 0 ; i < Users.selectedProject.getUserNum() ; i++){
+            memberView[i].setText(Users.selectedProject.getMyUser(i).getName());
+            memberProgressBar[i].setVisibility(View.VISIBLE);
+        }
 
         //button onclickevent 설정
         taskbutton.setOnClickListener(new View.OnClickListener() {
