@@ -27,6 +27,7 @@ public class TeamProject {
         myUser.add(u);
     }
     public String getSubject() { return this.subject; }
+    public User getMyUser(int i){ return this.myUser.get(i); }
     public int getUserNum() { return this.myUser.size(); }
     public void makeTask(String n, User m, LocalDate t, String ex){
         Task newTask = new Task(n,m,t,ex);
