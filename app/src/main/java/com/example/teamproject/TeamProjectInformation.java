@@ -72,7 +72,7 @@ public class TeamProjectInformation extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.bell_menu, menu);
+        menuInflater.inflate(R.menu.add_menu, menu);
         return true;
     }
 
@@ -80,7 +80,12 @@ public class TeamProjectInformation extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.navigation_notifications:
-                return true;
+                Intent teamProjectInformationToAlarm = new Intent (this, AlarmUI.class);
+                startActivity(teamProjectInformationToAlarm);
+
+            case R.id.navigation_team_add: //플러스 버튼 클릭 시 이벤트 처리
+                // Intent teamProjectToTeamAdd = new Intent(this, -----.class);  //팀원 추가 액티비티와 연결할 것
+                // startActivity(teamProjectToTeamAdd);
         }
         return true;
     }
