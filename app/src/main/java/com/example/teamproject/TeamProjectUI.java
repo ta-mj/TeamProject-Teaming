@@ -100,4 +100,24 @@ public class TeamProjectUI extends AppCompatActivity {
             return singerViewer;
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.add_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.navigation_notifications:  //알림 버튼 클릭 시 이벤트 처리
+                Intent teamProjectToAlarm = new Intent (this, AlarmUI.class);
+                startActivity(teamProjectToAlarm);
+            case R.id.navigation_team_add: //플러스 버튼 클릭 시 이벤트 처리
+               // Intent teamProjectToTeamAdd = new Intent(this, -----.class);  //팀원 추가 액티비티와 연결할 것
+               // startActivity(teamProjectToTeamAdd);
+        }
+        return true;
+    }
 }

@@ -48,6 +48,7 @@ public class Calendar extends AppCompatActivity {
         deleteButton = findViewById(R.id.deleteButton);
         changeButton = findViewById(R.id.changeButton);
         contentTextView = findViewById(R.id.contentTextView);
+        //textView3 = findViewById(R.id.textView3);
         contextEditText = findViewById(R.id.contextEditText);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
@@ -66,7 +67,7 @@ public class Calendar extends AppCompatActivity {
                 checkDay(year, month, dayOfMonth);
             }
         });
-        saveButton.setOnClickListener(new View.OnClickListener()  //저장 버튼을 누르면 입력한 내용을 해당 일자에 저장하는 메소드 / 저장 버튼 클릭 이벤트 처리
+        saveButton.setOnClickListener(new View.OnClickListener() //저장 버튼을 누르면 입력한 내용을 해당 일자에 저장하는 메소드 / 저장 버튼 클릭 이벤트 처리
         {
             @Override
             public void onClick(View view)
@@ -107,7 +108,7 @@ public class Calendar extends AppCompatActivity {
             changeButton.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);
 
-            changeButton.setOnClickListener(new View.OnClickListener() //수정 버튼을 누르면 입력한 내용을 불러와 수정할 수 있게 해주는 메소드 / 수정 버튼 클릭 이벤트 처리
+            changeButton.setOnClickListener(new View.OnClickListener()  //수정 버튼을 누르면 입력한 내용을 불러와 수정할 수 있게 해주는 메소드 / 수정 버튼 클릭 이벤트 처리
             {
                 @Override
                 public void onClick(View view)
