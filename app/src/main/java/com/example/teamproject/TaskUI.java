@@ -8,7 +8,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -34,6 +37,18 @@ public class TaskUI extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 startActivity(taskUIToTaskAdd);
+            }
+        });
+
+        //listview 설정
+        ListView listView = (ListView) findViewById(R.id.listview1);
+        final TaskAdapter taskAdapter = new TaskAdapter(this,Users.selectedProject.getAllTask());
+        listView.setAdapter(taskAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id){
+                Toast.makeText(getApplicationContext(),taskAdapter.getItem(position).getManager().getName(),Toast.LENGTH_SHORT).show();
+                //finish();
             }
         });
 

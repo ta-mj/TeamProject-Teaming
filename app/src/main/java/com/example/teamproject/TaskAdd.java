@@ -11,21 +11,32 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.app.DatePickerDialog;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class TaskAdd extends AppCompatActivity{
 
     private Intent taskAddToTaskMangerAdd;
-    private Button managerAddButton;
-    private DatePickerDialog datePickerDialog;  //스피너 달력 변수
+    private Intent taskAddToTaskUI;
+    private EditText catecoryText, taskNameText, explainText;
+    private Button managerAddButton,confirmButton;
+    private DatePickerDialog datePickerDialog;  //스피너 달력 변수S
     private Button dateButton;  //이 버튼을 누르면 스피너 달력이 뜸
-
+    private String catecory,taskName,explain,date;
+    private User taskManger = null;
+    public static TaskAdd thisTaskAdd;
+    public void setTaskManger(User u){
+        taskManger = u;
+        managerAddButton.setText(taskManger.getName());
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_add);
+
+        thisTaskAdd = this;
 
         Toolbar toolbar_back = (Toolbar) findViewById(R.id.toolbar_back);
         setSupportActionBar(toolbar_back);
@@ -35,12 +46,48 @@ public class TaskAdd extends AppCompatActivity{
         //툴바 뒤로가기 보이게 하는 코드
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Intent 설정
+        taskAddToTaskMangerAdd = new Intent(TaskAdd.this, TaskManagerAdd.class);
+        taskAddToTaskUI = new Intent(TaskAdd.this, TaskManagerAdd.class);
+
+        //View 들 id로 연결
+        catecoryText = findViewById(R.id.catecoryField);
+        taskNameText = findViewById(R.id.taskNameField);
+        explainText = findViewById(R.id.taskExplainField);
+
         //담당자 설정
+        managerAddButton = findViewById(R.id.taskManagerAddButton);
+        managerAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(taskAddToTaskMangerAdd);
+                Toast.makeText(getApplicationContext(),"두번째 액티비티 종료",Toast.LENGTH_SHORT);
+            }
+        });
 
         //마감일 설정
         initDatePicker(); //DatePicker 초기화
         dateButton = findViewById(R.id.calendarButton);
         dateButton.setText(getTodaysDate());
+
+        confirmButton = findViewById(R.id.confirmButton);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                catecory = catecoryText.getText().toString();
+                taskName = taskNameText.getText().toString();
+                explain = explainText.getText().toString();
+                date = dateButton.getText().toString();
+                if(catecory != "" && taskManger != null && taskName != "" && explain != ""){
+                    LocalDate deadline = LocalDate.parse(date);
+                    Users.selectedProject.makeTask(catecory,taskManger,taskName,deadline,explain);
+                    finish();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"업무 정보를 정확히 입력해주십시오.",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private String getTodaysDate() //오늘 날짜를 얻어오는 함수
@@ -80,7 +127,12 @@ public class TaskAdd extends AppCompatActivity{
 
     private String makeDateString(int day, int month, int year)
     {
-        return year + " " + month + "월 " + day + "일"; //스피너 달력으로 마감일 설정시 버튼에 출력되는 양식, 일 뒤에 띄어쓰기 4칸은 좀 더 이쁘게 출력하기 위함.
+        if(day >= 10){
+            return year + "-" + month + "-" + day; //스피너 달력으로 마감일 설정시 버튼에 출력되는 양식, 일 뒤에 띄어쓰기 4칸은 좀 더 이쁘게 출력하기 위함.
+        }
+        else{
+            return year + "-" + month + "-0" + day; //스피너 달력으로 마감일 설정시 버튼에 출력되는 양식, 일 뒤에 띄어쓰기 4칸은 좀 더 이쁘게 출력하기 위함.
+        }
     }
 
     public void openDatePicker(View view) //DatePicker 달력을 보여주는 메소드

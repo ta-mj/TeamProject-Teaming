@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.time.LocalDate;
+
 public class Login extends AppCompatActivity {
     public static Context context_main;
     private Button btn_register,btn_login;
@@ -21,6 +23,17 @@ public class Login extends AppCompatActivity {
         //유저 미리 만들어두기
         Users.makeUser("taewoo9240","ptwmju2199@","ptwmju2199@","박태우","01020449240","kiatae0722@naver.com");
         Users.makeUser("ckdtlr2000","125125","125125","김창식","01063729793","ckdtlr2000@naver.com");
+        Users.makeUser("parkkh9989","125125","125125","박규환","01012345678","parkkh9989@gmail.com");
+        Users.makeUser("hyjmex","125125","125125","한단비","01012345678","hyjmex@hanmail.net");
+        Users.selectedUser = Users.getUser("taewoo9240");
+        TeamProject example = new TeamProject("팀프로젝트1",Users.selectedUser);
+        Users.selectedProject.addUser(Users.getUser("ckdtlr2000"));
+        Users.selectedProject.addUser(Users.getUser("parkkh9989"));
+        Users.selectedProject.addUser(Users.getUser("hyjmex"));
+        example.makeTask("1111",Users.getUser("taewoo9240"),"1111", LocalDate.parse("2022-11-11"),"1111");
+        example.makeTask("2222",Users.getUser("ckdtlr2000"),"2222", LocalDate.parse("2022-11-10"),"2222");
+        example.makeTask("3333",Users.getUser("parkkh9989"),"3333", LocalDate.parse("2022-11-30"),"3333");
+        example.makeTask("4444",Users.getUser("hyjmex"),"4444", LocalDate.parse("2022-10-31"),"4444");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //context 설정

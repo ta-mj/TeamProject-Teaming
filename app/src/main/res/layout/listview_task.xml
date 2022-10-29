@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/border"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/commitButton"
+            android:layout_width="70dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@color/purple_500"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/file_size" />
+
+        <TextView
+            android:id="@+id/managerName"
+            android:layout_width="66dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="담당자"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/workNameText"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
+            android:text="업무 내용"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/deadLineText"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
+            android:text="마감일"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+
+        <CheckBox
+            android:id="@+id/isTaskComplete"
+            android:layout_width="46dp"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

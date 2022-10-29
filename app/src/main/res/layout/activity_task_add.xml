@@ -27,7 +27,7 @@
         style="?android:spinnerStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
+        android:layout_marginStart="48dp"
         android:layout_marginRight="50dp"
         android:onClick="openDatePicker"
         android:text="button"
@@ -38,18 +38,18 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/teamProgressView"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_back"
-        app:layout_constraintVertical_bias="0.73" />
+        app:layout_constraintVertical_bias="0.679" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="75p"
+        android:layout_marginTop="60dp"
         android:text="카테고리"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.18"
+        app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_back" />
 
@@ -87,62 +87,63 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <EditText
-        android:id="@+id/EditText11"
+        android:id="@+id/catecoryField"
         android:layout_width="190dp"
         android:layout_height="50dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="52dp"
         android:ellipsize="start"
         android:hint="내용을 입력해주세요."
         android:singleLine="true"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintHorizontal_bias="0.338"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_back" />
 
-    <EditText
-        android:id="@+id/EditText12"
-        android:layout_width="190dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:hint="내용을 입력해주세요."
+    <Button
+        android:id="@+id/taskManagerAddButton"
+        android:layout_width="127dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="28dp"
+        android:hint="추가"
         android:singleLine="true"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintHorizontal_bias="0.311"
         app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/EditText11" />
+        app:layout_constraintTop_toBottomOf="@+id/catecoryField" />
 
     <EditText
-        android:id="@+id/EditText13"
+        android:id="@+id/taskNameField"
         android:layout_width="190dp"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
         android:hint="내용을 입력해주세요."
         android:singleLine="true"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/taskManagerAddButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintHorizontal_bias="0.193"
         app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/EditText12" />
+        app:layout_constraintTop_toTopOf="@+id/calendarButton"
+        app:layout_constraintVertical_bias="0.735" />
 
     <EditText
-        android:id="@+id/EditText14"
+        android:id="@+id/taskExplainField"
         android:layout_width="195dp"
         android:layout_height="95dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:hint="내용을 입력해주세요."
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.69"
+        app:layout_constraintHorizontal_bias="0.59"
         app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/EditText13" />
+        app:layout_constraintTop_toBottomOf="@+id/taskNameField" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/confirmButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="확인"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

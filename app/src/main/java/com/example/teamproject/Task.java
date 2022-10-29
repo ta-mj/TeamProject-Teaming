@@ -8,9 +8,11 @@ import java.util.Comparator;
 
 public class Task{
     //업무 이름
-    private String workname;
+    private String catecory;
     //담당자
     private User manager;
+    //업무 제목
+    private String workname;
     //업무 설명
     private String explain;
     //등록일
@@ -20,10 +22,10 @@ public class Task{
     //완료 여부
     boolean is_complete;
     //제출 파일 --> 향후
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    Task(String n, User m, LocalDate t, String ex){
-        workname = n;
+    Task(String c, User m, String w, LocalDate t, String ex){
+        catecory = c;
         manager = m;
+        workname = w;
         startDate = LocalDate.now();
         targetDate = t;
         explain = ex;
@@ -38,6 +40,11 @@ public class Task{
     LocalDate getTargetDate(){
         return targetDate;
     }
+    String getCatecory() { return catecory;}
+    User getManager(){ return manager; }
+    String getWorkname(){ return workname; }
+    String getExplain(){ return explain; }
+    boolean Is_complete(){ return is_complete; }
     void setWorkname(String n) {
         workname = n;
     }

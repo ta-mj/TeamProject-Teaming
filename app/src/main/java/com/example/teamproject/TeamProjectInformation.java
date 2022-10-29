@@ -55,7 +55,7 @@ public class TeamProjectInformation extends AppCompatActivity {
 
         //멤버 수만큼 progressbar visibillity 설정
         for(int i  = 0 ; i < Users.selectedProject.getUserNum() ; i++){
-            memberView[i].setText(Users.selectedProject.getMyUser(i).getName());
+            memberView[i].setText(Users.selectedProject.getOneUser(i).getName());
             memberView[i].setVisibility(View.VISIBLE);
             memberProgressBar[i].setVisibility(View.VISIBLE);
         }
