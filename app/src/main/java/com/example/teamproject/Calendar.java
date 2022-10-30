@@ -3,9 +3,7 @@ package com.example.teamproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -190,16 +188,6 @@ public class Calendar extends AppCompatActivity {
         {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case android.R.id.home: //뒤로가기 버튼 클릭 시 이벤트 처리
-                finish();
-                break;
-        }
-        return true;
     }
 
 }

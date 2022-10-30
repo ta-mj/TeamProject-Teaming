@@ -11,6 +11,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
         setSupportActionBar(toolbar_bell);
+
 
         //인텐트 설정
         mainToProjectUI = new Intent(MainActivity.this,TeamProjectUI.class);
@@ -71,4 +75,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
 }
