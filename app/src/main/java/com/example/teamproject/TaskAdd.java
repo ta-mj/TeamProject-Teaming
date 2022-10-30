@@ -170,11 +170,17 @@ public class TaskAdd extends AppCompatActivity{
 
     private String makeDateString(int day, int month, int year)
     {
-        if(day >= 10){
+        if(day >= 10 && month >= 10){
             return year + "-" + month + "-" + day; //스피너 달력으로 마감일 설정시 버튼에 출력되는 양식, 일 뒤에 띄어쓰기 4칸은 좀 더 이쁘게 출력하기 위함.
         }
+        else if(day >= 10 && month < 10){
+            return year + "-0" + month + "-" + day;
+        }
+        else if(day < 10 && month >= 10){
+            return year + "-" + month + "-0" + day;
+        }
         else{
-            return year + "-" + month + "-0" + day; //스피너 달력으로 마감일 설정시 버튼에 출력되는 양식, 일 뒤에 띄어쓰기 4칸은 좀 더 이쁘게 출력하기 위함.
+            return year + "-0" + month + "-0" + day; //스피너 달력으로 마감일 설정시 버튼에 출력되는 양식, 일 뒤에 띄어쓰기 4칸은 좀 더 이쁘게 출력하기 위함.
         }
     }
 

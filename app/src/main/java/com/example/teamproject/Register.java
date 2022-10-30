@@ -25,8 +25,6 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        //Intent 설정
-        Intent registerToLogin = new Intent(Register.this, Login.class);
         context_register = this;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //EtitText 정보
@@ -100,7 +98,7 @@ public class Register extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
-                            startActivity(registerToLogin);
+                            finish();
                         }
                     });
                     AlertDialog success = builder.create();

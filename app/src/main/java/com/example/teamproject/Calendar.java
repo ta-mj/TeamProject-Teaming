@@ -156,6 +156,16 @@ public class Calendar extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home: //뒤로가기 버튼 클릭 시 이벤트 처리
+                finish();
+                break;
+        }
+        return true;
+    }
+
     @SuppressLint("WrongConstant")
     public void removeDiary(String readDay) //선택한 일자에 저장한 내용을 삭제하는 메소드
     {
