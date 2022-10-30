@@ -1,6 +1,7 @@
 package com.example.teamproject;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -52,6 +53,7 @@ public class AddUserDialog extends AppCompatActivity {
                     else{
                         Users.selectedProject.addUser(u);
                         Toast.makeText(context, "유저 추가가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                        TeamProjectInformation.thisTeamProjectInformation.onResume();
                     }
                 }
                 else{
