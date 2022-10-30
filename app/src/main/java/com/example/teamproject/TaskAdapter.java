@@ -54,6 +54,7 @@ public class TaskAdapter extends BaseAdapter {
         TextView deadline = (TextView)view.findViewById(R.id.deadLineText);
         fileUploadButton = (ImageButton)view.findViewById(R.id.commitButton);
         isTaskComplete = (CheckBox)view.findViewById(R.id.isTaskComplete);
+        isTaskComplete.setChecked(Users.selectedProject.getAllTask().get(position).is_complete);
         managerName.setText(tasks.get(position).getManager().getName());
         workName.setText(tasks.get(position).getWorkName());
         deadline.setText(tasks.get(position).getTargetDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
@@ -74,7 +75,7 @@ public class TaskAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Toast.makeText(mContext.getApplicationContext(), String.valueOf(tasks.get(position).is_complete) , Toast.LENGTH_SHORT).show();
-                tasks.get(position).is_complete = !tasks.get(position).is_complete;
+                tasks.get(position).changeCompleteState();
             }
         });
         return view;

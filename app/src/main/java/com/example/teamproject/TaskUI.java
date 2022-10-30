@@ -74,9 +74,11 @@ public class TaskUI extends AppCompatActivity{
         switch (item.getItemId()){
             case R.id.sortByAddDate: //등록일 순 정렬 클릭 시 이벤트 처리
                 Users.selectedProject.sortTaskByStartDate();
+                onResume();
                 break;
             case R.id.sortByDeadLine: //마감일 순 정렬 클릭 시 이벤트 처리
                 Users.selectedProject.sortTaskByTargetDate();
+                onResume();
                 break;
             case R.id.hideCompletedTask: // 완료된 아이템 숨기기/보이기 클릭 시 이벤트 처리
                 break;
