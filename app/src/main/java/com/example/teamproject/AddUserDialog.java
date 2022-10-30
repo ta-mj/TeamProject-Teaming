@@ -8,10 +8,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AddUserDialog {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class AddUserDialog extends AppCompatActivity {
 
     private Context context;
-
+    public AddUserDialog(){}
     public AddUserDialog(Context context) {
         this.context = context;
     }

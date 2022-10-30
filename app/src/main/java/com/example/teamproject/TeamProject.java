@@ -1,10 +1,8 @@
 package com.example.teamproject;
+
+
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
 public class TeamProject {
     //프로젝트 정보
     private String subject;

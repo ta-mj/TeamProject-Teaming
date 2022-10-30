@@ -1,4 +1,5 @@
 package com.example.teamproject;
+import android.net.Uri;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -21,7 +22,8 @@ public class Task{
     private LocalDate targetDate;
     //완료 여부
     boolean is_complete;
-    //제출 파일 --> 향후
+    //제출 파일
+    private Uri file = null;
     Task(String c, User m, String w, LocalDate t, String ex){
         catecory = c;
         manager = m;
@@ -31,27 +33,29 @@ public class Task{
         explain = ex;
         is_complete = false;
     }
-    String getWorkName(){
+    public String getWorkName(){
         return workname;
     }
-    LocalDate getStartDate(){
+    public LocalDate getStartDate(){
         return startDate;
     }
-    LocalDate getTargetDate(){
+    public LocalDate getTargetDate(){
         return targetDate;
     }
-    String getCatecory() { return catecory;}
-    User getManager(){ return manager; }
-    String getWorkname(){ return workname; }
-    String getExplain(){ return explain; }
-    boolean Is_complete(){ return is_complete; }
-    void setWorkname(String n) {
+    public String getCatecory() { return catecory;}
+    public User getManager(){ return manager; }
+    public String getWorkname(){ return workname; }
+    public String getExplain(){ return explain; }
+    public Uri getFile(){ return file; }
+    public boolean Is_complete(){ return is_complete; }
+    public void setWorkname(String n) {
         workname = n;
     }
-    void setTargetDate(LocalDate d){
+    public void setStartDate(LocalDate d) { startDate = d; }
+    public void setTargetDate(LocalDate d){
         targetDate = d;
     }
-    void changeCompleteState(){
+    public void changeCompleteState(){
         is_complete = !is_complete;
     }
 

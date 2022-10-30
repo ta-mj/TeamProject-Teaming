@@ -21,6 +21,7 @@ public class TaskUI extends AppCompatActivity{
     //변수 설정
     private Button taskAddButton;
     private Intent taskUIToTaskAdd;
+    private TaskAdapter taskAdapter;
     public static TaskUI thisTaskUI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class TaskUI extends AppCompatActivity{
 
         //listview 설정
         ListView listView = (ListView) findViewById(R.id.listview1);
-        final TaskAdapter taskAdapter = new TaskAdapter(this,Users.selectedProject.getAllTask());
+        taskAdapter = new TaskAdapter(this,Users.selectedProject.getAllTask());
         listView.setAdapter(taskAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -64,18 +65,22 @@ public class TaskUI extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.bell_menu, menu);
+        menuInflater.inflate(R.menu.sort_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.navigation_notifications: //알림 버튼 클릭 시 이벤트 처리
-                Intent teamProjectToAlarm = new Intent (this, AlarmUI.class);
-                startActivity(teamProjectToAlarm);
+            case R.id.sortByAddDate: //등록일 순 정렬 클릭 시 이벤트 처리
+                Users.selectedProject.sortTaskByStartDate();
                 break;
-            case android.R.id.home: //뒤로가기 버튼 클릭 시 이벤트 처리
+            case R.id.sortByDeadLine: //마감일 순 정렬 클릭 시 이벤트 처리
+                Users.selectedProject.sortTaskByTargetDate();
+                break;
+            case R.id.hideCompletedTask: // 완료된 아이템 숨기기/보이기 클릭 시 이벤트 처리
+                break;
+            case android.R.id.home:
                 finish();
                 break;
         }
