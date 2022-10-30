@@ -12,7 +12,7 @@ import android.os.Bundle;
 
 import androidx.core.app.NotificationCompat;
 
-public class Alarm {//ddddd
+public class Alarm {
     NotificationManager manager;
     NotificationCompat.Builder builder;
     public void showAlarm(){

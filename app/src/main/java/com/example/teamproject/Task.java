@@ -59,7 +59,6 @@ public class Task{
         is_complete = !is_complete;
     }
 
-
 }
 class StartDateComparator implements Comparator<Task> {
     public int compare(Task t1, Task t2){
@@ -71,3 +70,4 @@ class TargetDateComparator implements Comparator<Task> {
         return t1.getTargetDate().compareTo(t2.getTargetDate());
     }
 }
+
