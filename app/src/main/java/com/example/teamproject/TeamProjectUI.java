@@ -40,6 +40,7 @@ public class TeamProjectUI extends AppCompatActivity {
         setSupportActionBar(toolbar_bell);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         projectUIToProjectInfo = new Intent(TeamProjectUI.this, TeamProjectInformation.class);
 

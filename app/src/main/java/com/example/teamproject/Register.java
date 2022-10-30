@@ -1,12 +1,14 @@
 package com.example.teamproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +36,13 @@ public class Register extends AppCompatActivity {
         name = findViewById(R.id.et_name);
         phone = findViewById(R.id.et_phone);
         email = findViewById(R.id.et_email);
+
+        Toolbar toolbar_logo = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar_logo);
+        //뒤로가기 버튼 활성화
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //타이틀 숨기기
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //회원가입 버튼
         btn_register = findViewById(R.id.btn_register);
@@ -100,4 +109,15 @@ public class Register extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
+    }
+
 }

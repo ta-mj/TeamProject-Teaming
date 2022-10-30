@@ -31,6 +31,9 @@ public class TaskUI extends AppCompatActivity{
         Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
         setSupportActionBar(toolbar_bell);
 
+        //타이틀 숨기기
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         thisTaskUI = this;
 
         //Intent 설정

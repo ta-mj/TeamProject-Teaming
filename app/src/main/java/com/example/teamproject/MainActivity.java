@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
         setSupportActionBar(toolbar_bell);
 
+        //타이틀 숨기기
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //인텐트 설정
         mainToProjectUI = new Intent(MainActivity.this,TeamProjectUI.class);
