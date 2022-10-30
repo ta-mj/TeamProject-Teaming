@@ -17,7 +17,7 @@
     <ListView
         android:id="@+id/listview1"
         android:layout_width="match_parent"
-        android:layout_height="612dp"
+        android:layout_height="600dp"
         android:layout_below="@id/toolbar_bell" />
 
     <LinearLayout

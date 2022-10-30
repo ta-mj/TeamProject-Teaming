@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -140,7 +141,15 @@ public class TaskAdd extends AppCompatActivity{
         datePickerDialog.show();
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home: //뒤로가기 버튼 클릭 시 이벤트 처리
+                finish();
+                break;
+        }
+        return true;
+    }
 
 }
 
