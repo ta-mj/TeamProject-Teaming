@@ -22,9 +22,10 @@ public class TeamProjectInformation extends AppCompatActivity {
     private Intent projectInfoToTaskUI,projectInfoToCalender;
     private TextView[] memberView;
     private ProgressBar[] memberProgressBar;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onResume() {
+        super.onResume();
         setContentView(R.layout.activity_teamproject_information);
 
         //Intent 설정

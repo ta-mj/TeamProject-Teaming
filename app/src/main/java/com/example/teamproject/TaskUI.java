@@ -22,8 +22,8 @@ public class TaskUI extends AppCompatActivity{
     private Button taskAddButton;
     private Intent taskUIToTaskAdd;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onResume() {
+        super.onResume();
         setContentView(R.layout.activity_task_ui);
 
         Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
