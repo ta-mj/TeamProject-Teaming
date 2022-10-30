@@ -3,6 +3,7 @@ package com.example.teamproject;
 //업무분담 화면(설계도 상 7번째 화면) 관련 .java 파일
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -70,8 +71,13 @@ public class TaskUI extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.navigation_notifications:
-                return true;
+            case R.id.navigation_notifications: //알림 버튼 클릭 시 이벤트 처리
+                Intent teamProjectToAlarm = new Intent (this, AlarmUI.class);
+                startActivity(teamProjectToAlarm);
+                break;
+            case android.R.id.home: //뒤로가기 버튼 클릭 시 이벤트 처리
+                finish();
+                break;
         }
         return true;
     }

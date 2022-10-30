@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.navigation_notifications:
                 Intent mainToAlarm = new Intent (this, AlarmUI.class);
                 startActivity(mainToAlarm);
+                break;
         }
         return true;
     }

@@ -38,7 +38,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/teamProgressView"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_back"
-        app:layout_constraintVertical_bias="0.679" />
+        app:layout_constraintVertical_bias="0.7" />
 
     <TextView
         android:id="@+id/textView7"
@@ -90,7 +90,7 @@
         android:id="@+id/catecoryField"
         android:layout_width="190dp"
         android:layout_height="50dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="50dp"
         android:ellipsize="start"
         android:hint="내용을 입력해주세요."
         android:singleLine="true"
@@ -104,7 +104,7 @@
         android:id="@+id/taskManagerAddButton"
         android:layout_width="127dp"
         android:layout_height="49dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="30dp"
         android:hint="추가"
         android:singleLine="true"
         android:textSize="20sp"
@@ -117,6 +117,7 @@
         android:id="@+id/taskNameField"
         android:layout_width="190dp"
         android:layout_height="50dp"
+        android:layout_marginTop="30dp"
         android:hint="내용을 입력해주세요."
         android:singleLine="true"
         android:textSize="20sp"
@@ -131,7 +132,7 @@
         android:id="@+id/taskExplainField"
         android:layout_width="195dp"
         android:layout_height="95dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:hint="내용을 입력해주세요."
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

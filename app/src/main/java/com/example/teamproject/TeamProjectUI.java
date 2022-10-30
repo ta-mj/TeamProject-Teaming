@@ -116,10 +116,10 @@ public class TeamProjectUI extends AppCompatActivity {
             case R.id.navigation_notifications: //알림 버튼 클릭 시 이벤트 처리
                 Intent teamProjectToAlarm = new Intent (this, AlarmUI.class);
                 startActivity(teamProjectToAlarm);
+                break;
             case android.R.id.home: //뒤로가기 버튼 클릭 시 이벤트 처리
-               //Intent teamProjectToMain = new Intent(this, MainActivity.class);
-                //startActivity(teamProjectToMain);
-
+               finish();
+               break;
         }
         return true;
     }

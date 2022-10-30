@@ -94,10 +94,15 @@ public class TeamProjectInformation extends AppCompatActivity {
             case R.id.navigation_notifications:
                 Intent teamProjectInformationToAlarm = new Intent(this, AlarmUI.class);
                 startActivity(teamProjectInformationToAlarm);
+                break;
 
             case R.id.navigation_team_add: //플러스 버튼 클릭 시 이벤트 처리
                 AddUserDialog addUserDialog = new AddUserDialog(TeamProjectInformation.this);
                 addUserDialog.callFunction();
+                break;
+            case android.R.id.home:
+                finish();
+                break;
         }
         return true;
     }
