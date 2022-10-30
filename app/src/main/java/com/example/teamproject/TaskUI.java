@@ -20,6 +20,7 @@ public class TaskUI extends AppCompatActivity{
     //변수 설정
     private Button taskAddButton;
     private Intent taskUIToTaskAdd;
+    public static TaskUI thisTaskUI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +28,8 @@ public class TaskUI extends AppCompatActivity{
 
         Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
         setSupportActionBar(toolbar_bell);
+
+        thisTaskUI = this;
 
         //Intent 설정
         taskUIToTaskAdd = new Intent(TaskUI.this,TaskAdd.class);

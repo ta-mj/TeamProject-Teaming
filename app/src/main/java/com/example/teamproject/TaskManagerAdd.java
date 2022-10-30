@@ -10,13 +10,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class TaskManagerAdd extends AppCompatActivity {
-    Intent taskManagerAddToTaskAdd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_manager_add);
 
-        taskManagerAddToTaskAdd = new Intent(TaskManagerAdd.this, TaskAdd.class);
 
         ListView listView = (ListView) findViewById(R.id.listview1);
         final UserAdapter userAdapter = new UserAdapter(this,Users.selectedProject.getAllUser());
