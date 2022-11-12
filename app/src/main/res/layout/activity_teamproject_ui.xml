@@ -2,48 +2,62 @@
 
 <!--TeamProjectUI.java와 관련된 xml파일-->
 
-<RelativeLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".TeamProjectUI">
-
-<include
-    layout="@layout/toolbar_bell"
-    android:id="@+id/toolbar_bell"/>
-
-<LinearLayout
-    android:id="@+id/linearLayout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentStart="true"
-    android:layout_below="@id/toolbar_bell"
-    android:orientation="horizontal">
+    android:layout_height="match_parent"
+    tools:context=".TeamProjectUI">
 
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="추가" />
+    <include
+        android:id="@+id/toolbar_bell"
+        layout="@layout/toolbar_bell" />
 
-    <EditText
-        android:id="@+id/projectNameText"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:hint="팀프로젝트"
-        android:inputType="text" />
-</LinearLayout>
 
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout"
-        android:numColumns="2" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar_bell"
+        android:layout_margin="10dp"
+        android:horizontalSpacing="2dp"
+        android:listSelector="#BFBFBF"
+        android:numColumns="2"
+        android:verticalSpacing="2dp" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_outline_note_add_24"
+        app:backgroundTint="#55C65A"
+        app:fabSize="mini" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_outline_delete_24"
+        app:backgroundTint="#55C65A"
+        app:fabSize="mini" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_outline_settings_24"
+        app:backgroundTint="#55C65A" />
 
 </RelativeLayout>

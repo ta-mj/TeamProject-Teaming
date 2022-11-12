@@ -17,26 +17,45 @@
     <ListView
         android:id="@+id/listview1"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_below="@id/toolbar_bell" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/listview1"
-        android:layout_alignParentStart="true"
-        android:background="#5410CC"
-        android:orientation="horizontal">
+        android:layout_below="@id/toolbar_bell"
+        android:divider="#8C8C8C"
+        android:dividerHeight="1dp"/>
 
-        <Button
-            android:id="@+id/taskaddButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#5410CC"
-            android:text="추가" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_TaskAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_outline_note_add_24"
+        app:backgroundTint="#55C65A"
+        app:fabSize="mini" />
 
-    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_TaskDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_outline_delete_24"
+        app:backgroundTint="#55C65A"
+        app:fabSize="mini" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_TaskMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_outline_settings_24"
+        app:backgroundTint="#55C65A" />
+
 
 </RelativeLayout>

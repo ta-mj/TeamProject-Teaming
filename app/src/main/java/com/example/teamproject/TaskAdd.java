@@ -27,7 +27,7 @@ import java.util.Date;
 public class TaskAdd extends AppCompatActivity{
 
     private Intent taskAddToTaskMangerAdd;
-    private Intent taskAddToTaskUI;
+    //private Intent taskAddToTaskUI; //확인 버튼을 누르면 finish();가 실행되므로 필요없음
     private EditText catecoryText, taskNameText, explainText;
     private Button managerAddButton,confirmButton;
     private DatePickerDialog datePickerDialog;  //스피너 달력 변수S
@@ -63,7 +63,7 @@ public class TaskAdd extends AppCompatActivity{
 
         //Intent 설정
         taskAddToTaskMangerAdd = new Intent(TaskAdd.this, TaskManagerAdd.class);
-        taskAddToTaskUI = new Intent(TaskAdd.this, TaskManagerAdd.class);
+        //taskAddToTaskUI = new Intent(TaskAdd.this, TaskManagerAdd.class);  //확인 버튼을 누르면 finish();가 실행되므로 필요없음
 
         //View 들 id로 연결
         catecoryText = findViewById(R.id.catecoryField);

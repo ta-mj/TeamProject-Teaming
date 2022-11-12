@@ -17,7 +17,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#6200ED"
+        android:background="#BBD17F"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,11 +29,9 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="#6200EC"
-            android:backgroundTint="#6200EC"
+            android:background="#EDEDED"
             android:drawableTop="@drawable/file_size"
             android:paddingTop="10dp"
-            android:src="@drawable/file"
             android:text="업무" />
 
 
@@ -43,11 +41,9 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="#6200EC"
-            android:backgroundTint="#6200EC"
+            android:background="#EDEDED"
             android:drawableTop="@drawable/brainstorm_size"
             android:paddingTop="10dp"
-            android:src="@drawable/brainstorm"
             android:text="브레인스토밍" />
 
         <Button
@@ -56,11 +52,9 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="#6200EC"
-            android:backgroundTint="#6200EC"
+            android:background="#EDEDED"
             android:drawableTop="@drawable/calendar_size"
             android:paddingTop="10dp"
-            android:src="@drawable/calendar_size"
             android:text="일정" />
     </LinearLayout>
 
@@ -143,6 +137,7 @@
         android:layout_marginTop="60dp"
         android:text="팀 전체 진행도"
         android:textSize="16dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/team_progressbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topView" />
@@ -154,6 +149,7 @@
         android:layout_marginTop="50dp"
         android:text="팀원1"
         android:textSize="16dp"
+        android:textColor="@color/black"
         android:gravity="center"
         app:layout_constraintEnd_toStartOf="@+id/member0_progressbar"
         app:layout_constraintStart_toStartOf="parent"
@@ -166,6 +162,7 @@
         android:layout_marginTop="30dp"
         android:text="팀원2"
         android:textSize="16dp"
+        android:textColor="@color/black"
         android:gravity="center"
         android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/member1_progressbar"
@@ -179,6 +176,7 @@
         android:layout_marginTop="30dp"
         android:text="팀원3"
         android:textSize="16dp"
+        android:textColor="@color/black"
         android:gravity="center"
         android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/member2_progressbar"
@@ -192,6 +190,7 @@
         android:layout_marginTop="30dp"
         android:text="팀원4"
         android:textSize="16dp"
+        android:textColor="@color/black"
         android:gravity="center"
         android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/member3_progressbar"
@@ -205,6 +204,7 @@
         android:layout_marginTop="80dp"
         android:text="진행도"
         android:textSize="40dp"
+        android:textColor="@color/black"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
