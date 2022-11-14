@@ -4,7 +4,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="65dp"
-    android:background="#BBD17F"
+    android:background="#ECECEC"
     android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -13,7 +13,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/logo_with_bg" />
+        android:src="@drawable/logo_with_bg_white" />
 
 </androidx.appcompat.widget.Toolbar>
 <!--로고만 있는 툴바-->
