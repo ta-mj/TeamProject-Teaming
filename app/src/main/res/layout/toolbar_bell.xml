@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar_bell"
     android:layout_width="match_parent"
-    android:layout_height="65dp"
+    android:layout_height="55dp"
     android:background="#BBD17F"
     android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
