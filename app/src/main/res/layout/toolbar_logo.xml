@@ -13,7 +13,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/logo_with_bg_white" />
+        android:src="@drawable/new_logo_beige" />
 
 </androidx.appcompat.widget.Toolbar>
 <!--로고만 있는 툴바-->
