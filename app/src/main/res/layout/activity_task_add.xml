@@ -17,7 +17,8 @@
         android:layout_marginTop="100dp"
         android:text="마감일"
         android:textSize="25sp"
-        app:layout_constraintHorizontal_bias="0.175"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_bias="0.126"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -27,8 +28,7 @@
         style="?android:spinnerStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginStart="200dp"
         android:onClick="openDatePicker"
         android:text="button"
         android:textColor="@color/black"
@@ -36,9 +36,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/teamProgressView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_back"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintVertical_bias="0.67" />
 
     <TextView
         android:id="@+id/textView7"
@@ -48,8 +48,9 @@
         android:layout_marginTop="60dp"
         android:text="카테고리"
         android:textSize="25sp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_back" />
 
@@ -57,10 +58,11 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="48dp"
         android:text="담당자"
         android:textSize="25sp"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -68,10 +70,12 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginStart="60dp"
         android:layout_marginTop="50dp"
         android:text="업무 제목"
         android:textSize="25sp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -79,10 +83,11 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="80dp"
         android:text="설명"
         android:textSize="25sp"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -90,60 +95,65 @@
         android:id="@+id/catecoryField"
         android:layout_width="190dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="52dp"
         android:ellipsize="start"
         android:hint="내용을 입력해주세요."
         android:singleLine="true"
         android:textSize="20sp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.338"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintHorizontal_bias="0.796"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_back" />
 
     <Button
         android:id="@+id/taskManagerAddButton"
         android:layout_width="127dp"
         android:layout_height="49dp"
-        android:layout_marginTop="30dp"
         android:hint="추가"
         android:singleLine="true"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.311"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/catecoryField" />
+        app:layout_constraintHorizontal_bias="0.619"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_back"
+        app:layout_constraintVertical_bias="0.19" />
 
     <EditText
         android:id="@+id/taskNameField"
         android:layout_width="190dp"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
         android:hint="내용을 입력해주세요."
         android:singleLine="true"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/taskManagerAddButton"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.193"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toTopOf="@+id/calendarButton"
-        app:layout_constraintVertical_bias="0.735" />
+        app:layout_constraintHorizontal_bias="0.796"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_back"
+        app:layout_constraintVertical_bias="0.31" />
 
     <EditText
         android:id="@+id/taskExplainField"
         android:layout_width="195dp"
         android:layout_height="95dp"
-        android:layout_marginTop="20dp"
         android:hint="내용을 입력해주세요."
         android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.59"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/taskNameField" />
+        app:layout_constraintHorizontal_bias="0.814"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_back"
+        app:layout_constraintVertical_bias="0.48000002" />
 
     <Button
         android:id="@+id/confirmButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#BAD07F"
         android:text="확인"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

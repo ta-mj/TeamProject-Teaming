@@ -5,8 +5,9 @@ package com.example.teamproject;
 import static com.example.teamproject.Users.selectedProject;
 import static com.example.teamproject.Users.selectedUser;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.os.Bundle;
+import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,26 +15,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 public class TeamProjectUI extends AppCompatActivity {
     private GridView gridView;
-    private Button addButton;
-    private EditText projectNameText;
-    private ProjectAdapter projectAdapter;
     private Intent projectUIToProjectInfo;
+
+    //플로팅 액션버튼 변수
+    private FloatingActionButton fabMain;
+    private FloatingActionButton fabAdd;
+    private FloatingActionButton fabDelete;
+
+    //플로팅버튼 상태
+    private boolean fabMain_status = false;
+
+    //AddProjectDialog에서 프로젝트를 추가할 수 있게 하기 위해서 public static으로 변경
+    public static ProjectAdapter projectAdapter;
+    public static String text;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onResume() {
+        super.onResume();
         setContentView(R.layout.activity_teamproject_ui);
 
         Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
@@ -45,8 +53,11 @@ public class TeamProjectUI extends AppCompatActivity {
         projectUIToProjectInfo = new Intent(TeamProjectUI.this, TeamProjectInformation.class);
 
         gridView = findViewById(R.id.gridView);
-        addButton = findViewById(R.id.addButton);
-        projectNameText = findViewById(R.id.projectNameText);
+        fabMain = findViewById(R.id.fabMain);
+        fabAdd = findViewById(R.id.fabAdd);
+        fabDelete = findViewById(R.id.fabDelete);
+
+       // projectNameText = findViewById(R.id.projectNameText);
 
         projectAdapter = new ProjectAdapter();
         //반복문으로 소속된 프로젝트들 가지고 오기
@@ -63,17 +74,53 @@ public class TeamProjectUI extends AppCompatActivity {
             }
         });
 
-        addButton.setOnClickListener(new View.OnClickListener() {
+        //메인 플로팅 버튼 클릭 이벤트 처리
+        fabMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String text = projectNameText.getText().toString();
-                TeamProject newProject = new TeamProject(text,selectedUser);
-                projectAdapter.addItem(new ProjectItem(R.drawable.team,newProject));
-                //아이템추가
-                projectAdapter.notifyDataSetChanged();
+                toggleFab();
+            }
+        });
+
+        //추가 플로팅 버튼 클릭 이벤트 처리
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddProjectDialog addProjectDialog = new AddProjectDialog(TeamProjectUI.this);
+                addProjectDialog.callFunction();
+            }
+        });
+
+        //삭제 플로팅 버튼 클릭 이벤트 처리
+        fabDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //구현 바랍니다.
             }
         });
     }
+
+    //플로팅 액션 버튼 클릭시 애니메이션 효과
+    public void toggleFab(){
+        if(fabMain_status){
+            //플로팅 액션 버튼 닫기
+            // 애니메이션 추가
+            ObjectAnimator fc_animation = ObjectAnimator.ofFloat(fabAdd, "translationY", 0f);
+            fc_animation.start();
+            ObjectAnimator fe_animation = ObjectAnimator.ofFloat(fabDelete, "translationY", 0f);
+            fe_animation.start();
+
+        }else {
+            // 플로팅 액션 버튼 열기
+            ObjectAnimator fc_animation = ObjectAnimator.ofFloat(fabAdd, "translationY", -175f);
+            fc_animation.start();
+            ObjectAnimator fe_animation = ObjectAnimator.ofFloat(fabDelete, "translationY", -325f);
+            fe_animation.start();
+        }
+        // 플로팅 버튼 상태 변경
+        fabMain_status = !fabMain_status;
+    }
+
 
     class ProjectAdapter extends BaseAdapter {
         ArrayList<ProjectItem> items = new ArrayList<ProjectItem>();
@@ -107,7 +154,7 @@ public class TeamProjectUI extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.bell_menu, menu);
+        menuInflater.inflate(R.menu.add_search, menu);
         return true;
     }
 

@@ -18,7 +18,7 @@
             android:layout_width="70dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:background="@color/purple_500"
+            android:background="#BBD17F"
             android:gravity="center"
             android:scaleType="fitXY"
             android:src="@drawable/file_size" />

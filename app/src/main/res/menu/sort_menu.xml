@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/navigation_search"
+        android:icon="?android:attr/actionModeWebSearchDrawable"
+        android:iconTint="#000000"
+        android:title="SEARCH"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/sortByAddDate"
         android:title="등록일 순 정렬" />
     <item

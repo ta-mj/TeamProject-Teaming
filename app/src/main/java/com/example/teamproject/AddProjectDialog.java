@@ -1,4 +1,8 @@
 package com.example.teamproject;
+
+import static com.example.teamproject.TeamProjectUI.text;
+import static com.example.teamproject.Users.selectedUser;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
@@ -9,11 +13,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AddUserDialog extends AppCompatActivity {
-
+public class AddProjectDialog extends AppCompatActivity {
     private Context context;
-    public AddUserDialog(){}
-    public AddUserDialog(Context context) {
+    //private TeamProjectUI.ProjectAdapter projectAdapter;
+
+    public AddProjectDialog(){}
+    public AddProjectDialog(Context context) {
         this.context = context;
     }
 
@@ -27,36 +32,28 @@ public class AddUserDialog extends AppCompatActivity {
         dlg.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         // 커스텀 다이얼로그의 레이아웃을 설정한다.
-        dlg.setContentView(R.layout.activity_add_user_dialog);
+        dlg.setContentView(R.layout.activity_add_project_dialog);
 
         // 커스텀 다이얼로그를 노출한다.
         dlg.show();
 
         // 커스텀 다이얼로그의 각 위젯들을 정의한다.
-        final EditText message = (EditText) dlg.findViewById(R.id.mesgase);
-        final Button okButton = (Button) dlg.findViewById(R.id.okButton);
-        final Button cancelButton = (Button) dlg.findViewById(R.id.cancelButton);
+        final EditText message = (EditText) dlg.findViewById(R.id.project_mesgase);
+        final Button okButton = (Button) dlg.findViewById(R.id.project_okButton);
+        final Button cancelButton = (Button) dlg.findViewById(R.id.project_cancelButton);
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // '추가' 버튼 클릭시 id를 체크하고 이미 추가된 유저인 경우와 없는 유저인 경우 실패 메시지를 , 아닌 경우엔
-                // 성공했다는 메시지와 함께 유저를 추가한다.
-                String id = message.getText().toString();
-                if(Users.findUser(id)){
-                    User u = Users.getUser(id);
-                    if(Users.selectedProject.findUser(u)){
-                        Toast.makeText(context, "검색하신 유저가 이미 존재합니다.", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        Users.selectedProject.addUser(u);
-                        Toast.makeText(context, "유저 추가가 완료되었습니다.", Toast.LENGTH_SHORT).show();
-                        TeamProjectInformation.thisTeamProjectInformation.onResume();
-                    }
-                }
-                else{
-                    Toast.makeText(context, "찾으려는 유저가 없습니다.", Toast.LENGTH_SHORT).show();
-                }
+                // '추가' 버튼 클릭시 성공했다는 메시지와 함께 프로젝트를 추가한다.
+                text = message.getText().toString();
+
+                Toast.makeText(context, "프로젝트 추가가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+
+                TeamProject newProject = new TeamProject(text,selectedUser);
+                TeamProjectUI.projectAdapter.addItem(new ProjectItem(R.drawable.team,newProject));
+                //아이템추가
+                TeamProjectUI.projectAdapter.notifyDataSetChanged();
                 // 커스텀 다이얼로그를 종료한다.
                 dlg.dismiss();
             }

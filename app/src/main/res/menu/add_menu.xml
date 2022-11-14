@@ -5,13 +5,13 @@
 
     <item
         android:id="@+id/navigation_team_add"
-        android:icon="@drawable/ic_baseline_add_24"
+        android:icon="@drawable/ic_team_add_size"
         android:title="TEAM_ADD"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/ic_outline_notifications_24"
         android:title="BELL"
         app:showAsAction="ifRoom"/>
 
