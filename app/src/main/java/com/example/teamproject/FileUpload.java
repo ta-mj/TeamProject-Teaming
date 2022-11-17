@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.view.MenuItem;
@@ -26,6 +27,9 @@ public class FileUpload extends AppCompatActivity{
     private EditText manager,deadline,workname,explain;
     private Uri file;
     private Button fileUploadButton,confirmButton;
+
+    private View decorView;
+    private int uiOption;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,17 @@ public class FileUpload extends AppCompatActivity{
             }
         });
 
+        //하단 네비게이션바를 숨겨주는 코드(하단을 쓸어올리거나 상단을 쓸어내리면 다시 나옴)
+        decorView = getWindow().getDecorView();
+        uiOption = getWindow().getDecorView().getSystemUiVisibility();
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH )
+            uiOption |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN )
+            uiOption |= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT )
+            uiOption |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+
+        decorView.setSystemUiVisibility( uiOption );
     }
     ActivityResultLauncher<Intent> openfileLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>()

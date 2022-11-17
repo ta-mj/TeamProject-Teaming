@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +36,10 @@ public class TaskAdd extends AppCompatActivity{
     private String catecory,taskName,explain,date;
     private User taskManger = null;
     public static TaskAdd thisTaskAdd;
+
+    private View decorView;
+    private int uiOption;
+
     //알람 관련 변수
     private AlarmManager alarmManager;
     private NotificationManager notificationManager;
@@ -109,6 +114,18 @@ public class TaskAdd extends AppCompatActivity{
                 }
             }
         });
+
+        //하단 네비게이션바를 숨겨주는 코드(하단을 쓸어올리거나 상단을 쓸어내리면 다시 나옴)
+        decorView = getWindow().getDecorView();
+        uiOption = getWindow().getDecorView().getSystemUiVisibility();
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH )
+            uiOption |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN )
+            uiOption |= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT )
+            uiOption |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+
+        decorView.setSystemUiVisibility( uiOption );
     }
 
     public void setAlarm(String time){
