@@ -34,11 +34,6 @@ public class TeamProjectInformation extends AppCompatActivity {
 
         thisTeamProjectInformation = this;
 
-        //툴바 로고 글씨 안 보이게 하는 코드
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        //툴바 뒤로가기 보이게 하는 코드
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         //Intent 설정
         projectInfoToTaskUI = new Intent(TeamProjectInformation.this,TaskUI.class);
         projectInfoToCalender = new Intent(TeamProjectInformation.this, Calendar.class);
@@ -51,6 +46,11 @@ public class TeamProjectInformation extends AppCompatActivity {
         schelduleButton = findViewById(R.id.project_schedulebutton);
         addUserButton = findViewById(R.id.fabTeamAdd);
         teamprogress = (ProgressBar) findViewById((R.id.team_progressbar));
+
+        //툴바 로고 글씨 안 보이게 하는 코드
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //툴바 뒤로가기 보이게 하는 코드
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         memberView = new TextView[4];
         memberView[0] = findViewById(R.id.member0ProgressView);
