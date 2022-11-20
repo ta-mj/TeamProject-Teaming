@@ -130,7 +130,6 @@ public class TaskAdd extends AppCompatActivity{
         //Intent receiverIntent = new Intent(TaskAdd.this,AlarmRecevier.class);
         //PendingIntent pendingIntent = PendingIntent.getBroadcast(TaskAdd.this,0,receiverIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
-
         //alarmManager.set(AlarmManager.RTC, calender.getTimeInMillis(),pendingIntent);
     }
     private String getTodaysDate() //오늘 날짜를 얻어오는 함수
