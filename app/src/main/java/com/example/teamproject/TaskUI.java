@@ -126,6 +126,10 @@ public class TaskUI extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
+            case R.id.navigation_notifications: //알림 버튼 클릭 시 화면 전환
+                Intent taskUIToAlarm = new Intent (this, AlarmUI.class);
+                startActivity(taskUIToAlarm);
+                break;
             case R.id.sortByAddDate: //등록일 순 정렬 클릭 시 이벤트 처리
                 Users.selectedProject.sortTaskByStartDate();
                 onResume();

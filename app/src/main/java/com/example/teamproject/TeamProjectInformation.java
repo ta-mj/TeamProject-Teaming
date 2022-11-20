@@ -16,9 +16,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class TeamProjectInformation extends AppCompatActivity {
     //변수 선언
-    private Button taskButton, brainstromingButton, schelduleButton,addUserButton;
+    private Button taskButton, brainstromingButton, schelduleButton;
+    private FloatingActionButton addUserButton;
     private ProgressBar teamprogress;
     private Intent projectInfoToTaskUI,projectInfoToCalender;
     private TextView[] memberView;
@@ -41,8 +44,13 @@ public class TeamProjectInformation extends AppCompatActivity {
         taskButton = findViewById(R.id.project_taskbutton);
         brainstromingButton = findViewById(R.id.project_brainstromingbutton);
         schelduleButton = findViewById(R.id.project_schedulebutton);
-        addUserButton = findViewById(R.id.navigation_team_add);
+        addUserButton = findViewById(R.id.fabTeamAdd);
         teamprogress = (ProgressBar) findViewById((R.id.team_progressbar));
+
+        //툴바 로고 글씨 안 보이게 하는 코드
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //툴바 뒤로가기 보이게 하는 코드
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         memberView = new TextView[4];
         memberView[0] = findViewById(R.id.member0ProgressView);
@@ -107,14 +115,21 @@ public class TeamProjectInformation extends AppCompatActivity {
             }
         });
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //팀원 추가 플로팅 버튼 클릭 이벤트 처리
+        addUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddUserDialog addUserDialog = new AddUserDialog(TeamProjectInformation.this);
+                addUserDialog.callFunction();
+            }
+        });
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.add_menu, menu);
+        menuInflater.inflate(R.menu.bell_menu, menu);
         return true;
     }
 
@@ -126,10 +141,6 @@ public class TeamProjectInformation extends AppCompatActivity {
                 startActivity(teamProjectInformationToAlarm);
                 break;
 
-            case R.id.navigation_team_add: //플러스 버튼 클릭 시 이벤트 처리
-                AddUserDialog addUserDialog = new AddUserDialog(TeamProjectInformation.this);
-                addUserDialog.callFunction();
-                break;
             case android.R.id.home:
                 finish();
                 break;
