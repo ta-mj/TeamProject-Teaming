@@ -10,19 +10,30 @@
         android:id="@+id/toolbar_bell"
         layout="@layout/toolbar_bell" />
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_bell"
+        android:layout_margin="10dp"
+        android:background="@drawable/searchview_background"
+        app:iconifiedByDefault="false"
+        app:queryHint="검색어를 입력하시오" />
+
     <ListView
         android:id="@+id/main_listview"
         android:layout_width="match_parent"
-        android:layout_height="659dp"
-        android:layout_below="@id/toolbar_bell" />
+        android:layout_height="600dp"
+        android:layout_below="@id/searchView1"
+        android:dividerHeight="7dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/main_listview"
         android:background="#EDEDED"
-        android:orientation="horizontal"
-        android:layout_below="@id/main_listview">
+        android:orientation="horizontal">
 
 
         <Button

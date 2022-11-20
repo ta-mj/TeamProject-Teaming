@@ -11,12 +11,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/listview_shape"
+        android:layout_marginTop="10dp">
 
         <ImageView
             android:id="@+id/personImage"
-            android:layout_width="426dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:scaleType="fitXY"
             android:src="@drawable/person" />
