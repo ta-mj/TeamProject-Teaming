@@ -2,6 +2,10 @@ package com.example.teamproject;
 
 //프로젝트 정보 화면(설계도 상 5번째 화면) 관련 .java 파일
 
+import android.app.AlarmManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,8 +19,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class TeamProjectInformation extends AppCompatActivity {
     //변수 선언
@@ -27,12 +39,23 @@ public class TeamProjectInformation extends AppCompatActivity {
     private TextView[] memberView;
     private ProgressBar[] memberProgressBar;
     public static TeamProjectInformation thisTeamProjectInformation;
+    //알람 관련 변수
+    private AlarmManager alarmManager;
+    private GregorianCalendar mCalender;
+
+    private NotificationManager notificationManager;
+    NotificationCompat.Builder builder;
     @Override
     protected void onResume() {
         super.onResume();
         setContentView(R.layout.activity_teamproject_information);
 
         thisTeamProjectInformation = this;
+
+        //알람 변수 설정
+        mCalender = new GregorianCalendar();
+        notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
         //Intent 설정
         projectInfoToTaskUI = new Intent(TeamProjectInformation.this,TaskUI.class);
@@ -147,4 +170,5 @@ public class TeamProjectInformation extends AppCompatActivity {
         }
         return true;
     }
+
 }

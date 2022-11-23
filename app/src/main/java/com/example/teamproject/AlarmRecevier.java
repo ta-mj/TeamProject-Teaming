@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
@@ -37,11 +38,12 @@ public class AlarmRecevier extends BroadcastReceiver {
             );
             builder = new NotificationCompat.Builder(context, CHANNEL_ID);
         } else {
-            //builder = new NotificationCompat.Builder(context);
+            Toast.makeText(context.getApplicationContext(),"버전이 맞지 않습니다.",Toast.LENGTH_SHORT).show();
+            return;
         }
 
         //알림창 클릭 시 activity 화면 부름
-        Intent intent2 = new Intent(context, Login.class);
+        Intent intent2 = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context,101,intent2, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //알림창 제목

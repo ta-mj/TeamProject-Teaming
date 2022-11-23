@@ -37,5 +37,6 @@ public class User {
     public void addProject(TeamProject t){
         this.myProject.add(t);
     }
+    public void removeProject(int i){ this.myProject.remove(i); }
 
 }

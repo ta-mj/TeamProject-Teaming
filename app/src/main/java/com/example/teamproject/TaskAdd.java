@@ -5,8 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 
 import android.app.AlarmManager;
-import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -40,10 +43,6 @@ public class TaskAdd extends AppCompatActivity{
     private View decorView;
     private int uiOption;
 
-    //알람 관련 변수
-    private AlarmManager alarmManager;
-    private NotificationManager notificationManager;
-    NotificationCompat.Builder builder;
     public void setTaskManger(User u){
         taskManger = u;
         managerAddButton.setText(taskManger.getName());
@@ -53,9 +52,6 @@ public class TaskAdd extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_add);
 
-        notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-
-        alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         thisTaskAdd = this;
 
         Toolbar toolbar_back = (Toolbar) findViewById(R.id.toolbar_back);
@@ -101,12 +97,7 @@ public class TaskAdd extends AppCompatActivity{
                 if(catecory != "" && taskManger != null && taskName != "" && explain != ""){
                     LocalDate deadline = LocalDate.parse(date);
                     Users.selectedProject.makeTask(catecory,taskManger,taskName,deadline,explain);
-                    String oneDayBefore = deadline.minusDays(1).toString();
-                    if(taskManger == Users.selectedUser){
-                        //날짜 포맷을 바꿔주는 소스코드
-                        setAlarm(date);
-                        setAlarm(oneDayBefore);
-                    }
+                    //String oneDayBefore = deadline.minusDays(1).toString();
                     finish();
                 }
                 else{
@@ -126,28 +117,6 @@ public class TaskAdd extends AppCompatActivity{
             uiOption |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
         decorView.setSystemUiVisibility( uiOption );
-    }
-
-    public void setAlarm(String time){
-        String form = time + " 00:00:00";
-        Toast.makeText(getApplicationContext(),form,Toast.LENGTH_SHORT).show();
-
-        //날짜 포맷을 바꿔주는 소스코드
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
-        Date datetime = null;
-        try{
-            datetime = dateFormat.parse(form);
-            Toast.makeText(getApplicationContext(),datetime.toString(),Toast.LENGTH_SHORT).show();
-        } catch(ParseException e){
-            e.printStackTrace();
-        }
-        Calendar calender = Calendar.getInstance();
-        calender.setTime(datetime);
-        //AlarmReceiver에 값 전달
-        //Intent receiverIntent = new Intent(TaskAdd.this,AlarmRecevier.class);
-        //PendingIntent pendingIntent = PendingIntent.getBroadcast(TaskAdd.this,0,receiverIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-
-        //alarmManager.set(AlarmManager.RTC, calender.getTimeInMillis(),pendingIntent);
     }
     private String getTodaysDate() //오늘 날짜를 얻어오는 함수
     {

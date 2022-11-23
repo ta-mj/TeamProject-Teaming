@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -71,6 +72,18 @@ public class TeamProjectUI extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedProject = projectAdapter.getItem(i).getProject();
                 startActivity(projectUIToProjectInfo);
+            }
+        });
+        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(TeamProjectUI.this,"삭제하시겠습니까?",Toast.LENGTH_SHORT).show();
+//                selectedUser.removeProject(i);
+//                projectAdapter.items.remove(i);
+//                projectAdapter.notifyDataSetChanged();
+                RemoveProjectDialog removeProjectDialog = new RemoveProjectDialog(TeamProjectUI.this);
+                removeProjectDialog.callFunction(i);
+                return true;
             }
         });
 
