@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,16 +10,30 @@
         android:id="@+id/toolbar_bell"
         layout="@layout/toolbar_bell" />
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_bell"
+        android:layout_margin="10dp"
+        android:background="@drawable/searchview_background"
+        app:iconifiedByDefault="false"
+        app:queryHint="검색어를 입력하시오" />
+
+    <ListView
+        android:id="@+id/main_listview"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_below="@id/searchView1"
+        android:dividerHeight="7dp" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#6200ED"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+        android:layout_below="@id/main_listview"
+        android:background="#EDEDED"
+        android:orientation="horizontal">
 
 
         <Button
@@ -28,11 +42,9 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="#6200EC"
-            android:backgroundTint="#6200EC"
-            android:drawableTop="@drawable/ic_home_black_24dp"
-            android:paddingTop="10dp"
-            android:src="@drawable/ic_home_black_24dp"
+            android:background="#EDEDED"
+            android:drawableTop="@drawable/ic_home_size"
+            android:paddingTop="15dp"
             android:text="홈" />
 
         <Button
@@ -41,41 +53,22 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="#6200EC"
-            android:backgroundTint="#6200EC"
+            android:background="#EDEDED"
             android:drawableTop="@drawable/ic_team_size"
             android:paddingTop="10dp"
-            android:src="@drawable/person"
             android:text="프로젝트" />
 
         <Button
             android:id="@+id/personalbutton"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
-            android:layout_weight="1"
-            android:background="#6200EC"
-            android:backgroundTint="#6200EC"
-            android:drawableTop="@drawable/ic_person_size"
             android:layout_gravity="center"
-            android:paddingTop="10dp"
-            android:src="@drawable/person"
+            android:layout_weight="1"
+            android:background="#EDEDED"
+            android:drawableTop="@drawable/ic_person_size"
+            android:paddingTop="15dp"
             android:text="개인" />
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="392dp"
-        android:layout_height="659dp"
-        app:layout_constraintBottom_toTopOf="@id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_bell"
-        app:layout_constraintVertical_bias="0.13999999">
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
 
 
     <!--    <ImageView-->
@@ -87,4 +80,4 @@
     <!--        tools:layout_editor_absoluteY="1dp" />-->
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

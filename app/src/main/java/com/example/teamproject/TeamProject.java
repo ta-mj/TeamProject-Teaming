@@ -1,23 +1,22 @@
 package com.example.teamproject;
+
+
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
 public class TeamProject {
     //프로젝트 정보
     private String subject;
     //구성원
     private ArrayList<User> myUser = new ArrayList<>();
     //업무
-    private LinkedList<Task> myTask = new LinkedList<>();
+    private ArrayList<Task> myTask = new ArrayList<>();
     //브레인스토밍
     //일정
     //알림
     TeamProject(String s, User u){
         subject = s;
         myUser.add(u);
+        Users.selectedUser.addProject(this);
         Users.selectedProject = this;
     }
     public void setSubject(String s) {
@@ -25,12 +24,20 @@ public class TeamProject {
     }
     public void addUser(User u) {
         myUser.add(u);
+        u.addProject(this);
     }
     public String getSubject() { return this.subject; }
+    public ArrayList<User> getAllUser(){ return this.myUser;}
+    public ArrayList<Task> getAllTask(){ return this.myTask;}
+    public User getOneUser(int i){ return this.myUser.get(i); }
+    public Task getOneTask(int i){ return this.myTask.get(i); }
     public int getUserNum() { return this.myUser.size(); }
-    public void makeTask(String n, User m, LocalDate t, String ex){
-        Task newTask = new Task(n,m,t,ex);
+    public void makeTask(String c, User m, String w,LocalDate t, String ex){
+        Task newTask = new Task(c,m,w,t,ex);
         myTask.add(newTask);
+    }
+    public boolean findUser(User u){
+        return myUser.contains(u);
     }
     public void sortTaskByStartDate() {
         myTask.sort(new StartDateComparator());

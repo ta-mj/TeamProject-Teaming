@@ -3,31 +3,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.teamproject">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_teaming"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_teaming_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamProject"
         tools:targetApi="31">
+
+        <activity
+            android:name=".TaskManagerAdd"
+            android:exported="false" />
+        <activity
+            android:name=".AddUserDialog"
+            android:exported="true" />
         <activity
             android:name=".Calendar"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".TaskAdd"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".TaskUI"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".TeamProjectInformation"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".TeamProjectUI"
-            android:exported="true"/>
+            android:exported="true" />
+        <activity
+            android:name=".FileUpload"
+            android:exported="true" />
         <activity
             android:name=".AlarmFileTest"
             android:exported="true" />
@@ -57,8 +70,13 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <receiver android:name=".AlarmRecevier"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
 </manifest>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/listview_shape"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/commitButton"
+            android:layout_width="50dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/imageview_shape"
+            android:backgroundTint="#BBD17F"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/file_size"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/managerName"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="담당자"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/workNameText"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="업무 내용"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/deadLineText"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="마감일"
+            android:textColor="@color/black" />
+
+        <CheckBox
+            android:id="@+id/isTaskComplete"
+            android:layout_width="48dp"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

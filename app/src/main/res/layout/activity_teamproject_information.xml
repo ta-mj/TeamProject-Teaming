@@ -17,7 +17,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#6200ED"
+        android:background="#BBD17F"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,11 +29,9 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="#6200EC"
-            android:backgroundTint="#6200EC"
+            android:background="#EDEDED"
             android:drawableTop="@drawable/file_size"
             android:paddingTop="10dp"
-            android:src="@drawable/file"
             android:text="업무" />
 
 
@@ -43,11 +41,9 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="#6200EC"
-            android:backgroundTint="#6200EC"
+            android:background="#EDEDED"
             android:drawableTop="@drawable/brainstorm_size"
             android:paddingTop="10dp"
-            android:src="@drawable/brainstorm"
             android:text="브레인스토밍" />
 
         <Button
@@ -56,11 +52,9 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="#6200EC"
-            android:backgroundTint="#6200EC"
+            android:background="#EDEDED"
             android:drawableTop="@drawable/calendar_size"
             android:paddingTop="10dp"
-            android:src="@drawable/calendar_size"
             android:text="일정" />
     </LinearLayout>
 
@@ -73,13 +67,12 @@
         android:layout_marginTop="60dp"
         android:scaleY="3"
         android:max = "100"
-        android:progress="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/topView" />
 
     <ProgressBar
-        android:id="@+id/member1_progressbar"
+        android:id="@+id/member0_progressbar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="160dp"
         android:layout_height="30dp"
@@ -93,6 +86,21 @@
         app:layout_constraintTop_toBottomOf="@+id/team_progressbar" />
 
     <ProgressBar
+        android:id="@+id/member1_progressbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:scaleY="3"
+        android:max = "100"
+        android:progress="0"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.652"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/member0_progressbar" />
+
+    <ProgressBar
         android:id="@+id/member2_progressbar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="160dp"
@@ -101,6 +109,7 @@
         android:scaleY="3"
         android:max = "100"
         android:progress="0"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.652"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,95 +124,106 @@
         android:scaleY="3"
         android:max = "100"
         android:progress="0"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.652"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/member2_progressbar" />
 
-    <ProgressBar
-        android:id="@+id/membet4_progressbar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
-        android:scaleY="3"
-        android:max = "100"
-        android:progress="0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.652"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/member3_progressbar" />
-
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/teamProgressView"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="60dp"
         android:text="팀 전체 진행도"
         android:textSize="16dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/team_progressbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/topView" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/member0ProgressView"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="50dp"
         android:text="팀원1"
         android:textSize="16dp"
+        android:textColor="@color/black"
         android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/member1_progressbar"
+        app:layout_constraintEnd_toStartOf="@+id/member0_progressbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/teamProgressView" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/member1ProgressView"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
         android:text="팀원2"
         android:textSize="16dp"
+        android:textColor="@color/black"
         android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/member2_progressbar"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/member1_progressbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/member0ProgressView" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/member2ProgressView"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
         android:text="팀원3"
         android:textSize="16dp"
+        android:textColor="@color/black"
         android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/member3_progressbar"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/member2_progressbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/member1ProgressView" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/member3ProgressView"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
         android:text="팀원4"
         android:textSize="16dp"
+        android:textColor="@color/black"
         android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/membet4_progressbar"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/member3_progressbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/member2ProgressView" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/topView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:text="진행도"
         android:textSize="40dp"
+        android:textColor="@color/black"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_bell" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabTeamAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_team_add_size"
+        app:backgroundTint="#55C65A"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -104,7 +104,7 @@ public class AlarmFileTest extends AppCompatActivity {
         NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
                 .setContentTitle("알림")
                 .setContentText("마감 기한이 얼마 안남았습니다.")
-                .setSmallIcon(R.drawable.ic_notifications_black_24dp);//이미지 에셋 설정 --> file - new - imageasset으로 가 ic_android 설정해 newt - finish할것
+                .setSmallIcon(R.drawable.ic_outline_notifications_24);//이미지 에셋 설정 --> file - new - imageasset으로 가 ic_android 설정해 newt - finish할것
         return notifyBuilder;
     }
 
@@ -112,6 +112,7 @@ public class AlarmFileTest extends AppCompatActivity {
         NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
         mNotificationManager.notify(NOTIFICATION_ID, notifyBuilder.build());
     }
+
 
     ActivityResultLauncher<Intent> openfileLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>()
