@@ -4,8 +4,6 @@ package com.example.teamproject;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,11 +24,12 @@ public class TaskUI extends AppCompatActivity{
     private TaskAdapter taskAdapter;
 
     //플로팅 액션버튼 변수
-    private FloatingActionButton fab_TaskMain;
     private FloatingActionButton fab_TaskAdd;
-    private FloatingActionButton fab_TaskDelete;
+    //private FloatingActionButton fab_TaskAdd;
+    //private FloatingActionButton fab_TaskDelete;
+
     //플로팅버튼 상태
-    private boolean fab_TaskMain_status = false;
+    //private boolean fab_TaskMain_status = false;
 
     public static TaskUI thisTaskUI;
     @Override
@@ -47,9 +46,9 @@ public class TaskUI extends AppCompatActivity{
         thisTaskUI = this;
 
         //플로팅 액션 버튼 연결
-        fab_TaskMain = findViewById(R.id.fab_TaskMain);
         fab_TaskAdd = findViewById(R.id.fab_TaskAdd);
-        fab_TaskDelete = findViewById(R.id.fab_TaskDelete);
+        //fab_TaskAdd = findViewById(R.id.fab_TaskAdd);
+        //fab_TaskDelete = findViewById(R.id.fab_TaskDelete);
 
         //Intent 설정
         taskUIToTaskAdd = new Intent(TaskUI.this,TaskAdd.class);
@@ -70,50 +69,12 @@ public class TaskUI extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        //메인 플로팅 버튼 클릭 이벤트 처리
-        fab_TaskMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleFab();
-            }
-        });
-
         //추가 플로팅 버튼 클릭 이벤트 처리
         fab_TaskAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(taskUIToTaskAdd);
-            }
+            public void onClick(View view) { startActivity(taskUIToTaskAdd); }
         });
 
-        //삭제 플로팅 버튼 클릭 이벤트 처리
-        fab_TaskDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //구현 바랍니다.
-            }
-        });
-
-    }
-
-    public void toggleFab(){
-        if(fab_TaskMain_status){
-            //플로팅 액션 버튼 닫기
-            // 애니메이션 추가
-            ObjectAnimator fc_animation = ObjectAnimator.ofFloat(fab_TaskAdd, "translationY", 0f);
-            fc_animation.start();
-            ObjectAnimator fe_animation = ObjectAnimator.ofFloat(fab_TaskDelete, "translationY", 0f);
-            fe_animation.start();
-
-        }else {
-            // 플로팅 액션 버튼 열기
-            ObjectAnimator fc_animation = ObjectAnimator.ofFloat(fab_TaskAdd, "translationY", -175f);
-            fc_animation.start();
-            ObjectAnimator fe_animation = ObjectAnimator.ofFloat(fab_TaskDelete, "translationY", -325f);
-            fe_animation.start();
-        }
-        // 플로팅 버튼 상태 변경
-        fab_TaskMain_status = !fab_TaskMain_status;
     }
 
     @Override
@@ -146,4 +107,27 @@ public class TaskUI extends AppCompatActivity{
         }
         return true;
     }
+
+        /*
+    public void toggleFab(){
+        if(fab_TaskMain_status){
+            //플로팅 액션 버튼 닫기
+            // 애니메이션 추가
+            ObjectAnimator fc_animation = ObjectAnimator.ofFloat(fab_TaskAdd, "translationY", 0f);
+            fc_animation.start();
+            ObjectAnimator fe_animation = ObjectAnimator.ofFloat(fab_TaskDelete, "translationY", 0f);
+            fe_animation.start();
+
+        }else {
+            // 플로팅 액션 버튼 열기
+            ObjectAnimator fc_animation = ObjectAnimator.ofFloat(fab_TaskAdd, "translationY", -175f);
+            fc_animation.start();
+            ObjectAnimator fe_animation = ObjectAnimator.ofFloat(fab_TaskDelete, "translationY", -325f);
+            fe_animation.start();
+        }
+        // 플로팅 버튼 상태 변경
+        fab_TaskMain_status = !fab_TaskMain_status;
+    }
+*/
+
 }

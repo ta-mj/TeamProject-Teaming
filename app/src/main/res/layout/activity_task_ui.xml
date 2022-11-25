@@ -40,33 +40,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="24dp"
-        android:src="@drawable/ic_outline_note_add_24"
-        app:backgroundTint="#55C65A"
-        app:fabSize="mini" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_TaskDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="24dp"
-        android:src="@drawable/ic_outline_delete_24"
-        app:backgroundTint="#55C65A"
-        app:fabSize="mini" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_TaskMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_outline_settings_24"
+        android:src="@drawable/ic_outline_note_add_24"
         app:backgroundTint="#55C65A" />
 
 

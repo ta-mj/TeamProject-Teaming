@@ -1,41 +1,35 @@
 package com.example.teamproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
-import java.util.ArrayList;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+public class PersonUI extends AppCompatActivity {
+    //하단 네비게이션바를 숨기기 위한 변수
     private View decorView;
     private int uiOption;
-    private Intent mainToProjectUI, mainToPersonUI;
-    private Button projectButton,mainButton,personalButton;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    //플로팅 액션버튼
+    private FloatingActionButton fab_toDoAdd;
+
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_person_ui);
 
         Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
         setSupportActionBar(toolbar_bell);
 
-        //타이틀 숨기기
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        //인텐트 설정
-        mainToProjectUI = new Intent(MainActivity.this,TeamProjectUI.class);
-        mainToPersonUI = new Intent(MainActivity.this,PersonUI.class);
 
         //하단 네비게이션바를 숨겨주는 코드(하단을 쓸어올리거나 상단을 쓸어내리면 다시 나옴)
         decorView = getWindow().getDecorView();
@@ -49,23 +43,16 @@ public class MainActivity extends AppCompatActivity {
 
         decorView.setSystemUiVisibility( uiOption );
 
-        //프로젝트 버튼
-        projectButton = findViewById(R.id.projectbutton);
-        projectButton.setOnClickListener(new View.OnClickListener() {
+/*
+        //추가 플로팅 버튼 클릭 이벤트 처리
+        fab_toDoAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(mainToProjectUI);
+                //startActivity();
             }
-        });
-
-
-        personalButton = findViewById(R.id.personalbutton);
-        personalButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { startActivity(mainToPersonUI); }
-        });
-
+        }); */
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -77,9 +64,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.navigation_notifications:
-                Intent mainToAlarm = new Intent (this, AlarmUI.class);
-                startActivity(mainToAlarm);
+            case R.id.navigation_notifications: //알림 버튼 클릭 시 이벤트 처리
+                Intent personUIToAlarm = new Intent (this, AlarmUI.class);
+                startActivity(personUIToAlarm);
+                break;
+            case android.R.id.home: //뒤로가기 버튼 클릭 시 이벤트 처리
+                finish();
                 break;
         }
         return true;

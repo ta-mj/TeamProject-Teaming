@@ -5,9 +5,7 @@ package com.example.teamproject;
 import static com.example.teamproject.Users.selectedProject;
 import static com.example.teamproject.Users.selectedUser;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,12 +28,9 @@ public class TeamProjectUI extends AppCompatActivity {
     private Intent projectUIToProjectInfo;
 
     //플로팅 액션버튼 변수
-    private FloatingActionButton fabMain;
     private FloatingActionButton fabAdd;
-    private FloatingActionButton fabDelete;
-
     //플로팅버튼 상태
-    private boolean fabMain_status = false;
+    //private boolean fabMain_status = false;
 
     //AddProjectDialog에서 프로젝트를 추가할 수 있게 하기 위해서 public static으로 변경
     public static ProjectAdapter projectAdapter;
@@ -54,9 +49,7 @@ public class TeamProjectUI extends AppCompatActivity {
         projectUIToProjectInfo = new Intent(TeamProjectUI.this, TeamProjectInformation.class);
 
         gridView = findViewById(R.id.gridView);
-        fabMain = findViewById(R.id.fabMain);
         fabAdd = findViewById(R.id.fabAdd);
-        fabDelete = findViewById(R.id.fabDelete);
 
        // projectNameText = findViewById(R.id.projectNameText);
 
@@ -87,51 +80,16 @@ public class TeamProjectUI extends AppCompatActivity {
             }
         });
 
-        //메인 플로팅 버튼 클릭 이벤트 처리
-        fabMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleFab();
-            }
-        });
-
         //추가 플로팅 버튼 클릭 이벤트 처리
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //toggleFab();
                 AddProjectDialog addProjectDialog = new AddProjectDialog(TeamProjectUI.this);
                 addProjectDialog.callFunction();
             }
         });
 
-        //삭제 플로팅 버튼 클릭 이벤트 처리
-        fabDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //구현 바랍니다.
-            }
-        });
-    }
-
-    //플로팅 액션 버튼 클릭시 애니메이션 효과
-    public void toggleFab(){
-        if(fabMain_status){
-            //플로팅 액션 버튼 닫기
-            // 애니메이션 추가
-            ObjectAnimator fc_animation = ObjectAnimator.ofFloat(fabAdd, "translationY", 0f);
-            fc_animation.start();
-            ObjectAnimator fe_animation = ObjectAnimator.ofFloat(fabDelete, "translationY", 0f);
-            fe_animation.start();
-
-        }else {
-            // 플로팅 액션 버튼 열기
-            ObjectAnimator fc_animation = ObjectAnimator.ofFloat(fabAdd, "translationY", -175f);
-            fc_animation.start();
-            ObjectAnimator fe_animation = ObjectAnimator.ofFloat(fabDelete, "translationY", -325f);
-            fe_animation.start();
-        }
-        // 플로팅 버튼 상태 변경
-        fabMain_status = !fabMain_status;
     }
 
 
