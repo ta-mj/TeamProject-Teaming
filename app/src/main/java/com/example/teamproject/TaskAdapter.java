@@ -30,7 +30,9 @@ public class TaskAdapter extends BaseAdapter {
         tasks = data;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
+    public void setTasks(ArrayList<Task> t){tasks = t;}
 
+    public ArrayList<Task> getTasks(){ return tasks; }
     @Override
     public int getCount() {
         return tasks.size();

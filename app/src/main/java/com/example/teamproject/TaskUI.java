@@ -3,6 +3,7 @@ package com.example.teamproject;
 //업무분담 화면(설계도 상 7번째 화면) 관련 .java 파일
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,11 +21,15 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class TaskUI extends AppCompatActivity{
     //변수 설정
     private FloatingActionButton taskAddButton;
+    private SearchView task_search;
     private Intent taskUIToTaskAdd;
     private TaskAdapter taskAdapter;
+    private ArrayList<Task> selectedTask = new ArrayList<>();
 
     //플로팅 액션버튼 변수
     private FloatingActionButton fab_TaskMain;
@@ -51,6 +57,7 @@ public class TaskUI extends AppCompatActivity{
         fab_TaskAdd = findViewById(R.id.fab_TaskAdd);
         fab_TaskDelete = findViewById(R.id.fab_TaskDelete);
 
+
         //Intent 설정
         taskUIToTaskAdd = new Intent(TaskUI.this,TaskAdd.class);
 
@@ -64,6 +71,35 @@ public class TaskUI extends AppCompatActivity{
             public void onItemClick(AdapterView parent, View v, int position, long id){
                 Toast.makeText(getApplicationContext(),taskAdapter.getItem(position).getManager().getName(),Toast.LENGTH_SHORT).show();
                 //finish();
+            }
+        });
+
+        //검색 뷰 설정
+        task_search = findViewById(R.id.task_search);
+        task_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                if(s.length() == 0){
+                    taskAdapter.setTasks(Users.selectedProject.getAllTask());
+                }
+                else{
+                    taskAdapter.setTasks(Users.selectedProject.getAllTask());
+                    selectedTask.clear();
+                    for(int i = 0 ; i < taskAdapter.getTasks().size() ; i++){
+                        Task task = taskAdapter.getTasks().get(i);
+                        if(task.getManager().getName().contains(s) || task.getWorkName().contains(s)){
+                            selectedTask.add(task);
+                        }
+                    }
+                    taskAdapter.setTasks(selectedTask);
+                }
+                taskAdapter.notifyDataSetChanged();
+                return false;
             }
         });
 

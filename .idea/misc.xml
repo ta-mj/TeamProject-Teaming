@@ -13,6 +13,7 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/activity_add_project_dialog.xml" value="0.346875" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/activity_add_user_dialog.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/activity_alarm_file_test.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/activity_calendar.xml" value="0.22" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/activity_file_upload.xml" value="0.14947916666666666" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/activity_login.xml" value="0.1390625" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/activity_main.xml" value="0.22" />
@@ -25,7 +26,7 @@
         <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/activity_task_ui.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/activity_teamproject.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/activity_teamproject_information.xml" value="0.22" />
-        <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/activity_teamproject_ui.xml" value="0.409375" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/activity_teamproject_ui.xml" value="0.3824228028503563" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/border.xml" value="0.3161231884057971" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/listview_task.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/TeamProject/app/src/main/res/layout/listview_user.xml" value="0.3333333333333333" />
