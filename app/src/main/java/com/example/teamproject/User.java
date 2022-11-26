@@ -29,7 +29,12 @@ public class User {
     public String getPhoneNum() {
         return phone;
     }
-    public int getProjectNum() { return myProject.size(); }
+    public int getProjectNum() {
+        if(myProject != null){
+            return myProject.size();
+        }
+        return 0;
+    }
     public TeamProject getProject(int i) { return myProject.get(i); }
     public String printInfo() {
          return "이름" + getName() + "이메일:" + getEmail() + "전화번호:" + getPhoneNum() + "\n";

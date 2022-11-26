@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private View decorView;
     private int uiOption;
-    private Intent mainToProjectUI;
+    private Intent mainToProjectUI, mainToPersonUI;
     private Button projectButton,mainButton,personalButton;
 
     @Override
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         //인텐트 설정
         mainToProjectUI = new Intent(MainActivity.this,TeamProjectUI.class);
+        mainToPersonUI = new Intent(MainActivity.this,PersonUI.class);
 
         //하단 네비게이션바를 숨겨주는 코드(하단을 쓸어올리거나 상단을 쓸어내리면 다시 나옴)
         decorView = getWindow().getDecorView();
@@ -57,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        personalButton = findViewById(R.id.personalbutton);
+        personalButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { startActivity(mainToPersonUI); }
+        });
 
     }
 
