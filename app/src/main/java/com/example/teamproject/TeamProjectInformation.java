@@ -35,7 +35,7 @@ public class TeamProjectInformation extends AppCompatActivity {
     private Button taskButton, brainstromingButton, schelduleButton;
     private FloatingActionButton addUserButton;
     private ProgressBar teamprogress;
-    private Intent projectInfoToTaskUI,projectInfoToCalender;
+    private Intent projectInfoToTaskUI,projectInfoToCalender, projectInfoToBrainstorming;
     private TextView[] memberView;
     private ProgressBar[] memberProgressBar;
     public static TeamProjectInformation thisTeamProjectInformation;
@@ -60,6 +60,7 @@ public class TeamProjectInformation extends AppCompatActivity {
         //Intent 설정
         projectInfoToTaskUI = new Intent(TeamProjectInformation.this,TaskUI.class);
         projectInfoToCalender = new Intent(TeamProjectInformation.this, Calendar.class);
+        projectInfoToBrainstorming = new Intent(TeamProjectInformation.this, Brainstorming.class);
 
         //id로 view 연결
         Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
@@ -130,12 +131,16 @@ public class TeamProjectInformation extends AppCompatActivity {
             }
         });
 
-
         schelduleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(projectInfoToCalender);
             }
+        });
+
+        brainstromingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { startActivity( projectInfoToBrainstorming); }
         });
 
         //팀원 추가 플로팅 버튼 클릭 이벤트 처리

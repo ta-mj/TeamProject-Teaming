@@ -1,22 +1,21 @@
-    package com.example.teamproject;
+package com.example.teamproject;
 
-    //프로젝트 화면(설계도 상 4번째 화면) 관련 .java 파일
+//프로젝트 화면(설계도 상 4번째 화면) 관련 .java 파일
 
-    import android.animation.ObjectAnimator;
-    import android.content.Context;
-    import android.content.Intent;
-    import android.graphics.Color;
-    import android.util.Log;
-    import android.view.Menu;
-    import android.view.MenuInflater;
-    import android.view.MenuItem;
-    import android.view.View;
-    import android.view.ViewGroup;
-    import android.widget.AdapterView;
-    import android.widget.BaseAdapter;
-    import android.widget.GridView;
-    import androidx.appcompat.widget.SearchView;
-    import android.widget.Toast;
+import static com.example.teamproject.Users.selectedProject;
+import static com.example.teamproject.Users.selectedUser;
+
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import androidx.appcompat.widget.SearchView;
+import android.widget.Toast;
 
     import androidx.appcompat.app.AppCompatActivity;
     import androidx.appcompat.widget.Toolbar;
@@ -31,13 +30,10 @@
         private Intent projectUIToProjectInfo;
         private SearchView project_search;
 
-        //플로팅 액션버튼 변수
-        private FloatingActionButton fabMain;
-        private FloatingActionButton fabAdd;
-        private FloatingActionButton fabDelete;
-
-        //플로팅버튼 상태
-        private boolean fabMain_status = false;
+    //플로팅 액션버튼 변수
+    private FloatingActionButton fabAdd;
+    //플로팅버튼 상태
+    //private boolean fabMain_status = false;
 
         //AddProjectDialog에서 프로젝트를 추가할 수 있게 하기 위해서 public static으로 변경
         public static ProjectAdapter projectAdapter;
@@ -51,21 +47,19 @@
             super.onResume();
             setContentView(R.layout.activity_teamproject_ui);
 
-            Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
-            setSupportActionBar(toolbar_bell);
+        Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
+        setSupportActionBar(toolbar_bell);
 
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-            projectUIToProjectInfo = new Intent(TeamProjectUI.this, TeamProjectInformation.class);
+        projectUIToProjectInfo = new Intent(TeamProjectUI.this, TeamProjectInformation.class);
 
-            gridView = findViewById(R.id.gridView);
-            fabMain = findViewById(R.id.fabMain);
-            fabAdd = findViewById(R.id.fabAdd);
-            fabDelete = findViewById(R.id.fabDelete);
-            project_search = findViewById(R.id.project_search);
+        gridView = findViewById(R.id.gridView);
+        fabAdd = findViewById(R.id.fabAdd);
+        project_search = findViewById(R.id.project_search);
 
-           // projectNameText = findViewById(R.id.projectNameText);
+            // projectNameText = findViewById(R.id.projectNameText);
             try{
                 projectAdapter = new ProjectAdapter();
                 //반복문으로 소속된 프로젝트들 가지고 오기
@@ -98,6 +92,15 @@
                 }
             });
 
+        //추가 플로팅 버튼 클릭 이벤트 처리
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //toggleFab();
+                AddProjectDialog addProjectDialog = new AddProjectDialog(TeamProjectUI.this);
+                addProjectDialog.callFunction();
+            }
+        });
             //검색 기능
             project_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 //엔터키 눌렸을때
@@ -151,35 +154,7 @@
                 }
             });
 
-            //삭제 플로팅 버튼 클릭 이벤트 처리
-            fabDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //구현 바랍니다.
-                }
-            });
-        }
-
-        //플로팅 액션 버튼 클릭시 애니메이션 효과
-        public void toggleFab(){
-            if(fabMain_status){
-                //플로팅 액션 버튼 닫기
-                // 애니메이션 추가
-                ObjectAnimator fc_animation = ObjectAnimator.ofFloat(fabAdd, "translationY", 0f);
-                fc_animation.start();
-                ObjectAnimator fe_animation = ObjectAnimator.ofFloat(fabDelete, "translationY", 0f);
-                fe_animation.start();
-
-            }else {
-                // 플로팅 액션 버튼 열기
-                ObjectAnimator fc_animation = ObjectAnimator.ofFloat(fabAdd, "translationY", -175f);
-                fc_animation.start();
-                ObjectAnimator fe_animation = ObjectAnimator.ofFloat(fabDelete, "translationY", -325f);
-                fe_animation.start();
-            }
-            // 플로팅 버튼 상태 변경
-            fabMain_status = !fabMain_status;
-        }
+    }
 
 
         class ProjectAdapter extends BaseAdapter {

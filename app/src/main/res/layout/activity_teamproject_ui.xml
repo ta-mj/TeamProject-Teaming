@@ -31,10 +31,10 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:horizontalSpacing="2dp"
+        android:horizontalSpacing="5dp"
         android:listSelector="#BFBFBF"
         android:numColumns="2"
-        android:verticalSpacing="2dp" />
+        android:verticalSpacing="4dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAdd"
@@ -68,7 +68,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_outline_settings_24"
+        android:src="@drawable/ic_outline_note_add_24"
         app:backgroundTint="#55C65A" />
 
 </RelativeLayout>
