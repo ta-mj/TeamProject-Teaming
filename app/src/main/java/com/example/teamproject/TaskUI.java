@@ -2,6 +2,8 @@ package com.example.teamproject;
 
 //업무분담 화면(설계도 상 7번째 화면) 관련 .java 파일
 
+import static com.example.teamproject.TeamProjectUI.projectAdapter;
+
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
@@ -16,28 +18,26 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.arch.core.internal.FastSafeIterableMap;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 public class TaskUI extends AppCompatActivity{
+
     //변수 설정
     private FloatingActionButton taskAddButton;
     private SearchView task_search;
     private Intent taskUIToTaskAdd;
-    private TaskAdapter taskAdapter;
     private ArrayList<Task> selectedTask = new ArrayList<>();
 
     //플로팅 액션버튼 변수
     private FloatingActionButton fab_TaskAdd;
-    //private FloatingActionButton fab_TaskAdd;
-    //private FloatingActionButton fab_TaskDelete;
 
-    //플로팅버튼 상태
-    //private boolean fab_TaskMain_status = false;
-
+    public static TaskAdapter taskAdapter;
     public static TaskUI thisTaskUI;
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -53,17 +53,14 @@ public class TaskUI extends AppCompatActivity{
 
         //플로팅 액션 버튼 연결
         fab_TaskAdd = findViewById(R.id.fab_TaskAdd);
-        //fab_TaskAdd = findViewById(R.id.fab_TaskAdd);
-        //fab_TaskDelete = findViewById(R.id.fab_TaskDelete);
-
 
         //Intent 설정
         taskUIToTaskAdd = new Intent(TaskUI.this,TaskAdd.class);
 
-
         //listview 설정
         ListView listView = (ListView) findViewById(R.id.listview1);
         taskAdapter = new TaskAdapter(this,Users.selectedProject.getAllTask());
+
         listView.setAdapter(taskAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -72,6 +69,8 @@ public class TaskUI extends AppCompatActivity{
                 //finish();
             }
         });
+
+
 
         //검색 뷰 설정
         task_search = findViewById(R.id.task_search);

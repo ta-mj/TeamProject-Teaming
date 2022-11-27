@@ -44,4 +44,5 @@ public class User {
     }
     public void removeProject(int i){ this.myProject.remove(i); }
 
+
 }

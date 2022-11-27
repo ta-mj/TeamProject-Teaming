@@ -5,7 +5,7 @@ public class ProjectItem {
     private TeamProject myProject;
 
     public ProjectItem(int image, TeamProject pr){
-        this.image = image;
+        this.image = Integer.parseInt(String.valueOf(image));
         this.myProject = pr;
     }
     public int getImage(){
