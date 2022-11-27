@@ -74,6 +74,16 @@ public class TaskAdapter extends BaseAdapter {
                 TaskUI.thisTaskUI.startActivity(taskUIToFileUpload);
             }
         });
+        fileUploadButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Context c = mContext.getApplicationContext();
+                Toast.makeText(c,"롱클릭",Toast.LENGTH_SHORT).show();
+                tasks.remove(position);
+                notifyDataSetChanged();
+                return true;
+            }
+        });
         isTaskComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
