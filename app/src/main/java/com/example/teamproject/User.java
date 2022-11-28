@@ -8,7 +8,6 @@ public class User {
     private String email;
     private String phone;
     private ArrayList<TeamProject> myProject = new ArrayList<TeamProject>();
-    private ArrayList<Task> myTask = new ArrayList<>();
     //project 객체
     //user 생성자
     public User(String p , String n , String e, String ph){

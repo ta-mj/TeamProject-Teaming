@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,7 +40,7 @@ public class RemoveProjectDialog extends AppCompatActivity {
         dlg.show();
 
         // 커스텀 다이얼로그의 각 위젯들을 정의한다.
-        final EditText message = (EditText) dlg.findViewById(R.id.project_rm_message);
+        final TextView message = (TextView) dlg.findViewById(R.id.project_rm_message);
         final Button okButton = (Button) dlg.findViewById(R.id.project_rm_okButton);
         final Button cancelButton = (Button) dlg.findViewById(R.id.project_rm_cancelButton);
 
@@ -50,7 +51,6 @@ public class RemoveProjectDialog extends AppCompatActivity {
                 text = message.getText().toString();
 
                 Toast.makeText(context, "프로젝트 삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
-
                 Users.selectedUser.removeProject(i);
                 TeamProjectUI.projectAdapter.items.remove(i);
                 //아이템추가

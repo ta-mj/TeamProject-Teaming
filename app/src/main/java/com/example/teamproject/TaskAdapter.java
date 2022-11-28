@@ -20,11 +20,11 @@ import java.util.ArrayList;
 public class TaskAdapter extends BaseAdapter {
     Context mContext = null;
     LayoutInflater mLayoutInflater = null;
-    private ArrayList<Task> tasks;
+    private static ArrayList<Task> tasks;
     private ImageButton fileUploadButton;
     private CheckBox isTaskComplete;
     private Intent taskUIToFileUpload;
-
+    public void removeTask(int position){tasks.remove(position);}
     public TaskAdapter(Context context, ArrayList<Task> data) {
         mContext = context;
         tasks = data;
@@ -74,16 +74,18 @@ public class TaskAdapter extends BaseAdapter {
                 TaskUI.thisTaskUI.startActivity(taskUIToFileUpload);
             }
         });
-        fileUploadButton.setOnLongClickListener(new View.OnLongClickListener() {
+
+        fileUploadButton.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View view) {
                 Context c = mContext.getApplicationContext();
-                Toast.makeText(c,"롱클릭",Toast.LENGTH_SHORT).show();
-                tasks.remove(position);
-                notifyDataSetChanged();
+                Toast.makeText(mContext.getApplicationContext(),"삭제하시겠습니까",Toast.LENGTH_SHORT).show();
+                RemoveTaskDialog removeTaskDialog = new RemoveTaskDialog(mContext);
+                removeTaskDialog.CallFunction(position);
                 return true;
             }
         });
+
         isTaskComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,4 +95,7 @@ public class TaskAdapter extends BaseAdapter {
         });
         return view;
     }
+
+
+
 }

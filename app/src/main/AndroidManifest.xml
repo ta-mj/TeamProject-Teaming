@@ -17,13 +17,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamProject"
         tools:targetApi="31">
-
+        <activity
+            android:name=".remove_task_dialog"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Brainstorming"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".PersonUI"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".TaskManagerAdd"
             android:exported="false" />
