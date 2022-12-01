@@ -1,6 +1,7 @@
 package com.example.teamproject;
 
 import static com.example.teamproject.TeamProjectUI.text;
+import static com.example.teamproject.Users.selectedProject;
 import static com.example.teamproject.Users.selectedUser;
 
 import android.app.Dialog;
@@ -51,6 +52,12 @@ public class RemoveProjectDialog extends AppCompatActivity {
                 text = message.getText().toString();
 
                 Toast.makeText(context, "프로젝트 삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                for(int j = 0 ; j < selectedProject.getUserNum() ; j++){
+                    if(selectedProject.getOneUser(j).equals(selectedUser)){
+                        Toast.makeText(context,selectedProject.getOneUser(i).getName(),Toast.LENGTH_SHORT).show();
+                        selectedProject.removeUser(j);
+                    }
+                }
                 Users.selectedUser.removeProject(i);
                 TeamProjectUI.projectAdapter.items.remove(i);
                 //아이템추가

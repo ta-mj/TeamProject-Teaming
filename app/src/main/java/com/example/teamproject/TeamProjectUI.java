@@ -82,6 +82,7 @@ public class TeamProjectUI extends AppCompatActivity {
         gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Users.selectedProject = Users.selectedUser.getProject(i);
                 Toast.makeText(TeamProjectUI.this,"삭제하시겠습니까?",Toast.LENGTH_SHORT).show();
                 RemoveProjectDialog removeProjectDialog = new RemoveProjectDialog(TeamProjectUI.this);
                 removeProjectDialog.callFunction(i);
