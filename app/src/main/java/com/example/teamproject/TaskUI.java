@@ -5,6 +5,7 @@ package com.example.teamproject;
 import static com.example.teamproject.TeamProjectUI.projectAdapter;
 
 import android.animation.ObjectAnimator;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import androidx.appcompat.widget.SearchView;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +41,8 @@ public class TaskUI extends AppCompatActivity{
     public static TaskAdapter taskAdapter;
     public static TaskUI thisTaskUI;
 
+    //완료된 아이템 보이는지 안보이는지의 상태를 나타내는 변수
+    private static boolean isCompletedItemHide = false;
     @Override
     protected void onResume() {
         super.onResume();
@@ -59,8 +64,9 @@ public class TaskUI extends AppCompatActivity{
 
         //listview 설정
         ListView listView = (ListView) findViewById(R.id.listview1);
-        taskAdapter = new TaskAdapter(this,Users.selectedProject.getAllTask());
-
+        if(taskAdapter == null) {
+            taskAdapter = new TaskAdapter(this, Users.selectedProject.getAllTask());
+        }
         listView.setAdapter(taskAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -111,6 +117,21 @@ public class TaskUI extends AppCompatActivity{
         });
 
     }
+    public void hideCompletedItem(){
+        taskAdapter.setTasks(Users.selectedProject.getAllTask());
+        selectedTask.clear();
+        if(!isCompletedItemHide) {
+            for (int i = 0; i < taskAdapter.getTasks().size(); i++) {
+                Task task = taskAdapter.getTasks().get(i);
+                if(!task.IsComplete()){
+                    selectedTask.add(task);
+                }
+            }
+            taskAdapter.setTasks(selectedTask);
+        }
+        isCompletedItemHide = !isCompletedItemHide;
+        taskAdapter.notifyDataSetChanged();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -135,6 +156,13 @@ public class TaskUI extends AppCompatActivity{
                 onResume();
                 break;
             case R.id.hideCompletedTask: // 완료된 아이템 숨기기/보이기 클릭 시 이벤트 처리
+                hideCompletedItem();
+                if(isCompletedItemHide){
+                    item.setTitle("완료된 업무 보이기");
+                }
+                else{
+                    item.setTitle("완료된 업무 숨기기");
+                }
                 break;
             case android.R.id.home:
                 finish();
@@ -142,6 +170,7 @@ public class TaskUI extends AppCompatActivity{
         }
         return true;
     }
+
 
         /*
     public void toggleFab(){

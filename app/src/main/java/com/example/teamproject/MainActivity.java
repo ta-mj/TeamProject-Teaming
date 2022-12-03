@@ -16,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
@@ -69,9 +71,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) { startActivity(mainToPersonUI); }
         });
-        //알람 채널 생성
-        NotificationHelper.createNotificationChannel(getApplicationContext());
-        NotificationHelper.refreshScheduledNotification(getApplicationContext());
+
         //알람 설정
         setAlram(WorkManager.getInstance(getApplicationContext()));
 

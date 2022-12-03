@@ -24,15 +24,20 @@ public class TaskAdapter extends BaseAdapter {
     private ImageButton fileUploadButton;
     private CheckBox isTaskComplete;
     private Intent taskUIToFileUpload;
-    public void removeTask(int position){tasks.remove(position);}
     public TaskAdapter(Context context, ArrayList<Task> data) {
         mContext = context;
         tasks = data;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
-    public void setTasks(ArrayList<Task> t){tasks = t;}
+    public void setTasks(ArrayList<Task> t){
+        tasks = t;
+        for(int i = 0 ; i < tasks.size() ; i++){
+            isTaskComplete.setChecked(tasks.get(i).IsComplete());
+        }
+    }
 
     public ArrayList<Task> getTasks(){ return tasks; }
+    public void removeTask(int position){tasks.remove(position);}
     @Override
     public int getCount() {
         return tasks.size();
@@ -57,7 +62,7 @@ public class TaskAdapter extends BaseAdapter {
         TextView deadline = (TextView)view.findViewById(R.id.deadLineText);
         fileUploadButton = (ImageButton)view.findViewById(R.id.commitButton);
         isTaskComplete = (CheckBox)view.findViewById(R.id.isTaskComplete);
-        isTaskComplete.setChecked(Users.selectedProject.getAllTask().get(position).is_complete);
+        isTaskComplete.setChecked(tasks.get(position).IsComplete());
         managerName.setText(tasks.get(position).getManager().getName());
         workName.setText(tasks.get(position).getWorkName());
         deadline.setText(tasks.get(position).getTargetDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
@@ -89,7 +94,7 @@ public class TaskAdapter extends BaseAdapter {
         isTaskComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext.getApplicationContext(), String.valueOf(tasks.get(position).is_complete) , Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext.getApplicationContext(), String.valueOf(tasks.get(position).IsComplete()) , Toast.LENGTH_SHORT).show();
                 tasks.get(position).changeCompleteState();
             }
         });

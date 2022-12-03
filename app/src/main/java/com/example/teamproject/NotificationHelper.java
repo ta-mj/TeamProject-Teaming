@@ -23,6 +23,7 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -32,12 +33,9 @@ import java.util.concurrent.TimeUnit;
 
 import static com.example.teamproject.Constants.A_MORNING_EVENT_TIME;
 import static com.example.teamproject.Constants.A_NIGHT_EVENT_TIME;
-import static com.example.teamproject.Constants.B_MORNING_EVENT_TIME;
-import static com.example.teamproject.Constants.B_NIGHT_EVENT_TIME;
 import static com.example.teamproject.Constants.KOREA_TIMEZONE;
 import static com.example.teamproject.Constants.NOTIFICATION_CHANNEL_ID;
 import static com.example.teamproject.Constants.WORK_A_NAME;
-import static com.example.teamproject.Constants.WORK_B_NAME;
 
 public class NotificationHelper {
     private Context mContext;
@@ -49,9 +47,7 @@ public class NotificationHelper {
 
     public static void setScheduledNotification(WorkManager workManager) {
         setANotifySchedule(workManager);
-        setBNotifySchedule(workManager);
     }
-
     private static void setANotifySchedule(WorkManager workManager) {
         // Event 발생시 WorkerA.class 호출
         // 알림 활성화 시점에서 반복 주기 이전에 있는 가장 빠른 알림 생성
@@ -77,25 +73,6 @@ public class NotificationHelper {
         }
     }
 
-    private static void setBNotifySchedule(WorkManager workManager) {
-        // Event 발생 시 WorkerB.class 호출
-        OneTimeWorkRequest bWorkerOneTimePushRequest = new OneTimeWorkRequest.Builder(WorkerB.class).build();
-        PeriodicWorkRequest bWorkerPeriodicPushRequest =
-                new PeriodicWorkRequest.Builder(WorkerB.class, 12, TimeUnit.HOURS, 5, TimeUnit.MINUTES)
-                        .build();
-        try {
-            List<WorkInfo> bWorkerNotifyWorkInfoList = workManager.getWorkInfosForUniqueWorkLiveData(WORK_B_NAME).getValue();
-            for (WorkInfo workInfo : bWorkerNotifyWorkInfoList) {
-                if (workInfo.getState().isFinished()) {
-                    workManager.enqueue(bWorkerOneTimePushRequest);
-                    workManager.enqueueUniquePeriodicWork(WORK_B_NAME, ExistingPeriodicWorkPolicy.KEEP, bWorkerPeriodicPushRequest);
-                }
-            }
-        } catch (NullPointerException nullPointerException) {
-            workManager.enqueue(bWorkerOneTimePushRequest);
-            workManager.enqueueUniquePeriodicWork(WORK_B_NAME, ExistingPeriodicWorkPolicy.KEEP, bWorkerPeriodicPushRequest);
-        }
-    }
 
     // 현재시각이 알림 범위에 해당하지 않으면 딜레이 리턴
     public static long getNotificationDelay(String workName) {
@@ -114,19 +91,6 @@ public class NotificationHelper {
 
             } else if (cal.get(cal.get(Calendar.HOUR_OF_DAY)) < A_MORNING_EVENT_TIME) {
                 pushDelayMillis = getScheduledCalender(A_MORNING_EVENT_TIME).getTimeInMillis() - currentMillis;
-            }
-        } else if (workName.equals(WORK_B_NAME)) {
-            // 현재 시각이 21:00보다 크면 다음 날 오전 알림, 현재 시각이 21:00 전인지 09:00 전인지에 따라 알림 딜레이 설정
-            if (cal.get(Calendar.HOUR_OF_DAY) >= B_NIGHT_EVENT_TIME) {
-                Calendar nextDayCal = getScheduledCalender(B_MORNING_EVENT_TIME);
-                nextDayCal.add(Calendar.DAY_OF_YEAR, 1);
-                pushDelayMillis = nextDayCal.getTimeInMillis() - currentMillis;
-
-            } else if (cal.get(Calendar.HOUR_OF_DAY) >= B_MORNING_EVENT_TIME && cal.get(Calendar.HOUR_OF_DAY) < B_NIGHT_EVENT_TIME) {
-                pushDelayMillis = getScheduledCalender(B_NIGHT_EVENT_TIME).getTimeInMillis() - currentMillis;
-
-            } else if (cal.get(cal.get(Calendar.HOUR_OF_DAY)) < B_MORNING_EVENT_TIME) {
-                pushDelayMillis = getScheduledCalender(B_MORNING_EVENT_TIME).getTimeInMillis() - currentMillis;
             }
         }
         return pushDelayMillis;
@@ -159,16 +123,36 @@ public class NotificationHelper {
             if (notificationManager != null) {
                 notificationManager.notify(WORK_A_NOTIFICATION_CODE, notificationBuilder.build());
             }
-        } else if (workName.equals(WORK_B_NAME)) {
-            PendingIntent pendingIntent = PendingIntent.getActivity(mContext, WORK_B_NOTIFICATION_CODE, intent, PendingIntent.FLAG_IMMUTABLE);
-
-            notificationBuilder.setContentTitle("WorkerB Notification").setContentText("set a Notification contents")
-                    .setContentIntent(pendingIntent);
-
-            if (notificationManager != null) {
-                notificationManager.notify(WORK_B_NOTIFICATION_CODE, notificationBuilder.build());
-            }
         }
+    }
+    public void createNotification(Task t) {
+        // 클릭 시 MainActivity 호출
+        Intent intent = new Intent(mContext, Login.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT); // 대기열에 이미 있다면 MainActivity가 아닌 앱 활성화
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+
+        NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        // Notificatoin을 이루는 공통 부분 정의
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mContext, NOTIFICATION_CHANNEL_ID);
+        notificationBuilder.setSmallIcon(R.mipmap.ic_teaming_round) // 기본 제공되는 이미지
+                .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE)
+                .setAutoCancel(true); // 클릭 시 Notification 제거
+
+        // Notification 클릭 시 동작할 Intent 입력, CODE를 다르게하면 Notification 개별 생성
+        // CODE를 업무 객체의 hashcode로 설정하여 중복 없게 함.
+        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, t.hashCode(), intent, PendingIntent.FLAG_IMMUTABLE);
+
+        // Notification 제목, 컨텐츠 설정
+        String content = t.getManager().getName() + "님 " + t.getWorkName() + " 업무가 완료되지 않았습니다." + "\n" + "파일을 제출해주세요.";
+        notificationBuilder.setContentTitle("업무 미완료 알림").setContentText(content)
+                .setContentIntent(pendingIntent);
+
+        if (notificationManager != null) {
+            notificationManager.notify(t.hashCode(), notificationBuilder.build());
+        }
+        String alramcontent = LocalDate.now().toString() + "\n" + content;
+        Users.selectedUser.addAlram(alramcontent);
     }
 
     public static Boolean isNotificationChannelCreated(Context context) {

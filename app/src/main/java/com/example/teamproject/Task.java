@@ -21,7 +21,7 @@ public class Task{
     //마감일
     private LocalDate targetDate;
     //완료 여부
-    boolean is_complete;
+    private boolean is_complete;
     //제출 파일
     private Uri file = null;
     Task(String c, User m, String w, LocalDate t, String ex){
@@ -48,7 +48,7 @@ public class Task{
     public String getWorkname(){ return workname; }
     public String getExplain(){ return explain; }
     public Uri getFile(){ return file; }
-    public boolean Is_complete(){ return is_complete; }
+    public boolean IsComplete(){ return is_complete; }
     public void setWorkname(String n) {
         workname = n;
     }

@@ -10,8 +10,13 @@
         layout="@layout/toolbar_back" />
 
     <ListView
+        android:id="@+id/alram_listview"
         android:layout_width="409dp"
         android:layout_height="664dp"
+        android:divider="@color/white"
+        android:dividerHeight="7dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

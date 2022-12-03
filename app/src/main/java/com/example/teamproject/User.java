@@ -9,6 +9,7 @@ public class User {
     private String phone;
     private ArrayList<TeamProject> myProject = new ArrayList<TeamProject>();
     private ArrayList<Task> myTask = new ArrayList<>();
+    private ArrayList<String> myAlram = new ArrayList<>();
     //project 객체
     //user 생성자
     public User(String p , String n , String e, String ph){
@@ -39,13 +40,14 @@ public class User {
     public TeamProject getProject(int i) { return myProject.get(i); }
     public ArrayList<Task> getAllTask(){ return myTask; }
     public Task getTask(int i){ return myTask.get(i); }
-    public String printInfo() {
-         return "이름" + getName() + "이메일:" + getEmail() + "전화번호:" + getPhoneNum() + "\n";
-    }
+    public ArrayList<String> getAllAlram(){ return myAlram; }
+    public String getAlram(int i){ return myAlram.get(i); }
     public void addProject(TeamProject t){
         this.myProject.add(t);
     }
     public void removeProject(int i){ this.myProject.remove(i); }
     public void addTask(Task t){ this.myTask.add(t); }
     public void removeTask(int i){ this.myTask.remove(i); }
+    public void addAlram(String s){ this.myAlram.add(s); }
+    public void removeAlram(int i){ this.myAlram.remove(i); }
 }

@@ -3,6 +3,7 @@ package com.example.teamproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AlarmUI extends AppCompatActivity {
 
+    //어댑터 변수 선언
+    public static AlramAdapter alramAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -22,6 +25,11 @@ public class AlarmUI extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         //툴바 뒤로가기 보이게 하는 코드
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //listview 설정
+        ListView listView = (ListView) findViewById(R.id.alram_listview);
+        alramAdapter = new AlramAdapter(this,Users.selectedUser.getAllAlram());
+        listView.setAdapter(alramAdapter);
     }
 
     @Override
