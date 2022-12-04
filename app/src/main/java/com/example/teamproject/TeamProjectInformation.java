@@ -31,9 +31,9 @@ import java.util.Locale;
 
 public class TeamProjectInformation extends AppCompatActivity {
     //변수 선언
-    private Button taskButton, brainstromingButton, schelduleButton;
+    private Button taskButton, brainstormingButton, scheduleButton;
     private FloatingActionButton addUserButton;
-    private ProgressBar teamprogress;
+    private ProgressBar teamProgress;
     private Intent projectInfoToTaskUI,projectInfoToCalender, projectInfoToBrainstorming;
     private TextView[] memberView;
     private ProgressBar[] memberProgressBar;
@@ -65,10 +65,10 @@ public class TeamProjectInformation extends AppCompatActivity {
         Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
         setSupportActionBar(toolbar_bell);
         taskButton = findViewById(R.id.project_taskbutton);
-        brainstromingButton = findViewById(R.id.project_brainstromingbutton);
-        schelduleButton = findViewById(R.id.project_schedulebutton);
+        brainstormingButton = findViewById(R.id.project_brainstormingbutton);
+        scheduleButton = findViewById(R.id.project_schedulebutton);
         addUserButton = findViewById(R.id.fabTeamAdd);
-        teamprogress = (ProgressBar) findViewById((R.id.team_progressbar));
+        teamProgress = (ProgressBar) findViewById((R.id.team_progressbar));
 
         //툴바 로고 글씨 안 보이게 하는 코드
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -119,7 +119,7 @@ public class TeamProjectInformation extends AppCompatActivity {
             }
         }
         if(totalTask != 0){
-            teamprogress.setProgress((int)(100 * totalCompleteTask / totalTask));
+            teamProgress.setProgress((int)(100 * totalCompleteTask / totalTask));
         }
 
         //button onclickevent 설정
@@ -130,14 +130,14 @@ public class TeamProjectInformation extends AppCompatActivity {
             }
         });
 
-        schelduleButton.setOnClickListener(new View.OnClickListener() {
+        scheduleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(projectInfoToCalender);
             }
         });
 
-        brainstromingButton.setOnClickListener(new View.OnClickListener() {
+        brainstormingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { startActivity( projectInfoToBrainstorming); }
         });

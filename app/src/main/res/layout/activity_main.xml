@@ -23,7 +23,7 @@
     <ListView
         android:id="@+id/main_listview"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="520dp"
         android:layout_below="@id/searchView1"
         android:dividerHeight="7dp" />
 
