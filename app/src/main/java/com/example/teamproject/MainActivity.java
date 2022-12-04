@@ -38,16 +38,16 @@ public class MainActivity extends AppCompatActivity {
         mainToPersonUI = new Intent(MainActivity.this,PersonUI.class);
 
         //하단 네비게이션바를 숨겨주는 코드(하단을 쓸어올리거나 상단을 쓸어내리면 다시 나옴)
-        decorView = getWindow().getDecorView();
-        uiOption = getWindow().getDecorView().getSystemUiVisibility();
-        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH )
-            uiOption |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN )
-            uiOption |= View.SYSTEM_UI_FLAG_FULLSCREEN;
-        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT )
-            uiOption |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-
-        decorView.setSystemUiVisibility( uiOption );
+//        decorView = getWindow().getDecorView();
+//        uiOption = getWindow().getDecorView().getSystemUiVisibility();
+//        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH )
+//            uiOption |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+//        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN )
+//            uiOption |= View.SYSTEM_UI_FLAG_FULLSCREEN;
+//        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT )
+//            uiOption |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+//
+//        decorView.setSystemUiVisibility( uiOption );
 
         //프로젝트 버튼
         projectButton = findViewById(R.id.projectbutton);

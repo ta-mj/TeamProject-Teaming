@@ -36,7 +36,7 @@
 
 
         <Button
-            android:id="@+id/project_brainstromingbutton"
+            android:id="@+id/project_brainstormingbutton"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_gravity="center"

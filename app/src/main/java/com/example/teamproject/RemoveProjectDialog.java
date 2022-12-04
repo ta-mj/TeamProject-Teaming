@@ -40,7 +40,7 @@ public class RemoveProjectDialog extends AppCompatActivity {
         dlg.show();
 
         // 커스텀 다이얼로그의 각 위젯들을 정의한다.
-        final TextView message = (TextView) dlg.findViewById(R.id.project_rm_message);
+        //final TextView message = (TextView) dlg.findViewById(R.id.project_rm_message);
         final Button okButton = (Button) dlg.findViewById(R.id.project_rm_okButton);
         final Button cancelButton = (Button) dlg.findViewById(R.id.project_rm_cancelButton);
 
@@ -48,9 +48,10 @@ public class RemoveProjectDialog extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // '추가' 버튼 클릭시 성공했다는 메시지와 함께 프로젝트를 추가한다.
-                text = message.getText().toString();
+                //text = message.getText().toString();
 
                 Toast.makeText(context, "프로젝트 삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+
                 Users.selectedUser.removeProject(i);
                 TeamProjectUI.projectAdapter.items.remove(i);
                 //아이템추가

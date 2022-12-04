@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#578FA8"/>
+    <corners android:radius="50dp"/>
+</shape>
+<!--브레인스토밍 그래프 고정, 추가, 삭제 버튼-->

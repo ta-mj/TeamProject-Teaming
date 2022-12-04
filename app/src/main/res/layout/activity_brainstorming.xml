@@ -1,97 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Brainstorming">
 
-<!--    <include-->
-<!--        android:id="@+id/toolbar_back"-->
+    <include
+        android:id="@+id/toolbar_back"
+        layout="@layout/toolbar_back" />
 
     <com.gyso.treeview.GysoTreeView
         android:id="@+id/base_tree_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#CDCDCD">
-    </com.gyso.treeview.GysoTreeView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
+        android:background="#F9F9F9"
+        android:layout_below="@+id/toolbar_back"/>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:orientation="vertical">-->
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_below="@+id/toolbar_back"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:orientation="horizontal">
-            <TextView
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp">
+
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+            <ImageView
                 android:id="@+id/view_center_bt"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
                 android:padding="6dp"
                 android:checked="false"
-                android:text="FIT WINDOW"
+                android:text="크기 조정"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
-                android:background="#FF978B"
+                android:background="@drawable/button_shape"
                 android:foreground="?attr/selectableItemBackground"
-                app:layout_constraintLeft_toRightOf="@+id/drag_edit_mode_rd"
+                android:src="@drawable/fullscreen"
+                app:layout_constraintLeft_toRightOf="@+id/add_nodes_bt"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/add_nodes_bt"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:layout_marginLeft="20dp"
                 android:padding="6dp"
                 android:checked="false"
-                android:text="ADD"
+                android:text="추가"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
-                android:background="#FF978B"
+                android:background="@drawable/button_shape"
+                android:src="@drawable/plus"
                 android:foreground="?attr/selectableItemBackground"
                 app:layout_constraintLeft_toRightOf="@+id/view_center_bt"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/remove_node_bt"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:layout_marginLeft="20dp"
                 android:padding="6dp"
                 android:checked="false"
-                android:text="REMOVE"
+                android:text="삭제"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
-                android:background="#FF978B"
+                android:background="@drawable/button_shape"
                 android:foreground="?attr/selectableItemBackground"
+                android:src="@drawable/minus"
                 app:layout_constraintLeft_toRightOf="@+id/add_nodes_bt"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/drag_edit_mode_rd"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/button_shape"
+                android:checked="false"
+                android:padding="5dp"
+                android:text="Drag Mode"
+                android:textSize="15dp"
+                android:icon="@drawable/minus"
+                android:textAppearance="@style/Widget.AppCompat.CompoundButton.Switch"
+                android:textColor="@android:color/black"
+                app:layout_constraintLeft_toRightOf="@+id/remove_node_bt"
+                app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
-        <!--        <com.google.android.material.switchmaterial.SwitchMaterial-->
-        <!--            android:id="@+id/drag_edit_mode_rd"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:checked="false"-->
-        <!--            android:textAppearance="@style/Widget.AppCompat.CompoundButton.Switch"-->
-        <!--            android:textColor="@android:color/white"-->
-        <!--            android:text="DRAG EDIT MODE"-->
-        <!--            android:layout_marginStart="10dp"-->
-        <!--            android:padding="5dp"-->
-        <!--            android:textStyle="bold"-->
-        <!--            android:background="#FF978B"-->
-        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
-    </LinearLayout>
+
+
+<!--    </LinearLayout>-->
     <TextView
         android:id="@+id/scale_percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
-        android:background="#FF978B"
         android:layout_gravity="bottom|center_horizontal"
         android:padding="10dp"
         android:textSize="18sp"
@@ -102,4 +119,15 @@
         tools:text="100%">
     </TextView>
 
-</FrameLayout>
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/view_center_bt"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginRight="16dp"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:src="@drawable/ic_outline_note_add_24"-->
+<!--        app:backgroundTint="#55C65A" />-->
+
+</RelativeLayout>
