@@ -2,6 +2,7 @@ package com.example.teamproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.work.WorkManager;
 
 import android.content.Intent;
 import android.os.Build;
@@ -12,7 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,7 +69,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) { startActivity(mainToPersonUI); }
         });
+        //알람 채널 생성
+        NotificationHelper.createNotificationChannel(getApplicationContext());
+        NotificationHelper.refreshScheduledNotification(getApplicationContext());
+        //알람 설정
+        setAlram(WorkManager.getInstance(getApplicationContext()));
 
+    }
+
+    public void setAlram(final WorkManager workManager){
+        boolean isChannelCreated = NotificationHelper.isNotificationChannelCreated(getApplicationContext());
+        if(isChannelCreated){
+            PreferenceHelper.setBoolean(getApplicationContext(), Constants.SHARED_PREF_NOTIFICATION_KEY, true);
+            NotificationHelper.setScheduledNotification(workManager);
+        }
+        else{
+            NotificationHelper.createNotificationChannel(getApplicationContext());
+        }
     }
 
     @Override

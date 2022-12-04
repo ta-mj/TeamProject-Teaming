@@ -26,6 +26,9 @@ public class TeamProject {
         myUser.add(u);
         u.addProject(this);
     }
+    public void removeUser(int i){
+        myUser.remove(i);
+    }
     public String getSubject() { return this.subject; }
     public ArrayList<User> getAllUser(){ return this.myUser;}
     public ArrayList<Task> getAllTask(){ return this.myTask;}

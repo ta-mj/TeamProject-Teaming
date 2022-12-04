@@ -2,12 +2,15 @@ package com.example.teamproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +42,6 @@ public class TaskAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-
 
     @Override
     public Task getItem(int position) {

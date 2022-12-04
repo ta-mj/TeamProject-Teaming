@@ -32,6 +32,7 @@ public class Task{
         targetDate = t;
         explain = ex;
         is_complete = false;
+        m.addTask(this);
     }
     public String getWorkName(){
         return workname;
