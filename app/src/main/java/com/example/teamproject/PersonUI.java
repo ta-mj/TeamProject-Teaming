@@ -75,7 +75,7 @@ public class PersonUI extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.bell_menu, menu);
+        menuInflater.inflate(R.menu.todo_sort_menu, menu);
         return true;
     }
 
@@ -92,5 +92,4 @@ public class PersonUI extends AppCompatActivity {
         }
         return true;
     }
-
 }
