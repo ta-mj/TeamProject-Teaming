@@ -23,17 +23,39 @@
         app:iconifiedByDefault="false"
         app:queryHint="검색어를 입력하시오" />
 
+    <LinearLayout
+        android:id="@+id/linearLayout_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="400dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/team_text_visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="프로젝트 목록이 없습니다."
+            android:textSize="30dp">
+
+        </TextView>
+    </LinearLayout>
+
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:layout_below="@id/project_search"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        android:listSelector="#BFBFBF"
+        android:background="#F9F9F9"
+        android:horizontalSpacing="2dp"
+        android:listSelector="#F9F9F9"
         android:numColumns="2"
-        android:horizontalSpacing="4dp"
-        android:verticalSpacing="4dp" />
+        android:verticalSpacing="10dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAdd"
