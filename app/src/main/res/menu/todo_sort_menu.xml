@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_outline_notifications_24"
+        android:title="BELL"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/hideCompletedToDo"
+        android:title="완료된 할 일 숨기기" />
+</menu>
+<!--개인-할일 완료된 할 일 숨기기 메뉴-->
