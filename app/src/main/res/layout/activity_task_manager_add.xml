@@ -14,7 +14,12 @@
     <ListView
         android:id="@+id/listview1"
         android:layout_width="match_parent"
-        android:layout_height="666dp"
-        android:layout_below="@id/toolbar_bell" />
+        android:layout_height="760dp"
+        android:layout_below="@id/toolbar_bell"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:dividerHeight="20dp"
+        android:divider="@color/white"/>
 
 </RelativeLayout>
