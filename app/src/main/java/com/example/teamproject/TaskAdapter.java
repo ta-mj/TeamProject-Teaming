@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -71,11 +72,7 @@ public class TaskAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Toast.makeText(mContext.getApplicationContext(), tasks.get(position).getManager().getName(),Toast.LENGTH_SHORT).show();
                 taskUIToFileUpload = new Intent(TaskUI.thisTaskUI, FileUpload.class);
-                taskUIToFileUpload.putExtra("담당자", tasks.get(position).getManager().getName());
-                taskUIToFileUpload.putExtra("업무 제목",tasks.get(position).getWorkName());
-                taskUIToFileUpload.putExtra("설명",tasks.get(position).getExplain());
-                taskUIToFileUpload.putExtra("마감일",tasks.get(position).getTargetDate().toString());
-                taskUIToFileUpload.putExtra("파일 이름",tasks.get(position).getFile());
+                taskUIToFileUpload.putExtra("선택업무", tasks.get(position));
                 TaskUI.thisTaskUI.startActivity(taskUIToFileUpload);
             }
         });

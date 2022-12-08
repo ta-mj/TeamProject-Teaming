@@ -1,9 +1,10 @@
 package com.example.teamproject;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-public class TeamProject {
+public class TeamProject implements Serializable {
     //프로젝트 정보
     private String subject;
     //구성원

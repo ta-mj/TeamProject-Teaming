@@ -1,13 +1,15 @@
 package com.example.teamproject;
 import android.net.Uri;
 import android.os.Build;
+import android.widget.EditText;
 
 import androidx.annotation.RequiresApi;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Comparator;
 
-public class Task{
+public class Task implements Serializable {
     //업무 이름
     private String catecory;
     //담당자
@@ -45,17 +47,19 @@ public class Task{
     }
     public String getCatecory() { return catecory;}
     public User getManager(){ return manager; }
-    public String getWorkname(){ return workname; }
     public String getExplain(){ return explain; }
     public Uri getFile(){ return file; }
     public boolean IsComplete(){ return is_complete; }
-    public void setWorkname(String n) {
+    public void setWorkName(String n) {
         workname = n;
     }
     public void setStartDate(LocalDate d) { startDate = d; }
     public void setTargetDate(LocalDate d){
         targetDate = d;
     }
+    public void setCatecory(String c){ catecory = c;}
+    public void setExplain(String e){ explain = e;}
+    public void setFile(Uri u){ file = u; }
     public void changeCompleteState(){
         is_complete = !is_complete;
     }

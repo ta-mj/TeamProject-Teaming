@@ -25,13 +25,15 @@
         android:layout_width="match_parent"
         android:layout_height="520dp"
         android:layout_below="@id/searchView1"
+        android:layout_marginTop="27dp"
         android:dividerHeight="7dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:layout_below="@id/main_listview"
+        android:layout_marginTop="40dp"
         android:background="#EDEDED"
         android:orientation="horizontal">
 

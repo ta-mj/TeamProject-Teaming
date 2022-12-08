@@ -98,7 +98,6 @@ public class TaskAdd extends AppCompatActivity{
                 if(catecory != "" && taskManger != null && taskName != "" && explain != ""){
                     LocalDate deadline = LocalDate.parse(date);
                     Users.selectedProject.makeTask(catecory,taskManger,taskName,deadline,explain);
-                    //String oneDayBefore = deadline.minusDays(1).toString();
                     finish();
                 }
                 else{

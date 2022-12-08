@@ -1,7 +1,8 @@
 package com.example.teamproject;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class User {
+public class User implements Serializable {
     private int image;
     private String pw;
     private String name;
@@ -48,6 +49,7 @@ public class User {
     public void removeProject(int i){ this.myProject.remove(i); }
     public void addTask(Task t){ this.myTask.add(t); }
     public void removeTask(int i){ this.myTask.remove(i); }
+    public void removeTask(Task t){ this.myTask.remove(t); }
     public void addAlram(String s){ this.myAlram.add(s); }
     public void removeAlram(int i){ this.myAlram.remove(i); }
 }
