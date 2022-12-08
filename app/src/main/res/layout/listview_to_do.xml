@@ -6,34 +6,32 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="300dp"
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="56dp"
         android:background="@drawable/listview_shape"
         android:orientation="horizontal"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="5dp">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/personImage"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/full_person" />
+        <CheckBox
+            android:id="@+id/isTaskComplete"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"/>
 
-        <TextView
-            android:id="@+id/personName"
+        <EditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="이름"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:hint="할 일을 입력하세요"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/black">
+        </EditText>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

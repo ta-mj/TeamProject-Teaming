@@ -12,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import androidx.appcompat.widget.SearchView;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,6 +58,9 @@ public class TeamProjectUI extends AppCompatActivity {
         fabAdd = findViewById(R.id.fabAdd);
         project_search = findViewById(R.id.project_search);
 
+        //visibility 팀프로젝트 목록이 없을 때 "프로젝트 목록이 없습니다" TextView
+        TextView textView = findViewById(R.id.team_text_visible);
+
         // projectNameText = findViewById(R.id.projectNameText);
         try{
             projectAdapter = new ProjectAdapter();
@@ -72,6 +77,7 @@ public class TeamProjectUI extends AppCompatActivity {
         }
 
         gridView.setAdapter(projectAdapter);
+        textView.setVisibility(View.INVISIBLE); // 팀프로젝트 목록이 있으면 자료 안 보임
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

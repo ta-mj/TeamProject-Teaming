@@ -2,25 +2,57 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <include
         android:id="@+id/toolbar_bell"
         layout="@layout/toolbar_bell" />
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/to_do_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/searchview_background"
+        app:iconifiedByDefault="false"
+        android:layout_below="@id/toolbar_bell"
+        app:queryHint="검색어를 입력하시오"
+        tools:layout_editor_absoluteX="10dp" />
+
     <ListView
         android:id="@+id/person_listview"
         android:layout_width="match_parent"
-        android:layout_height="659dp"
-        android:layout_below="@id/toolbar_bell" />
+        android:layout_height="654dp"
+        android:layout_below="@+id/to_do_search" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="400dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="할 일 목록이 없습니다"
+            android:textSize="30dp">
+
+        </TextView>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/person_linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/person_listview"
         android:background="#EDEDED"
         android:orientation="horizontal">
+
 
         <Button
             android:id="@+id/person_todobutton"
@@ -53,5 +85,6 @@
         android:layout_marginBottom="81dp"
         android:src="@drawable/ic_outline_note_add_24"
         app:backgroundTint="#55C65A" />
+
 
 </RelativeLayout>

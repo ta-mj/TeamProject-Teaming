@@ -75,7 +75,7 @@ public class PersonUI extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.bell_menu, menu);
+        menuInflater.inflate(R.menu.todo_sort_menu, menu);
         return true;
     }
 
@@ -86,11 +86,12 @@ public class PersonUI extends AppCompatActivity {
                 Intent personUIToAlarm = new Intent (this, AlarmUI.class);
                 startActivity(personUIToAlarm);
                 break;
+            case R.id.hideCompletedToDo: // 완료된 할 일 숨기기 이벤트 처리
+                break;
             case android.R.id.home: //뒤로가기 버튼 클릭 시 이벤트 처리
                 finish();
                 break;
         }
         return true;
     }
-
 }

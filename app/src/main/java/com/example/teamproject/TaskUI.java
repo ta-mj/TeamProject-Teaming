@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import androidx.appcompat.widget.SearchView;
 
 import android.widget.TextView;
@@ -59,6 +60,9 @@ public class TaskUI extends AppCompatActivity{
         //플로팅 액션 버튼 연결
         fab_TaskAdd = findViewById(R.id.fab_TaskAdd);
 
+        //visibility
+        TextView textView = (TextView) findViewById(R.id.textVisible);
+
         //Intent 설정
         taskUIToTaskAdd = new Intent(TaskUI.this,TaskAdd.class);
 
@@ -68,6 +72,7 @@ public class TaskUI extends AppCompatActivity{
             taskAdapter = new TaskAdapter(this, Users.selectedProject.getAllTask());
         }
         listView.setAdapter(taskAdapter);
+        textView.setVisibility(View.INVISIBLE);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id){
