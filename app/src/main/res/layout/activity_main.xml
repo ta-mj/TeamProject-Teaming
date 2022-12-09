@@ -5,11 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
     tools:context=".MainActivity">
 
-    <include
-        android:id="@+id/toolbar_bell"
-        layout="@layout/toolbar_bell" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <include
+            android:id="@+id/toolbar_bell"
+            layout="@layout/toolbar_bell" />
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView1"
@@ -73,28 +82,28 @@
                 android:paddingTop="15dp"
                 android:text="홈" />
 
-        <Button
-            android:id="@+id/projectbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="#EDEDED"
-            android:drawableTop="@drawable/ic_team_size"
-            android:paddingTop="10dp"
-            android:text="프로젝트" />
+            <Button
+                android:id="@+id/projectbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#EDEDED"
+                android:drawableTop="@drawable/ic_team_size"
+                android:paddingTop="10dp"
+                android:text="프로젝트" />
 
-        <Button
-            android:id="@+id/personalbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="#EDEDED"
-            android:drawableTop="@drawable/ic_person_size"
-            android:paddingTop="15dp"
-            android:text="개인" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/personalbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#EDEDED"
+                android:drawableTop="@drawable/ic_person_size"
+                android:paddingTop="15dp"
+                android:text="개인" />
+        </LinearLayout>
 
 
         <!--    <ImageView-->
