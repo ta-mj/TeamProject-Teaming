@@ -1,5 +1,6 @@
 package com.example.teamproject;
 
+import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -32,6 +33,7 @@ import org.threeten.bp.format.DateTimeFormatter;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -48,8 +50,10 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
     public TextView diaryTextView, contentTextView; //diaryTextView = 선택한 날짜를 표시해줌, contentTextView = 일정 내용(str변수의 값)을 저장하는 변수
     public EditText contextEditText; //입력 창 관련 변수
 
-    //데코 삭제를 위한 테스트 변수
-    //private EventDecorator eventDecorator;
+    //데코 관련 변수
+    //private static ArrayList<EventDecorator> all_Event = new ArrayList<>(); //테스트용
+    private static ArrayList<CalendarDay> all_Dates = new ArrayList<>(); //저장 버튼 누를때 일정만 저장
+    private EventDecorator eventDecorator; //점 찍는 용도
 
     @BindView(R.id.calendarView)
     MaterialCalendarView widget;
@@ -80,6 +84,21 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
         //오늘 날짜에 도트찍는 코드
         //calendarView.addDecorator(new EventDecorator(Color.RED, Collections.singleton(CalendarDay.today())));
 
+        Toolbar toolbar_back = (Toolbar) findViewById(R.id.toolbar_back);
+        setSupportActionBar(toolbar_back);
+
+        //툴바 뒤로가기 보이게 하는 코드
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //툴바 로고 글씨 안 보이게 하는 코드
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        /*
+        // 화면 전환했을때 다시 점 찍는 반복문
+        for(int i = 0; i < all_Dates.size(); i++){
+            widget.addDecorators(new EventDecorator(Color.RED, all_Dates.get(i)));
+        }
+        */
+
         //캘린더뷰 관련 변수들
 
         diaryTextView = findViewById(R.id.diaryTextView);
@@ -105,6 +124,7 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
         changeButton.setVisibility(View.INVISIBLE);
         deleteButton.setVisibility(View.INVISIBLE);
         //diaryTextView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth(), date.getDay()));
+        //textView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth(), date.getDay()));
         contextEditText.setText("");
         checkDay(date.getYear(), date.getMonth(), date.getDay());
 
@@ -113,18 +133,24 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
             @Override
             public void onClick(View view)
             {
-                saveDiary(readDay);
-                str = contextEditText.getText().toString();
-                contentTextView.setText(str);
-                saveButton.setVisibility(View.INVISIBLE);
-                changeButton.setVisibility(View.VISIBLE);
-                deleteButton.setVisibility(View.VISIBLE);
-                contextEditText.setVisibility(View.INVISIBLE);
-                contentTextView.setVisibility(View.VISIBLE);
-                //eventDecorator = new EventDecorator(Color.RED, Collections.singleton(date));
-                //widget.addDecorator(eventDecorator);
-                widget.addDecorator(new EventDecorator(Color.RED, Collections.singleton(date)));
-                widget.invalidateDecorators();
+                if(contextEditText.getText().length() == 0){
+                    Toast.makeText(getApplicationContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                }else{
+                    saveDiary(readDay);
+                    str = contextEditText.getText().toString();
+                    contentTextView.setText(str);
+                    saveButton.setVisibility(View.INVISIBLE);
+                    changeButton.setVisibility(View.VISIBLE);
+                    deleteButton.setVisibility(View.VISIBLE);
+                    contextEditText.setVisibility(View.INVISIBLE);
+                    contentTextView.setVisibility(View.VISIBLE);
+
+                    eventDecorator = new EventDecorator(Color.RED, date);
+                    widget.addDecorator(eventDecorator);
+                    //widget.addDecorator(new EventDecorator(Color.RED, date));
+                    widget.invalidateDecorators();
+                }
+
 
             }
         });
@@ -158,7 +184,10 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
                 changeButton.setVisibility(View.INVISIBLE);
                 deleteButton.setVisibility(View.INVISIBLE);
                 removeDiary(readDay);
-                //widget.removeDecorator(eventDecorator);
+
+                widget.removeDecorator(eventDecorator);
+                all_Dates.remove(date);
+                widget.invalidateDecorators();
             }
         });
 
@@ -244,17 +273,16 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
     //캘린더에 도트 찍어주는 클래스
     class EventDecorator implements DayViewDecorator {
 
-        private final int color;
-        private final HashSet<CalendarDay> dates;
+        private int color;
 
-        public EventDecorator(int color, Collection<CalendarDay> dates) {
+        public EventDecorator(int color, CalendarDay date) {
             this.color = color;
-            this.dates = new HashSet<>(dates);
+            all_Dates.add(date);
         }
 
         @Override
         public boolean shouldDecorate(CalendarDay day) {
-            return dates.contains(day);
+            return all_Dates.contains(day);
         }
 
         @Override
@@ -300,6 +328,16 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
         public void decorate(DayViewFacade view) {
             view.addSpan(new ForegroundColorSpan(Color.RED));
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: //뒤로가기 버튼 클릭 시 이벤트 처리
+                finish();
+                break;
+        }
+        return true;
     }
 
     /*

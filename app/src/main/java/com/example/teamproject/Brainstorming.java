@@ -145,7 +145,7 @@ public class Brainstorming extends AppCompatActivity {
 
 
         //treeView control listener
-        final Object token = new Object();
+        /*final Object token = new Object();
         Runnable dismissRun = () -> {
             binding.scalePercent.setVisibility(View.GONE);
         };
@@ -171,6 +171,8 @@ public class Brainstorming extends AppCompatActivity {
                 Log.e(TAG, "onDragMoveNodesHit: draging[" + draggingNode + "]hittingNode[" + hittingNode + "]");
             }
         });
+
+         */
     }
 
     private TreeLayoutManager getTreeLayoutManager() {
