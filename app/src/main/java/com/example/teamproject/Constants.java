@@ -1,6 +1,9 @@
 package com.example.teamproject;
 
 public class Constants {
+    //메인 리스트 아이템 key 값
+    public static final int TEAM_TASK = 1;
+    public static final int TEAM_SCHEDULE = 2;
     // 알림 설정 Preference Key 값
     public static final String SHARED_PREF_NOTIFICATION_KEY = "Notification Value";
 

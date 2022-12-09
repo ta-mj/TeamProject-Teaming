@@ -1,4 +1,6 @@
 package com.example.teamproject;
+import android.widget.Toast;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,9 +10,10 @@ public class User implements Serializable {
     private String name;
     private String email;
     private String phone;
-    private ArrayList<TeamProject> myProject = new ArrayList<TeamProject>();
-    private ArrayList<Task> myTask = new ArrayList<>();
-    private ArrayList<String> myAlram = new ArrayList<>();
+    private ArrayList<TeamProject> myProject;
+    private ArrayList<Task> myTask;
+    private ArrayList<String> myAlram;
+    private ArrayList<MainItem> myItem;
     //project 객체
     //user 생성자
     public User(String p , String n , String e, String ph){
@@ -19,6 +22,10 @@ public class User implements Serializable {
         name = n;
         email = e;
         phone = ph;
+        myProject = new ArrayList<TeamProject>();
+        myTask = new ArrayList<>();
+        myAlram = new ArrayList<>();
+        myItem = new ArrayList<>();
     }
     public String getPW() {
         return pw;
@@ -43,6 +50,8 @@ public class User implements Serializable {
     public Task getTask(int i){ return myTask.get(i); }
     public ArrayList<String> getAllAlram(){ return myAlram; }
     public String getAlram(int i){ return myAlram.get(i); }
+    public ArrayList<MainItem> getAllItem(){ return myItem; }
+    public MainItem getItem(int i){ return myItem.get(i); }
     public void addProject(TeamProject t){
         this.myProject.add(t);
     }
@@ -52,4 +61,14 @@ public class User implements Serializable {
     public void removeTask(Task t){ this.myTask.remove(t); }
     public void addAlram(String s){ this.myAlram.add(s); }
     public void removeAlram(int i){ this.myAlram.remove(i); }
+    public void addItem(MainItem i){this.myItem.add(i); }
+    public void removeItem(int i){this.myItem.remove(i); }
+    public void removeItem(Object o){
+        for(int i = 0 ; i < this.myItem.size() ; i++){
+            if(myItem.get(i).getData().equals(o)){
+                myItem.remove(i);
+            }
+        }
+    }
+
 }

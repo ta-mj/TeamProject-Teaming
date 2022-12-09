@@ -80,6 +80,14 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
         //오늘 날짜에 도트찍는 코드
         //calendarView.addDecorator(new EventDecorator(Color.RED, Collections.singleton(CalendarDay.today())));
 
+        Toolbar toolbar_back = (Toolbar) findViewById(R.id.toolbar_back);
+        setSupportActionBar(toolbar_back);
+
+        //툴바 뒤로가기 보이게 하는 코드
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //툴바 로고 글씨 안 보이게 하는 코드
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         //캘린더뷰 관련 변수들
 
         diaryTextView = findViewById(R.id.diaryTextView);
@@ -317,7 +325,15 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
         getSupportActionBar().setTitle(FORMATTER.format(date.getDate()));
     }
      */
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: //뒤로가기 버튼 클릭 시 이벤트 처리
+                finish();
+                break;
+        }
+        return true;
+    }
 }
 
 

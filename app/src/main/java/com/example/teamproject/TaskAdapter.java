@@ -67,6 +67,18 @@ public class TaskAdapter extends BaseAdapter {
         managerName.setText(tasks.get(position).getManager().getName());
         workName.setText(tasks.get(position).getWorkName());
         deadline.setText(tasks.get(position).getTargetDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
+        fileUploadButton.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View view) {
+                Context c = mContext.getApplicationContext();
+                //다이얼로그가 나타나기 전 액티비티가 종료되었는지 확인.
+                Toast.makeText(mContext,"삭제하시겠습니까",Toast.LENGTH_SHORT).show();
+                RemoveTaskDialog removeTaskDialog = new RemoveTaskDialog(mContext);
+                removeTaskDialog.CallFunction(position);
+                return true;
+            }
+        });
         fileUploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,22 +89,19 @@ public class TaskAdapter extends BaseAdapter {
             }
         });
 
-        fileUploadButton.setOnLongClickListener(new View.OnLongClickListener(){
-            @Override
-            public boolean onLongClick(View view) {
-                Context c = mContext.getApplicationContext();
-                Toast.makeText(mContext.getApplicationContext(),"삭제하시겠습니까",Toast.LENGTH_SHORT).show();
-                RemoveTaskDialog removeTaskDialog = new RemoveTaskDialog(mContext);
-                removeTaskDialog.CallFunction(position);
-                return true;
-            }
-        });
-
         isTaskComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext.getApplicationContext(), String.valueOf(tasks.get(position).IsComplete()) , Toast.LENGTH_SHORT).show();
-                tasks.get(position).changeCompleteState();
+                Task t = tasks.get(position);
+                t.changeCompleteState();
+//                if(Users.selectedUser.equals(t.getManager())) {
+//                    if (t.IsComplete()) {
+//                        Users.selectedUser.removeItem(t);
+//                    }
+//                    else{
+//                        Users.selectedUser.addItem(new MainItem(R.drawable.file,t.getWorkName(),t));
+//                    }
+//                }
             }
         });
         return view;

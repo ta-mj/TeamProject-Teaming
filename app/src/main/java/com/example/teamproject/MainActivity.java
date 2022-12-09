@@ -11,7 +11,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,16 +28,46 @@ public class MainActivity extends AppCompatActivity {
 
     private View decorView;
     private int uiOption;
+    private Intent destination;
     private Intent mainToProjectUI, mainToPersonUI;
     private Button projectButton,mainButton,personalButton;
 
+    public static MainAdapter mainAdapter;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onResume() {
+        super.onResume();
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar_bell = (Toolbar) findViewById(R.id.toolbar_bell);
         setSupportActionBar(toolbar_bell);
+
+        TextView textView = findViewById(R.id.noItemText);
+        //현재 유저의 mainlist가 비어있지 않다면 내용을 추가하라는 textview을 안보이게 함.
+        if(Users.selectedUser.getAllItem().size() == 0){
+            textView.setVisibility(View.VISIBLE);
+        }
+        else{
+            //listview 설정
+            ListView listView = (ListView) findViewById(R.id.main_listview);
+            if(mainAdapter == null) {
+                mainAdapter = new MainAdapter(this, Users.selectedUser.getAllItem());
+            }
+            listView.setAdapter(mainAdapter);
+            textView.setVisibility(View.GONE);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    MainItem item = mainAdapter.getItem(position);
+                    switch (item.getImage()){
+                        case R.drawable.file:
+                            destination = new Intent(MainActivity.this,TaskUI.class);
+                            startActivity(destination);
+                            mainAdapter.notifyDataSetChanged();
+                            break;
+                    }
+                }
+            });
+        }
 
         //타이틀 숨기기
         getSupportActionBar().setDisplayShowTitleEnabled(false);
