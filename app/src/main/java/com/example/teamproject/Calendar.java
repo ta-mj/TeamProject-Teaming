@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 
 
@@ -51,8 +52,9 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
     public EditText contextEditText; //입력 창 관련 변수
 
     //데코 관련 변수
-    //private static ArrayList<EventDecorator> all_Event = new ArrayList<>(); //테스트용
-    private static ArrayList<CalendarDay> all_Dates = new ArrayList<>(); //저장 버튼 누를때 일정만 저장
+    //public static HashSet<CalendarDay> all_Dates = new HashSet<>(); //테스트용
+    public static HashMap<CalendarDay, EventDecorator> all_Event = new HashMap<>();
+   // public static ArrayList<CalendarDay> all_Dates = new ArrayList<>(); //저장 버튼 누를때 일정만 저장
     private EventDecorator eventDecorator; //점 찍는 용도
 
     @BindView(R.id.calendarView)
@@ -92,12 +94,6 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
         //툴바 로고 글씨 안 보이게 하는 코드
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        /*
-        // 화면 전환했을때 다시 점 찍는 반복문
-        for(int i = 0; i < all_Dates.size(); i++){
-            widget.addDecorators(new EventDecorator(Color.RED, all_Dates.get(i)));
-        }
-        */
 
         //캘린더뷰 관련 변수들
 
@@ -108,6 +104,11 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
         contentTextView = findViewById(R.id.contentTextView);
         //textView3 = findViewById(R.id.textView3);
         contextEditText = findViewById(R.id.contextEditText);
+
+        for(CalendarDay key : all_Event.keySet()){
+            widget.addDecorator(all_Event.get(key));
+        }
+
 
     }
 
@@ -145,8 +146,9 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
                     contextEditText.setVisibility(View.INVISIBLE);
                     contentTextView.setVisibility(View.VISIBLE);
 
-                    eventDecorator = new EventDecorator(Color.RED, date);
-                    widget.addDecorator(eventDecorator);
+                    eventDecorator = new EventDecorator(Color.RED);
+                    all_Event.put(date, eventDecorator);
+                    widget.addDecorator(all_Event.get(date));
                     //widget.addDecorator(new EventDecorator(Color.RED, date));
                     widget.invalidateDecorators();
                 }
@@ -183,10 +185,9 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
                 saveButton.setVisibility(View.VISIBLE);
                 changeButton.setVisibility(View.INVISIBLE);
                 deleteButton.setVisibility(View.INVISIBLE);
+                widget.removeDecorator(all_Event.get(date));
+                all_Event.remove(date);
                 removeDiary(readDay);
-
-                widget.removeDecorator(eventDecorator);
-                all_Dates.remove(date);
                 widget.invalidateDecorators();
             }
         });
@@ -274,15 +275,16 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
     class EventDecorator implements DayViewDecorator {
 
         private int color;
+        //private CalendarDay date;
 
-        public EventDecorator(int color, CalendarDay date) {
+        public EventDecorator(int color) {
             this.color = color;
-            all_Dates.add(date);
+            //this.date = date;
         }
 
         @Override
         public boolean shouldDecorate(CalendarDay day) {
-            return all_Dates.contains(day);
+            return all_Event.containsKey(day);
         }
 
         @Override

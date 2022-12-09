@@ -1,7 +1,11 @@
 package com.example.teamproject;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.work.WorkManager;
 
 import android.content.Intent;
@@ -16,11 +20,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.material.navigation.NavigationView;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    ActionBarDrawerToggle drawerToggle;
 
     private View decorView;
     private int uiOption;
@@ -37,10 +47,18 @@ public class MainActivity extends AppCompatActivity {
 
         //타이틀 숨기기
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //drawer navigation
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
 
         //인텐트 설정
-        mainToProjectUI = new Intent(MainActivity.this,TeamProjectUI.class);
-        mainToPersonUI = new Intent(MainActivity.this,PersonUI.class);
+        mainToProjectUI = new Intent(MainActivity.this, TeamProjectUI.class);
+        mainToPersonUI = new Intent(MainActivity.this, PersonUI.class);
 
         //하단 네비게이션바를 숨겨주는 코드(하단을 쓸어올리거나 상단을 쓸어내리면 다시 나옴)
 //        decorView = getWindow().getDecorView();
@@ -67,15 +85,34 @@ public class MainActivity extends AppCompatActivity {
         personalButton = findViewById(R.id.personalbutton);
         personalButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { startActivity(mainToPersonUI); }
+            public void onClick(View view) {
+                startActivity(mainToPersonUI);
+            }
         });
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.item_logout:
+
+
+                        return true;
+                }
+                return true;
+            }
+        });
+
+
         //알람 채널 생성
         NotificationHelper.createNotificationChannel(getApplicationContext());
         NotificationHelper.refreshScheduledNotification(getApplicationContext());
         //알람 설정
         setAlram(WorkManager.getInstance(getApplicationContext()));
-
     }
+
+
+
 
     public void setAlram(final WorkManager workManager){
         boolean isChannelCreated = NotificationHelper.isNotificationChannelCreated(getApplicationContext());
@@ -96,14 +133,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.navigation_notifications:
                 Intent mainToAlarm = new Intent (this, AlarmUI.class);
                 startActivity(mainToAlarm);
                 break;
+    }
+        if (drawerToggle.onOptionsItemSelected(item))
+        {
+            return true;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed(){
+        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+        {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
 }
