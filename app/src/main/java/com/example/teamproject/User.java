@@ -9,6 +9,7 @@ public class User {
     private String phone;
     private ArrayList<TeamProject> myProject = new ArrayList<TeamProject>();
     private ArrayList<Task> myTask = new ArrayList<>();
+    private ArrayList<ToDo> myTodo = new ArrayList<>();
     //project 객체
     //user 생성자
     public User(String p , String n , String e, String ph){
@@ -36,6 +37,7 @@ public class User {
         }
         return 0;
     }
+    public ArrayList<ToDo> getAllToDo(){return myTodo;}
     public TeamProject getProject(int i) { return myProject.get(i); }
     public ArrayList<Task> getAllTask(){ return myTask; }
     public Task getTask(int i){ return myTask.get(i); }
@@ -48,4 +50,5 @@ public class User {
     public void removeProject(int i){ this.myProject.remove(i); }
     public void addTask(Task t){ this.myTask.add(t); }
     public void removeTask(int i){ this.myTask.remove(i); }
+
 }
