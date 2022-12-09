@@ -100,7 +100,6 @@ public class TeamProjectUI extends AppCompatActivity {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //toggleFab();
                 AddProjectDialog addProjectDialog = new AddProjectDialog(TeamProjectUI.this);
                 addProjectDialog.callFunction();
             }
