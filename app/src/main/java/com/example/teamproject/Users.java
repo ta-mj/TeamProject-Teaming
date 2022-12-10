@@ -12,7 +12,8 @@ public class Users {
     public static HashMap<String,User> myusers = new HashMap<>();
     public static User selectedUser;
     public static TeamProject selectedProject;
-    private static String selectedUserId;
+    private static String selectedUserID = null;
+
     public static int makeUser(String id,String pw,String checkpw,String name,String ph,String email) {
         if(myusers.containsKey(id)) {
             return -1;
@@ -29,15 +30,12 @@ public class Users {
     }
     public static boolean Login(String id,String pw) {
         if(myusers.containsKey(id) == true && myusers.get(id).getPW().equals(pw)){
-            selectedUserId = id;
+            selectedUserID = id;
             return true;
         }
         else{
             return false;
         }
-    }
-    public static String getId(){
-        return selectedUserId;
     }
     public static boolean findUser(String id){
         return myusers.containsKey(id);
@@ -45,6 +43,8 @@ public class Users {
     public static User getUser(String id) {
         return myusers.get(id);
     }
-
+    public static String getUserID(){
+        return selectedUserID;
+    }
 }
 
