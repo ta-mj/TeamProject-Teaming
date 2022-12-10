@@ -41,7 +41,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 
-public class Calendar extends AppCompatActivity implements OnDateSelectedListener {
+public class CalendarPerson extends AppCompatActivity implements OnDateSelectedListener {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("EEE, d MMM yyyy");
     public String readDay = null;  //선택한 일자 읽어오는 변수
@@ -57,16 +57,16 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
     // public static ArrayList<CalendarDay> all_Dates = new ArrayList<>(); //저장 버튼 누를때 일정만 저장
     private EventDecorator eventDecorator; //점 찍는 용도
 
-    @BindView(R.id.calendarView)
+    @BindView(R.id.person_calendarView)
     MaterialCalendarView widget;
 
-    @BindView(R.id.diaryTextView)
+    @BindView(R.id.person_diaryTextView)
     TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
+        setContentView(R.layout.activity_calendar_person);
         ButterKnife.bind(this);
 
         widget.setOnDateChangedListener(this);
@@ -96,13 +96,14 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
 
 
         //캘린더뷰 관련 변수들
-        diaryTextView = findViewById(R.id.diaryTextView);
-        saveButton = findViewById(R.id.saveButton);
-        deleteButton = findViewById(R.id.deleteButton);
-        changeButton = findViewById(R.id.changeButton);
-        contentTextView = findViewById(R.id.contentTextView);
+        diaryTextView = findViewById(R.id.person_diaryTextView);
+        saveButton = findViewById(R.id.person_saveButton);
+        deleteButton = findViewById(R.id.person_deleteButton);
+        changeButton = findViewById(R.id.person_changeButton);
+        contentTextView = findViewById(R.id.person_contentTextView);
         //textView3 = findViewById(R.id.textView3);
-        contextEditText = findViewById(R.id.contextEditText);
+        contextEditText = findViewById(R.id.person_contextEditText);
+
 
         for(CalendarDay key : all_Event.keySet()){
             widget.addDecorator(all_Event.get(key));
@@ -205,7 +206,7 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
 
     public void checkDay(int cYear, int cMonth, int cDay) //선택한 일자를 readDay 변수에 저장하는 메소드
     {
-        readDay = "" + cYear + "-" + cMonth + "" + "-" + cDay + ".txt";
+        readDay = "person_" + cYear + "-" + cMonth + "" + "-" + cDay + ".txt";
         FileInputStream fis;
 
         try
