@@ -71,11 +71,7 @@ public class TaskAdapter extends BaseAdapter {
         fileUploadButton.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View view) {
-                Context c = mContext.getApplicationContext();
-                //다이얼로그가 나타나기 전 액티비티가 종료되었는지 확인.
-                Toast.makeText(mContext,"삭제하시겠습니까",Toast.LENGTH_SHORT).show();
-                RemoveTaskDialog removeTaskDialog = new RemoveTaskDialog(mContext);
-                removeTaskDialog.CallFunction(position);
+                TaskUI.thisTaskUI.removeTask(position);
                 return true;
             }
         });
@@ -94,14 +90,14 @@ public class TaskAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Task t = tasks.get(position);
                 t.changeCompleteState();
-//                if(Users.selectedUser.equals(t.getManager())) {
-//                    if (t.IsComplete()) {
-//                        Users.selectedUser.removeItem(t);
-//                    }
-//                    else{
-//                        Users.selectedUser.addItem(new MainItem(R.drawable.file,t.getWorkName(),t));
-//                    }
-//                }
+                if(Users.selectedUser.equals(t.getManager())) {
+                    if (t.IsComplete()) {
+                        Users.selectedUser.removeItem(t);
+                    }
+                    else{
+                        Users.selectedUser.addItem(new MainItem(R.drawable.file,t.getWorkName(),t));
+                    }
+                }
             }
         });
         return view;

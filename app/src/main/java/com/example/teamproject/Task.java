@@ -36,7 +36,7 @@ public class Task implements Serializable {
         explain = ex;
         is_complete = false;
         m.addTask(this);
-        //m.addItem(new MainItem(R.drawable.file,this.workname,this));
+        m.addItem(new MainItem(R.drawable.file,this.workname,this));
     }
     public String getWorkName(){
         return workname;

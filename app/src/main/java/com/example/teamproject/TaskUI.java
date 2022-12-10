@@ -70,7 +70,12 @@ public class TaskUI extends AppCompatActivity{
         ListView listView = (ListView) findViewById(R.id.listview1);
         if(taskAdapter == null) {
             taskAdapter = new TaskAdapter(this, Users.selectedProject.getAllTask());
+
         }
+        else{
+            taskAdapter.setTasks(Users.selectedProject.getAllTask());
+        }
+        Toast.makeText(getApplicationContext(),String.valueOf(Users.selectedProject.getAllTask().size()),Toast.LENGTH_SHORT).show();
         listView.setAdapter(taskAdapter);
         textView.setVisibility(View.INVISIBLE);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -122,6 +127,13 @@ public class TaskUI extends AppCompatActivity{
         });
 
     }
+    //업무 삭제 다이얼로그 호출 함수
+    public void removeTask(int position){
+        Toast.makeText(getApplicationContext(),"삭제하시겠습니까",Toast.LENGTH_SHORT).show();
+        RemoveTaskDialog removeTaskDialog = new RemoveTaskDialog(TaskUI.this);
+        removeTaskDialog.CallFunction(position);
+    }
+    //완료 업무 숨기는 함수
     public void hideCompletedItem(){
         taskAdapter.setTasks(Users.selectedProject.getAllTask());
         selectedTask.clear();

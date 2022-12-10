@@ -8,14 +8,16 @@ public class TeamProject implements Serializable {
     //프로젝트 정보
     private String subject;
     //구성원
-    private ArrayList<User> myUser = new ArrayList<>();
+    private ArrayList<User> myUser;
     //업무
-    private ArrayList<Task> myTask = new ArrayList<>();
+    private ArrayList<Task> myTask;
     //브레인스토밍
     //일정
     //알림
     TeamProject(String s, User u){
         subject = s;
+        myUser = new ArrayList<>();
+        myTask = new ArrayList<>();
         myUser.add(u);
         Users.selectedUser.addProject(this);
         Users.selectedProject = this;

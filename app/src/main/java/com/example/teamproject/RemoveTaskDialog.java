@@ -41,10 +41,10 @@ public class RemoveTaskDialog extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 text = messages.getText().toString();
-//                if(Users.selectedUser.equals(TaskUI.taskAdapter.getItem(position).getManager())) {
-//                    Users.selectedUser.removeItem(TaskUI.taskAdapter.getItem(position));
-//                    MainActivity.mainAdapter.notifyDataSetChanged();
-//                }
+                if(Users.selectedUser.equals(TaskUI.taskAdapter.getItem(position).getManager())) {
+                    Users.selectedUser.removeItem(TaskUI.taskAdapter.getItem(position));
+                    MainActivity.mainAdapter.notifyDataSetChanged();
+                }
                 TaskUI.taskAdapter.removeTask(position);
                 TaskUI.taskAdapter.notifyDataSetChanged();
                 // 커스텀 다이얼로그를 종료한다.
