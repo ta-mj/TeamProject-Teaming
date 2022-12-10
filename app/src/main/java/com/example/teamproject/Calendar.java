@@ -205,7 +205,7 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
 
     public void checkDay(int cYear, int cMonth, int cDay) //선택한 일자를 readDay 변수에 저장하는 메소드
     {
-        readDay = "" + cYear + "-" + cMonth + "" + "-" + cDay + ".txt";
+        readDay = " " + cYear + "-" + cMonth + "-" + cDay + ".txt";
         FileInputStream fis;
 
         try
