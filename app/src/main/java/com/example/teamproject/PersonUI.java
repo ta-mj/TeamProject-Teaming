@@ -1,5 +1,6 @@
 package com.example.teamproject;
 
+import android.app.Person;
 import android.content.Intent;
 import android.os.Build;
 import android.view.Menu;
@@ -28,8 +29,8 @@ public class PersonUI extends AppCompatActivity {
     public static PersonAdapter personadapter;
     public static PersonUI thisPersonUI;
 
-    //private Button person_toDoButton, person_scheduleButton;
-    //private Intent personUIToCalendar;
+    private Button person_toDoButton, person_scheduleButton;
+    private Intent personUIToCalendar;
 
     protected void onResume() {
         super.onResume();
@@ -46,6 +47,10 @@ public class PersonUI extends AppCompatActivity {
 
         thisPersonUI = this;
         fab_toDoAdd = findViewById(R.id.fab_ToDoAdd);
+        person_scheduleButton = findViewById(R.id.person_schedulebutton);
+
+        //인텐트 설정
+        personUIToCalendar = new Intent(PersonUI.this, CalendarPerson.class);
 
         ListView listview = (ListView) findViewById(R.id.person_listview);
         personadapter = new PersonAdapter(this,Users.selectedUser.getAllToDo());
@@ -86,6 +91,13 @@ public class PersonUI extends AppCompatActivity {
             public void onClick(View view) {
                 AddTodoDialog addtododialog= new AddTodoDialog(PersonUI.this);
                 addtododialog.Call_Function();
+            }
+        });
+
+        person_scheduleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(personUIToCalendar);
             }
         });
     }
