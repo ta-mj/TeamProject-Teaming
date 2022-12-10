@@ -12,11 +12,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class RemoveTaskDialog extends AppCompatActivity {
+public class RemoveToDoDialog extends AppCompatActivity {
     private Context context;
 
-    public RemoveTaskDialog(){}
-    public RemoveTaskDialog(Context context){this.context = context;}
+    public RemoveToDoDialog(){}
+    public RemoveToDoDialog(Context context){this.context = context;}
     // 호출할 다이얼로그 함수를 정의한다.
     public void CallFunction(int position) {
 
@@ -27,28 +27,26 @@ public class RemoveTaskDialog extends AppCompatActivity {
         dlgs.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         // 커스텀 다이얼로그의 레이아웃을 설정한다.
-        dlgs.setContentView(R.layout.activity_remove_task_dialog);
+        dlgs.setContentView(R.layout.activity_remove_todo_dialog);
 
         // 커스텀 다이얼로그를 노출한다.
         dlgs.show();
 
         // 커스텀 다이얼로그의 각 위젯들을 정의한다.
-        final TextView messages = (TextView) dlgs.findViewById(R.id.task_rm_message1);
-        final Button okButtons = (Button) dlgs.findViewById(R.id.task_rm_okButton1);
-        final Button cancelButtons = (Button) dlgs.findViewById(R.id.task_rm_cancelButton1);
+        final TextView messages = (TextView) dlgs.findViewById(R.id.todo_rm_message1);
+        final Button okButtons = (Button) dlgs.findViewById(R.id.todo_rm_okButton1);
+        final Button cancelButtons = (Button) dlgs.findViewById(R.id.todo_rm_cancelButton1);
 
         okButtons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 text = messages.getText().toString();
-                if(Users.selectedUser.equals(TaskUI.taskAdapter.getItem(position).getManager())) {
-                    Users.selectedUser.removeItem(TaskUI.taskAdapter.getItem(position));
-                    MainActivity.mainAdapter.notifyDataSetChanged();
-                }
-                TaskUI.taskAdapter.removeTask(position);
-                TaskUI.taskAdapter.notifyDataSetChanged();
+                ToDo t = PersonUI.personadapter.getItem(position);
+                Users.selectedUser.removeItem(t);
+                PersonUI.personadapter.removeTodo(position);
+                PersonUI.personadapter.notifyDataSetChanged();
                 // 커스텀 다이얼로그를 종료한다.
-                Toast.makeText(context, "업무 삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "할 일 삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
                 dlgs.dismiss();
             }
         });

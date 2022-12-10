@@ -60,6 +60,8 @@ public class User implements Serializable {
     }
     public void removeProject(int i){ this.myProject.remove(i); }
     public void addTask(Task t){ this.myTask.add(t); }
+    public void addToDo(ToDo t){ this.myTodo.add(t); }
+    public void removeToDo(int i){ this.myTodo.remove(i); }
     public void removeTask(int i){ this.myTask.remove(i); }
     public void removeTask(Task t){ this.myTask.remove(t); }
     public void addAlram(String s){ this.myAlram.add(s); }

@@ -46,5 +46,25 @@ public class Users {
     public static String getUserID(){
         return selectedUserID;
     }
+    //회원 탈퇴 함수
+    public static void unRegister(User u){
+        //1. 유저가 소속된 프로젝트에서 유저 및 유저가 담당한  업무 삭제
+        for(int i = 0; i < u.getProjectNum() ; i++){
+            TeamProject p = u.getProject(i);
+            for(int j = 0 ; j < p.getAllTask().size() ; j++){
+                if(p.getOneTask(j).getManager().equals(u)){
+                    p.getAllTask().remove(p.getOneTask(j));
+                    j--;
+                }
+            }
+            p.removeUser(u);
+        }
+        //2. 유저를 유저 목록에서 삭제
+        if(myusers.containsValue(u)){
+            myusers.values().remove(u);
+        }
+        //3. 유저 데이터 삭제
+        u = null;
+    }
 }
 

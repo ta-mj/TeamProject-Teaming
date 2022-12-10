@@ -5,12 +5,12 @@
     android:background="#ffffff">
 
     <TextView
-        android:id="@+id/task_title"
+        android:id="@+id/todo_title"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#BBD17F"
         android:gravity="center"
-        android:text="업무 삭제"
+        android:text="할 일 삭제"
         android:textColor="#000000"
         android:textSize="16dp" />
 
@@ -20,7 +20,7 @@
         android:background="#000000"/>
 
     <TextView
-        android:id="@+id/task_rm_message1"
+        android:id="@+id/todo_rm_message1"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:gravity="center"
@@ -38,7 +38,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/task_rm_okButton1"
+            android:id="@+id/todo_rm_okButton1"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_weight="1"
@@ -54,7 +54,7 @@
             android:background="#000000" />
 
         <Button
-            android:id="@+id/task_rm_cancelButton1"
+            android:id="@+id/todo_rm_cancelButton1"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_weight="1"

@@ -2,12 +2,14 @@ package com.example.teamproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.work.WorkManager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +25,8 @@ import android.widget.Toast;
 
 
 import java.time.Duration;
+
+import com.google.android.material.internal.NavigationMenuItemView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.time.LocalDate;
@@ -38,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private View decorView;
     private int uiOption;
-    private Intent destination;
-    private Intent mainToProjectUI, mainToPersonUI;
+    private Intent mainToLogin,mainToProjectUI,mainToTaskUI, mainToPersonUI, mainToTeamCalender;
     private Button projectButton,mainButton,personalButton;
 
     public static MainAdapter mainAdapter;
@@ -53,6 +56,42 @@ public class MainActivity extends AppCompatActivity {
         }
         if (drawerToggle.onOptionsItemSelected(item))
         {
+            Toast.makeText(getApplicationContext(),"설정 메뉴 눌림",Toast.LENGTH_SHORT).show();
+            NavigationMenuItemView logout = findViewById(R.id.item_logout);
+            NavigationMenuItemView unregister = findViewById(R.id.item_unregister);
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
+                    dlg.setTitle("로그아웃");
+                    dlg.setMessage("로그아웃 하시겠습니까?");
+                    dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Users.selectedUser = null;
+                            startActivity(mainToLogin);
+                        }
+                    });
+                    dlg.show();
+                }
+            });
+            unregister.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
+                    dlg.setTitle("회원 탈퇴");
+                    dlg.setMessage("정말로 탈퇴 하시겠습니까?");
+                    dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //이 유저에 관한 모든 데이터 삭제
+                            Users.unRegister(Users.selectedUser);
+                            startActivity(mainToLogin);
+                        }
+                    });
+                    dlg.show();
+                }
+            });
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -77,6 +116,9 @@ public class MainActivity extends AppCompatActivity {
             if(mainAdapter == null) {
                 mainAdapter = new MainAdapter(this, Users.selectedUser.getAllItem());
             }
+            else{
+                mainAdapter.members = Users.selectedUser.getAllItem();
+            }
             listView.setAdapter(mainAdapter);
             textView.setVisibility(View.GONE);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -85,10 +127,15 @@ public class MainActivity extends AppCompatActivity {
                     MainItem item = mainAdapter.getItem(position);
                     switch (item.getImage()){
                         case R.drawable.file:
-                            destination = new Intent(MainActivity.this,TaskUI.class);
-                            startActivity(destination);
+                            startActivity(mainToTaskUI);
                             mainAdapter.notifyDataSetChanged();
                             break;
+                        case R.drawable.ic_outline_checklist_24:
+                            startActivity(mainToPersonUI);
+                            mainAdapter.notifyDataSetChanged();
+                        case R.drawable.calendar:
+                            startActivity(mainToTeamCalender);
+                            mainAdapter.notifyDataSetChanged();
                     }
                 }
             });
@@ -106,8 +153,11 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //인텐트 설정
+        mainToLogin = new Intent(MainActivity.this,Login.class);
         mainToProjectUI = new Intent(MainActivity.this,TeamProjectUI.class);
+        mainToTaskUI = new Intent(MainActivity.this,TaskUI.class);
         mainToPersonUI = new Intent(MainActivity.this,PersonUI.class);
+        mainToTeamCalender = new Intent(MainActivity.this, Calendar.class);
 
         //하단 네비게이션바를 숨겨주는 코드(하단을 쓸어올리거나 상단을 쓸어내리면 다시 나옴)
 //        decorView = getWindow().getDecorView();
@@ -138,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //알람 설정
-        setAlram(WorkManager.getInstance(getApplicationContext()));
+        //setAlram(WorkManager.getInstance(getApplicationContext()));
 
     }
 
@@ -168,7 +218,8 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(GravityCompat.START);
         }
         else {
-            super.onBackPressed();
+            //로그아웃 했을 때만 나갈 수 있도록 막아놓음
+            //super.onBackPressed();
         }
     }
 }

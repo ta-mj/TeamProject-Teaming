@@ -23,7 +23,7 @@
     <ListView
         android:id="@+id/person_listview"
         android:layout_width="match_parent"
-        android:layout_height="540dp"
+        android:layout_height="630dp"
         android:layout_below="@+id/to_do_search" />
 
     <LinearLayout
@@ -48,8 +48,11 @@
     <LinearLayout
         android:id="@+id/person_linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
         android:layout_below="@id/person_listview"
+        android:layout_alignBottom="@+id/person_listview"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="-200dp"
         android:background="#EDEDED"
         android:orientation="horizontal">
 
