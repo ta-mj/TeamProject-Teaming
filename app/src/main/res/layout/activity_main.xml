@@ -1,46 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
     tools:context=".MainActivity">
 
-    <include
-        android:id="@+id/toolbar_bell"
-        layout="@layout/toolbar_bell" />
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView1"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/searchview_background"
-        app:iconifiedByDefault="false"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_bell"
-        app:queryHint="검색어를 입력하시오"
-        tools:layout_editor_absoluteX="10dp" />
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-    <ListView
-        android:id="@+id/main_listview"
-        android:layout_width="match_parent"
-        android:layout_height="640dp"
-        android:layout_below="@id/searchView1"
-        android:divider="@color/white"
-        android:dividerHeight="7dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/searchView1" />
+        <include
+            android:id="@+id/toolbar_bell"
+            layout="@layout/toolbar_bell" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="400dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/searchview_background"
+            app:iconifiedByDefault="false"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_bell"
+            app:queryHint="검색어를 입력하시오"
+            tools:layout_editor_absoluteX="10dp" />
+
+        <ListView
+            android:id="@+id/main_listview"
+            android:layout_width="match_parent"
+            android:layout_height="640dp"
+            android:layout_below="@id/searchView1"
+            android:divider="@color/white"
+            android:dividerHeight="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/searchView1" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="400dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/noItemText"
@@ -50,61 +60,77 @@
             android:text="목록이 없습니다"
             android:textSize="25dp"
             android:visibility="gone">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="목록이 없습니다"
+                android:textSize="25dp">
 
-        </TextView>
-    </LinearLayout>
+            </TextView>
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#EDEDED"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-
-        <Button
-            android:id="@+id/homebutton"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="#EDEDED"
-            android:drawableTop="@drawable/ic_home_size"
-            android:paddingTop="15dp"
-            android:text="홈" />
-
-        <Button
-            android:id="@+id/projectbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="#EDEDED"
-            android:drawableTop="@drawable/ic_team_size"
-            android:paddingTop="10dp"
-            android:text="프로젝트" />
-
-        <Button
-            android:id="@+id/personalbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="#EDEDED"
-            android:drawableTop="@drawable/ic_person_size"
-            android:paddingTop="15dp"
-            android:text="개인" />
-    </LinearLayout>
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
 
 
-    <!--    <ImageView-->
-    <!--        android:id="@+id/imageView4"-->
-    <!--        android:layout_width="166dp"-->
-    <!--        android:layout_height="63dp"-->
-    <!--        app:srcCompat="@drawable/logo_with_bg"-->
-    <!--        tools:layout_editor_absoluteX="125dp"-->
-    <!--        tools:layout_editor_absoluteY="1dp" />-->
+            <Button
+                android:id="@+id/homebutton"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#EDEDED"
+                android:drawableTop="@drawable/ic_home_size"
+                android:paddingTop="15dp"
+                android:text="홈" />
+
+            <Button
+                android:id="@+id/projectbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#EDEDED"
+                android:drawableTop="@drawable/ic_team_size"
+                android:paddingTop="10dp"
+                android:text="프로젝트" />
+
+            <Button
+                android:id="@+id/personalbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#EDEDED"
+                android:drawableTop="@drawable/ic_person_size"
+                android:paddingTop="15dp"
+                android:text="개인" />
+        </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!--    <ImageView-->
+        <!--        android:id="@+id/imageView4"-->
+        <!--        android:layout_width="166dp"-->
+        <!--        android:layout_height="63dp"-->
+        <!--        app:srcCompat="@drawable/logo_with_bg"-->
+        <!--        tools:layout_editor_absoluteX="125dp"-->
+        <!--        tools:layout_editor_absoluteY="1dp" />-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:headerLayout="@layout/main_header"
+        app:menu="@menu/main_menu"
+        android:id="@+id/nav_view"
+        android:layout_gravity="start"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

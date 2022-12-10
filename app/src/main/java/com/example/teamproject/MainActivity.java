@@ -1,7 +1,11 @@
 package com.example.teamproject;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.work.WorkManager;
 
 import android.content.Intent;
@@ -19,12 +23,18 @@ import android.widget.Toast;
 
 
 import java.time.Duration;
+import com.google.android.material.navigation.NavigationView;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    ActionBarDrawerToggle drawerToggle;
 
     private View decorView;
     private int uiOption;
@@ -33,6 +43,21 @@ public class MainActivity extends AppCompatActivity {
     private Button projectButton,mainButton,personalButton;
 
     public static MainAdapter mainAdapter;
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.navigation_notifications:
+                Intent mainToAlarm = new Intent(this, AlarmUI.class);
+                startActivity(mainToAlarm);
+                break;
+        }
+        if (drawerToggle.onOptionsItemSelected(item))
+        {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -71,6 +96,14 @@ public class MainActivity extends AppCompatActivity {
 
         //타이틀 숨기기
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        //drawer navigation
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        drawerToggle =  new ActionBarDrawerToggle (this,drawerLayout,R.string.open,R.string.close);
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //인텐트 설정
         mainToProjectUI = new Intent(MainActivity.this,TeamProjectUI.class);
@@ -127,15 +160,15 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.navigation_notifications:
-                Intent mainToAlarm = new Intent (this, AlarmUI.class);
-                startActivity(mainToAlarm);
-                break;
-        }
-        return true;
-    }
 
+    @Override
+    public void onBackPressed(){
+        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+        {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
 }

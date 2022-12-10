@@ -14,6 +14,7 @@ public class User implements Serializable {
     private ArrayList<Task> myTask;
     private ArrayList<String> myAlram;
     private ArrayList<MainItem> myItem;
+    private ArrayList<ToDo> myTodo;
     //project 객체
     //user 생성자
     public User(String p , String n , String e, String ph){
@@ -26,6 +27,7 @@ public class User implements Serializable {
         myTask = new ArrayList<>();
         myAlram = new ArrayList<>();
         myItem = new ArrayList<>();
+        myTodo = new ArrayList<>();
     }
     public String getPW() {
         return pw;
@@ -45,6 +47,7 @@ public class User implements Serializable {
         }
         return 0;
     }
+    public ArrayList<ToDo> getAllToDo(){return myTodo;}
     public TeamProject getProject(int i) { return myProject.get(i); }
     public ArrayList<Task> getAllTask(){ return myTask; }
     public Task getTask(int i){ return myTask.get(i); }
@@ -70,5 +73,4 @@ public class User implements Serializable {
             }
         }
     }
-
 }
