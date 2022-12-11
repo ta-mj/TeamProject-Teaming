@@ -57,9 +57,9 @@
         android:id="@+id/person_linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/person_listview"
         android:background="#EDEDED"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
 
 
         <Button
