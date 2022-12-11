@@ -1,14 +1,9 @@
 package com.example.teamproject;
 
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.example.teamproject.CalendarPerson.EventDecorator;
-
-import java.io.Serializable;
-
-public class Test {
+public class Schedule {
     private String context;
     private EventDecorator decorator;
-    public Test(String c, EventDecorator d){
+    public Schedule (String c, EventDecorator d){
         this.context = c;
         this.decorator = d;
     }
