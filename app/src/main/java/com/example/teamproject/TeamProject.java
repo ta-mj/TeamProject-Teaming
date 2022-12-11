@@ -1,9 +1,13 @@
 package com.example.teamproject;
 
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 public class TeamProject implements Serializable {
     //프로젝트 정보
     private String subject;
@@ -13,6 +17,7 @@ public class TeamProject implements Serializable {
     private ArrayList<Task> myTask;
     //브레인스토밍
     //일정
+    private HashMap<CalendarDay,Schedule> teamSchedule;
     //알림
     TeamProject(String s, User u){
         subject = s;
@@ -21,6 +26,7 @@ public class TeamProject implements Serializable {
         myUser.add(u);
         Users.selectedUser.addProject(this);
         Users.selectedProject = this;
+        teamSchedule = new HashMap<>();
     }
     public void setSubject(String s) {
         subject = s;
@@ -36,6 +42,9 @@ public class TeamProject implements Serializable {
     public String getSubject() { return this.subject; }
     public ArrayList<User> getAllUser(){ return this.myUser;}
     public ArrayList<Task> getAllTask(){ return this.myTask;}
+    public HashMap<CalendarDay, Schedule> getAllTeamSchedule(){ return teamSchedule; }
+    public Schedule getTeamSchedule(CalendarDay c){ return teamSchedule.get(c); }
+    public void addTeamSchedule(CalendarDay c, Schedule t){ this.teamSchedule.put(c,t); }
     public User getOneUser(int i){ return this.myUser.get(i); }
     public Task getOneTask(int i){ return this.myTask.get(i); }
     public int getUserNum() { return this.myUser.size(); }

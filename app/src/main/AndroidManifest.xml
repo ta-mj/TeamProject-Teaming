@@ -48,7 +48,7 @@
             android:name=".AddUserDialog"
             android:exported="true" />
         <activity
-            android:name=".Calendar"
+            android:name=".CalendarTeam"
             android:exported="true" />
         <activity
             android:name=".TaskAdd"

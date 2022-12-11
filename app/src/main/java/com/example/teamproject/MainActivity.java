@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private View decorView;
     private int uiOption;
-    private Intent mainToLogin,mainToProjectUI,mainToTaskUI, mainToPersonUI, mainToTeamCalender;
+    private Intent mainToLogin,mainToProjectUI,mainToTaskUI, mainToPersonUI, mainToTeamCalender, mainToPersonCalender;
     private Button projectButton,mainButton,personalButton;
 
     public static MainAdapter mainAdapter;
@@ -144,8 +144,14 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(mainToPersonUI);
                             mainAdapter.notifyDataSetChanged();
                         case R.drawable.calendar:
-                            startActivity(mainToTeamCalender);
-                            mainAdapter.notifyDataSetChanged();
+                            if( item.getContent().charAt(0) == '팀'){
+                                startActivity(mainToTeamCalender);
+                                mainAdapter.notifyDataSetChanged();
+                            }else{
+                                startActivity(mainToPersonCalender);
+                                mainAdapter.notifyDataSetChanged();
+                            }
+
                     }
                 }
             });
@@ -167,7 +173,8 @@ public class MainActivity extends AppCompatActivity {
         mainToProjectUI = new Intent(MainActivity.this,TeamProjectUI.class);
         mainToTaskUI = new Intent(MainActivity.this,TaskUI.class);
         mainToPersonUI = new Intent(MainActivity.this,PersonUI.class);
-        mainToTeamCalender = new Intent(MainActivity.this, Calendar.class);
+        mainToTeamCalender = new Intent(MainActivity.this, CalendarTeam.class);
+        mainToPersonCalender = new Intent(MainActivity.this, CalendarPerson.class);
 
         //하단 네비게이션바를 숨겨주는 코드(하단을 쓸어올리거나 상단을 쓸어내리면 다시 나옴)
 //        decorView = getWindow().getDecorView();
