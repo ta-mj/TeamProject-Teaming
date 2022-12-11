@@ -10,6 +10,7 @@ public class ToDo{
     ToDo(String t){
         todoname = t;
         is_complete = false;
+        Users.selectedUser.addItem(new MainItem(R.drawable.ic_outline_checklist_24,todoname,this));
     }
     public String getTodoname(){return todoname;}
     public void setTodoname(String todoname){this.todoname = todoname;}

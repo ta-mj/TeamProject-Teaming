@@ -6,6 +6,7 @@ public class Schedule {
     public Schedule (String c, EventDecorator d){
         this.context = c;
         this.decorator = d;
+        Users.selectedUser.addItem(new MainItem(R.drawable.calendar,c,this));
     }
 
     public String getContext(){

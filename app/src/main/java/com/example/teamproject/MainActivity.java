@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
                         case R.drawable.ic_outline_checklist_24:
                             startActivity(mainToPersonUI);
                             mainAdapter.notifyDataSetChanged();
+                            break;
                         case R.drawable.calendar:
                             if( item.getContent().charAt(0) == '팀'){
                                 startActivity(mainToTeamCalender);
@@ -154,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(mainToPersonCalender);
                                 mainAdapter.notifyDataSetChanged();
                             }
+                            break;
 
                     }
                 }

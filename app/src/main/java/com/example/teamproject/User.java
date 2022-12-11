@@ -20,7 +20,6 @@ public class User{
     private ArrayList<ToDo> myTodo;
     //완료된 개인 할 일 숨기기 기능
     private boolean isCompletedToDoHide;
-    //private ArrayList<Test> myTest;
     private HashMap<CalendarDay,Schedule> mySchedule;
     //project 객체
     //user 생성자
