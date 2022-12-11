@@ -46,8 +46,13 @@ public class AlramAdapter extends BaseAdapter {
     public View getView(int position, View converView, ViewGroup parent) {
         View view = mLayoutInflater.inflate(R.layout.listview_alram, null);
 
+        String[] text = alrams.get(position).split("\\n");
+        String date = text[0];
+        String content = text[1] + "\n" + "파일을 제출해주세요.";
+        TextView alarmDate = (TextView) view.findViewById(R.id.alramDate);
         TextView alarmContent = (TextView) view.findViewById(R.id.alramContent);
-        alarmContent.setText(alrams.get(position));
+        alarmDate.setText(date);
+        alarmContent.setText(content);
         return view;
     }
 }

@@ -16,14 +16,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/alramCalendar"
+            android:id="@+id/alramDate"
             android:layout_width="400dp"
             android:layout_height="30dp"
             android:gravity="center"
-            android:text="2022-12-03"
             android:textColor="@color/black"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="visible"/>
 
         <TextView
             android:id="@+id/alramContent"
@@ -33,7 +33,7 @@
             android:gravity="center"
             android:text="박태우님 보고서 제출 업무가 완료되지 않았습니다.\n파일을 제출해주세요."
             android:textColor="@color/black"
-            android:layout_below="@+id/alramCalendar"
+            android:layout_below="@+id/alramDate"
             />
 
 

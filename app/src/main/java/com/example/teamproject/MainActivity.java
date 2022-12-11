@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Users.selectedUser = null;
+                            mainAdapter = null;
                             startActivity(mainToLogin);
                         }
                     });
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             //이 유저에 관한 모든 데이터 삭제
                             Users.unRegister(Users.selectedUser);
+                            mainAdapter = null;
                             startActivity(mainToLogin);
                         }
                     });
@@ -120,6 +122,12 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.noItemText);
         //현재 유저의 mainlist가 비어있지 않다면 내용을 추가하라는 textview을 안보이게 함.
+        if(mainAdapter == null){
+            //알람 설정
+            NotificationHelper.createNotificationChannel(getApplicationContext());
+            NotificationHelper.refreshScheduledNotification(getApplicationContext());
+            setAlram(WorkManager.getInstance(getApplicationContext()));
+        }
         if(Users.selectedUser.getAllItem().size() == 0){
             textView.setVisibility(View.VISIBLE);
         }
@@ -237,9 +245,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) { startActivity(mainToPersonUI); }
         });
-
-        //알람 설정
-        //setAlram(WorkManager.getInstance(getApplicationContext()));
 
     }
 

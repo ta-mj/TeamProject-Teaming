@@ -65,6 +65,14 @@ public class TeamProjectUI extends AppCompatActivity {
         try{
             projectAdapter = new ProjectAdapter();
             //반복문으로 소속된 프로젝트들 가지고 오기
+            if(Users.selectedUser.getProjectNum() == 0){
+                Toast.makeText(getApplicationContext(),"프로젝트 없음",Toast.LENGTH_SHORT).show();
+                textView.setVisibility(View.VISIBLE);
+                gridView.setVisibility(View.GONE);
+            }
+            else{
+                textView.setVisibility(View.GONE);
+            }
             for(int i = allItem.size() ; i < Users.selectedUser.getProjectNum() ; i++){
                 allItem.add(new ProjectItem(R.drawable.team,Users.selectedUser.getProject(i)));
             }
