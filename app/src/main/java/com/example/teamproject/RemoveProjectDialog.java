@@ -75,6 +75,7 @@ public class RemoveProjectDialog extends AppCompatActivity {
                 TeamProjectUI.projectAdapter.notifyDataSetChanged();
                 // 커스텀 다이얼로그를 종료한다.
                 dlg.dismiss();
+                TeamProjectUI.thisTeamProjectUI.onResume();
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {

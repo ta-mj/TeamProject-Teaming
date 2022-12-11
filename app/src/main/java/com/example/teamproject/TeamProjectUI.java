@@ -38,6 +38,8 @@ public class TeamProjectUI extends AppCompatActivity {
     public static ProjectAdapter projectAdapter;
     public static String text;
 
+    public static TeamProjectUI thisTeamProjectUI;
+
     //projectAdapter에 들어갈 arrayList
     private ArrayList<ProjectItem> allItem = new ArrayList<>();
     private ArrayList<ProjectItem> selectedItem = new ArrayList<>();//검색했을 때 조건에 맞는 아이템만 넣기 위한 변수
@@ -52,6 +54,8 @@ public class TeamProjectUI extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        thisTeamProjectUI = this;
+
         projectUIToProjectInfo = new Intent(TeamProjectUI.this, TeamProjectInformation.class);
 
         gridView = findViewById(R.id.gridView);
@@ -65,16 +69,18 @@ public class TeamProjectUI extends AppCompatActivity {
         try{
             projectAdapter = new ProjectAdapter();
             //반복문으로 소속된 프로젝트들 가지고 오기
+
+            for(int i = allItem.size() ; i < Users.selectedUser.getProjectNum() ; i++){
+                allItem.add(new ProjectItem(R.drawable.team,Users.selectedUser.getProject(i)));
+            }
             if(Users.selectedUser.getProjectNum() == 0){
-                Toast.makeText(getApplicationContext(),"프로젝트 없음",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"프로젝트 없음",Toast.LENGTH_SHORT).show();
                 textView.setVisibility(View.VISIBLE);
                 gridView.setVisibility(View.GONE);
             }
             else{
+                gridView.setVisibility(View.VISIBLE);
                 textView.setVisibility(View.GONE);
-            }
-            for(int i = allItem.size() ; i < Users.selectedUser.getProjectNum() ; i++){
-                allItem.add(new ProjectItem(R.drawable.team,Users.selectedUser.getProject(i)));
             }
             projectAdapter.items = allItem;
             projectAdapter.notifyDataSetChanged();
@@ -85,7 +91,6 @@ public class TeamProjectUI extends AppCompatActivity {
         }
 
         gridView.setAdapter(projectAdapter);
-        textView.setVisibility(View.INVISIBLE); // 팀프로젝트 목록이 있으면 자료 안 보임
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

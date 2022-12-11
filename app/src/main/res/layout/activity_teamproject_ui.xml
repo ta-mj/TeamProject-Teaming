@@ -39,7 +39,7 @@
             android:gravity="center"
             android:text="프로젝트를 추가해주세요."
             android:textSize="25dp"
-            android:visibility="gone">
+            android:visibility="visible">
 
         </TextView>
     </LinearLayout>
@@ -49,15 +49,16 @@
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:layout_below="@id/project_search"
-        android:layout_marginTop="7dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="7dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:background="#F9F9F9"
         android:horizontalSpacing="2dp"
         android:listSelector="#F9F9F9"
         android:numColumns="2"
-        android:verticalSpacing="15dp" />
+        android:verticalSpacing="15dp"
+        android:visibility="invisible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAdd"
