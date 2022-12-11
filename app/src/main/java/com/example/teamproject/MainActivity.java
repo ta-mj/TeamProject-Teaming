@@ -65,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
                     AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
                     dlg.setTitle("로그아웃");
                     dlg.setMessage("로그아웃 하시겠습니까?");
+                    dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
                     dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -81,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
                     AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
                     dlg.setTitle("회원 탈퇴");
                     dlg.setMessage("정말로 탈퇴 하시겠습니까?");
+                    dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
                     dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

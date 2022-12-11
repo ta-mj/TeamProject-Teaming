@@ -150,7 +150,8 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
                     widget.addDecorator(all_Event.get(date));
                     //widget.addDecorator(new EventDecorator(Color.RED, date));
                     //메인화면에 추가
-                    Users.selectedUser.addItem(new MainItem(R.drawable.calendar,str,date));
+                    String mainString = "팀 : " + date.getDate().toString() + "\n" + str;
+                    Users.selectedUser.addItem(new MainItem(R.drawable.calendar,mainString,date));
                     widget.invalidateDecorators();
                 }
 

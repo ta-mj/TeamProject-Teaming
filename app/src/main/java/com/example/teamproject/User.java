@@ -1,8 +1,11 @@
 package com.example.teamproject;
 import android.widget.Toast;
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 public class User implements Serializable {
     private int image;
@@ -15,6 +18,8 @@ public class User implements Serializable {
     private ArrayList<String> myAlram;
     private ArrayList<MainItem> myItem;
     private ArrayList<ToDo> myTodo;
+    //private ArrayList<Test> myTest;
+    private HashMap<CalendarDay,Test> myTest;
     //project 객체
     //user 생성자
     public User(String p , String n , String e, String ph){
@@ -28,6 +33,7 @@ public class User implements Serializable {
         myAlram = new ArrayList<>();
         myItem = new ArrayList<>();
         myTodo = new ArrayList<>();
+        myTest = new HashMap<>();
     }
     public String getPW() {
         return pw;
@@ -54,13 +60,16 @@ public class User implements Serializable {
     public ArrayList<String> getAllAlram(){ return myAlram; }
     public String getAlram(int i){ return myAlram.get(i); }
     public ArrayList<MainItem> getAllItem(){ return myItem; }
+    public HashMap<CalendarDay, Test> getAllTest(){ return myTest; }
     public MainItem getItem(int i){ return myItem.get(i); }
+    public Test getTest(CalendarDay c){ return myTest.get(c); }
     public void addProject(TeamProject t){
         this.myProject.add(t);
     }
     public void removeProject(int i){ this.myProject.remove(i); }
     public void addTask(Task t){ this.myTask.add(t); }
     public void addToDo(ToDo t){ this.myTodo.add(t); }
+    public void addTest(CalendarDay c, Test t){ this.myTest.put(c,t); }
     public void removeToDo(int i){ this.myTodo.remove(i); }
     public void removeTask(int i){ this.myTask.remove(i); }
     public void removeTask(Task t){ this.myTask.remove(t); }
