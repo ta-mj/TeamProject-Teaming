@@ -9,6 +9,6 @@ public class Brain {
 
     @Override
     public String toString() {
-        return "Idea["+name+"]";
+        return name;
     }
 }

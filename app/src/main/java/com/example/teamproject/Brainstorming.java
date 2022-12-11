@@ -14,6 +14,7 @@ import com.gyso.treeview.listener.TreeViewControlListener;
 import com.gyso.treeview.model.NodeModel;
 import com.gyso.treeview.model.TreeModel;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +22,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -107,19 +109,13 @@ public class Brainstorming extends AppCompatActivity {
         //add some nodes
         binding.addNodesBt.setOnClickListener(v -> {
             if (targetNode == null) {
-                Toast.makeText(this, "Ohs, your targetNode is null", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
                 return;
             }
-            NodeModel<Brain> a = new NodeModel<>(new Brain("add-" + atomicInteger.getAndIncrement()));
-            //NodeModel<Animal> b = new NodeModel<>(new Animal("add-"+atomicInteger.getAndIncrement()));
-            //NodeModel<Animal> c = new NodeModel<>(new Animal(R.drawable.ic_14,"add-"+atomicInteger.getAndIncrement()));
-            //editor.addChildNodes(targetNode,a,b,c);
+            NodeModel<Brain> a = new NodeModel<>(new Brain("키워드 추가"));
             editor.addChildNodes(targetNode, a);
+            hideKeyboard();
 
-
-            //add to remove demo cache
-            //removeCache.push(targetNode);
-            //targetNode = b;
             targetNode = null;
             removeCache = null;
         });
@@ -127,81 +123,33 @@ public class Brainstorming extends AppCompatActivity {
         //remove node
         binding.removeNodeBt.setOnClickListener(v -> {
             if (removeCache == null) {
-                Toast.makeText(this, "Ohs, demo removeCache is empty now!! Try to add some nodes firstly!!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Ohs, demo removeCache is empty now!! Try to add some nodes firstly!!", Toast.LENGTH_SHORT).show();
                 return;
             }
             NodeModel<Brain> toRemoveNode = removeCache;
             targetNode = null;
-            //removeCache = toRemoveNode.getParentNode();
             removeCache = null;
             editor.removeNode(toRemoveNode);
+            hideKeyboard();
         });
 
         adapter.setOnItemListener((item, node) -> {
             Brain brain = node.getValue();
-            Toast.makeText(this, "you click the head of " + brain, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,  "선택되었습니다.", Toast.LENGTH_SHORT).show();
             targetNode = node;
             removeCache = node;
         });
-
-
-        //treeView control listener
-        /*final Object token = new Object();
-        Runnable dismissRun = () -> {
-            binding.scalePercent.setVisibility(View.GONE);
-        };
-
-        binding.baseTreeView.setTreeViewControlListener(new TreeViewControlListener() {
-            @Override
-            public void onScaling(int state, int percent) {
-                Log.e(TAG, "onScaling: " + state + "  " + percent);
-                binding.scalePercent.setVisibility(View.VISIBLE);
-                if (state == TreeViewControlListener.MAX_SCALE) {
-                    binding.scalePercent.setText("MAX");
-                } else if (state == TreeViewControlListener.MIN_SCALE) {
-                    binding.scalePercent.setText("MIN");
-                } else {
-                    binding.scalePercent.setText(percent + "%");
-                }
-                handler.removeCallbacksAndMessages(token);
-                handler.postAtTime(dismissRun, token, SystemClock.uptimeMillis() + 2000);
-            }
-
-            @Override
-            public void onDragMoveNodesHit(NodeModel<?> draggingNode, NodeModel<?> hittingNode, View draggingView, View hittingView) {
-                Log.e(TAG, "onDragMoveNodesHit: draging[" + draggingNode + "]hittingNode[" + hittingNode + "]");
-            }
-        });
-
-         */
     }
 
     private TreeLayoutManager getTreeLayoutManager() {
         int space_50dp = 30;
         int space_20dp = 20;
         BaseLine line = getLine();
-        //return new RightTreeLayoutManager(this,space_50dp,space_20dp,line);
-        //return new LeftTreeLayoutManager(this,space_50dp,space_20dp,line);
-        //return new CompactRightTreeLayoutManager(this,space_50dp,space_20dp,line);
-        //return new CompactLeftTreeLayoutManager(this,space_50dp,space_20dp,line);
-        //return new HorizonLeftAndRightLayoutManager(this,space_50dp,space_20dp,line);
-        //return new CompactHorizonLeftAndRightLayoutManager(this,space_50dp,space_20dp,line);
-        //return new DownTreeLayoutManager(this,space_50dp,space_20dp,line);
-        //return new UpTreeLayoutManager(this,space_50dp,space_20dp,line);
         return new CompactDownTreeLayoutManager(this, space_50dp, space_20dp, line);
-        //return new CompactUpTreeLayoutManager(this,space_50dp,space_20dp,line);
-        //return new CompactVerticalUpAndDownLayoutManager(this,space_50dp,space_20dp,line);
-        //return new VerticalUpAndDownLayoutManager(this,space_50dp,space_20dp,line);
-        //return new CompactRingTreeLayoutManager(this,space_50dp,space_20dp,line);
-        //return new ForceDirectedTreeLayoutManager(this,line);
     }
 
     private BaseLine getLine() {
-        //return new SmoothLine();
         return new StraightLine(Color.parseColor("#000000"), 2);
-        //return new PointedLine();
-        //return new DashLine(Color.parseColor("#F1286C"),3);
-        //return new AngledLine();
     }
 
     private void setData(BrainTreeViewAdapter adapter) {
@@ -213,20 +161,20 @@ public class Brainstorming extends AppCompatActivity {
             treeModel.addNode(root);
         }
 
-        //child nodes
-//        NodeModel<Brain> sub0 = new NodeModel<>(new Brain("sub00"));
-//        NodeModel<Brain> sub1 = new NodeModel<>(new Brain("sub01"));
-//        NodeModel<Brain> sub2 = new NodeModel<>(new Brain("sub02"));
-//        NodeModel<Brain> sub3 = new NodeModel<>(new Brain("sub03"));
-//        NodeModel<Brain> sub4 = new NodeModel<>(new Brain("sub04"));
-
-
-        //mark
-        //parentToRemoveChildren = sub0;
-        //targetNode = sub1;
-
         //set data
         adapter.setTreeModel(treeModel);
+    }
+
+    //키보드 숨기는 메소드
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(this);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override
