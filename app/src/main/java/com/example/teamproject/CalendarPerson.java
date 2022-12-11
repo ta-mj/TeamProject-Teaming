@@ -142,7 +142,7 @@ public class CalendarPerson extends AppCompatActivity implements OnDateSelectedL
         //textView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth(), date.getDay()));
         contextEditText.setText("");
         checkDay(date.getYear(), date.getMonth(), date.getDay());
-
+        System.out.println(readDay);
         saveButton.setOnClickListener(new View.OnClickListener() //저장 버튼을 누르면 입력한 내용을 해당 일자에 저장하는 메소드 / 저장 버튼 클릭 이벤트 처리
         {
             @Override
@@ -226,7 +226,7 @@ public class CalendarPerson extends AppCompatActivity implements OnDateSelectedL
 
     public void checkDay(int cYear, int cMonth, int cDay) //선택한 일자를 readDay 변수에 저장하는 메소드
     {
-        readDay = Users.getUserID() + "person_" + cYear + "-" + cMonth + "" + "-" + cDay + ".txt";
+        readDay = Users.getUserID() + "_" + "person_" + cYear + "-" + cMonth + "-" + cDay + ".txt";
         FileInputStream fis;
 
         try
