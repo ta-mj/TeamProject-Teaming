@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class PersonAdapter extends BaseAdapter {
     Context mcontext = null;
     LayoutInflater mLayoutInflater = null;
-    public static ArrayList<ToDo> todolist;
+    public static ArrayList<ToDo> items;
     private CheckBox istodoComplete;
     private TextView todotext;
     private Button scheduleButton;
@@ -27,17 +27,19 @@ public class PersonAdapter extends BaseAdapter {
     private String todo;
     public PersonAdapter(Context context,ArrayList<ToDo> data){
         mcontext = context;
-        todolist = data;
+        items = data;
         mLayoutInflater = LayoutInflater.from(mcontext);
     }
+    public void addTodo(ToDo t){ items.add(t); }
+    public void removeTodo(int position){items.remove(position);}
+    public void setAllToDo(ArrayList<ToDo> data){
 
-    public void removeTodo(int position){todolist.remove(position);}
+    }
+    @Override
+    public int getCount() {return items.size();}
 
     @Override
-    public int getCount() {return todolist.size();}
-
-    @Override
-    public ToDo getItem(int position) {return todolist.get(position);}
+    public ToDo getItem(int position) {return items.get(position);}
 
     @Override
     public long getItemId(int position) {return position;}
@@ -48,14 +50,29 @@ public class PersonAdapter extends BaseAdapter {
 
         TextView todotext = (TextView)view.findViewById(R.id.todotext);
         istodoComplete = (CheckBox)view.findViewById(R.id.istodoComplete);
-        todotext.setText(todolist.get(position).getTodoname());
-
+        todotext.setText(items.get(position).getTodoname());
+        istodoComplete.setChecked(items.get(position).iscomplete);
 
         istodoComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mcontext.getApplicationContext(),String.valueOf(todolist.get(position).iscomplete),Toast.LENGTH_SHORT).show();
-                todolist.get(position).changecompletestate();
+                Toast.makeText(mcontext.getApplicationContext(),String.valueOf(items.get(position).iscomplete),Toast.LENGTH_SHORT).show();
+                items.get(position).changecompletestate();
+                //메인 화면 설정
+                if(items.get(position).iscomplete){
+                    Users.selectedUser.removeItem(items.get(position));
+                }
+                else{
+                    Users.selectedUser.addItem(new MainItem(R.drawable.ic_outline_checklist_24,items.get(position).getTodoname(),items.get(position)));
+                }
+            }
+        });
+        //체크 박스 롱클릭시 할 일 삭제
+        istodoComplete.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                PersonUI.thisPersonUI.removeToDo(position);
+                return true;
             }
         });
 

@@ -33,6 +33,7 @@ public class Brainstorming extends AppCompatActivity {
     private AtomicInteger atomicInteger = new AtomicInteger();
     private Handler handler = new Handler();
     private NodeModel<Brain> parentToRemoveChildren = null;
+    private static TreeModel<Brain> treeModel = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,9 +205,13 @@ public class Brainstorming extends AppCompatActivity {
     }
 
     private void setData(BrainTreeViewAdapter adapter) {
-        //root
-        NodeModel<Brain> root = new NodeModel<>(new Brain("Keyword"));
-        TreeModel<Brain> treeModel = new TreeModel<>(root);
+
+        if(treeModel == null) {
+            //root
+            NodeModel<Brain> root = new NodeModel<>(new Brain("프로젝트"));
+            treeModel = new TreeModel<>(root);
+            treeModel.addNode(root);
+        }
 
         //child nodes
 //        NodeModel<Brain> sub0 = new NodeModel<>(new Brain("sub00"));
@@ -215,7 +220,7 @@ public class Brainstorming extends AppCompatActivity {
 //        NodeModel<Brain> sub3 = new NodeModel<>(new Brain("sub03"));
 //        NodeModel<Brain> sub4 = new NodeModel<>(new Brain("sub04"));
 
-        treeModel.addNode(root);
+
         //mark
         //parentToRemoveChildren = sub0;
         //targetNode = sub1;

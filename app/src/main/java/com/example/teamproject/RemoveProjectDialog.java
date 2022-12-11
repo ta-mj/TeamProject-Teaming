@@ -54,8 +54,18 @@ public class RemoveProjectDialog extends AppCompatActivity {
                 Toast.makeText(context, "프로젝트 삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
                 for(int j = 0 ; j < selectedProject.getUserNum() ; j++){
                     if(selectedProject.getOneUser(j).equals(selectedUser)){
-                        Toast.makeText(context,selectedProject.getOneUser(i).getName(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,selectedProject.getOneUser(j).getName(),Toast.LENGTH_SHORT).show();
+                        //회원 탈퇴
                         selectedProject.removeUser(j);
+                        //해당 유저의 업무 삭제
+                        for(int k = 0 ; k < selectedProject.getAllTask().size() ; k++){
+                            Task t = selectedProject.getOneTask(k);
+                            if(t.getManager().equals(selectedUser)) {
+                                selectedProject.getAllTask().remove(k);
+                                selectedUser.removeTask(t);
+                                k--;
+                            }
+                        }
                     }
                 }
                 Users.selectedUser.removeProject(i);

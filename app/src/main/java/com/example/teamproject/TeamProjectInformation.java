@@ -106,7 +106,7 @@ public class TeamProjectInformation extends AppCompatActivity {
                 if(thisTask.getManager().getName().equals(memberView[j].getText().toString())){
                     numTask[j]++;
                     totalTask++;
-                    if(thisTask.is_complete == true){
+                    if(thisTask.IsComplete() == true){
                         numCompleteTask[j]++;
                         totalCompleteTask++;
                     }

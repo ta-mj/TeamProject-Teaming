@@ -53,10 +53,10 @@ public class CalendarPerson extends AppCompatActivity implements OnDateSelectedL
 
     //데코 관련 변수
     //public static HashSet<CalendarDay> all_Dates = new HashSet<>(); //테스트용
-    public static HashMap<CalendarDay, HashMap<String, EventDecorator>> personal_All_Event = new HashMap<>();
-    public static HashMap<String, EventDecorator> all_Event = new HashMap<>();
+    public static HashMap<String, HashMap<CalendarDay, EventDecorator>> personal_All_Event = new HashMap<>();
+    public static HashMap<CalendarDay, EventDecorator> all_Event = new HashMap<>();
     // public static ArrayList<CalendarDay> all_Dates = new ArrayList<>(); //저장 버튼 누를때 일정만 저장
-    //private EventDecorator eventDecorator; //점 찍는 용도 (필요없을 듯)
+    private EventDecorator eventDecorator; //점 찍는 용도
 
     @BindView(R.id.person_calendarView)
     MaterialCalendarView widget;
@@ -110,20 +110,20 @@ public class CalendarPerson extends AppCompatActivity implements OnDateSelectedL
     }
 
     private void init(){
-
-        //유저 ID로 초기 도트 찍는 반복문
-        if(!personal_All_Event.isEmpty() && !all_Event.isEmpty()){
-            widget.removeDecorators();
-            for(CalendarDay date : personal_All_Event.keySet()){
-                for(String id : all_Event.keySet()){
-                    if(id.equals(Users.getUserID())){
-                        widget.addDecorator(personal_All_Event.get(date).get(id));
-                        widget.invalidateDecorators();
-                    }
-
-                }
-            }
+//        //유저 ID로 초기 도트 찍는 반복문
+//        for(String key : personal_All_Event.keySet()){
+//            if(key.equals(Users.getUserID())){
+//                for(CalendarDay date : all_Event.keySet()){
+//                    widget.addDecorator(personal_All_Event.get(key).get(date));
+//                }
+//            }
+//        }
+        //객체로 함 해보입시더
+        Toast.makeText(getApplicationContext(),String.valueOf(Users.selectedUser.getAllTest().size()),Toast.LENGTH_SHORT).show();
+        for(CalendarDay c : Users.selectedUser.getAllTest().keySet()){
+            widget.addDecorator(Users.selectedUser.getTest(c).getDecorator());
         }
+        widget.invalidateDecorators();
     }
 
     @Override
@@ -141,8 +141,8 @@ public class CalendarPerson extends AppCompatActivity implements OnDateSelectedL
         //diaryTextView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth(), date.getDay()));
         //textView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth(), date.getDay()));
         contextEditText.setText("");
-        checkDay(date.getYear(), date.getMonth(), date.getDay());
-        System.out.println(readDay);
+        checkDay(date);
+
         saveButton.setOnClickListener(new View.OnClickListener() //저장 버튼을 누르면 입력한 내용을 해당 일자에 저장하는 메소드 / 저장 버튼 클릭 이벤트 처리
         {
             @Override
@@ -151,7 +151,6 @@ public class CalendarPerson extends AppCompatActivity implements OnDateSelectedL
                 if(contextEditText.getText().length() == 0){
                     Toast.makeText(getApplicationContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }else{
-                    saveDiary(readDay);
                     str = contextEditText.getText().toString();
                     contentTextView.setText(str);
                     saveButton.setVisibility(View.INVISIBLE);
@@ -160,9 +159,13 @@ public class CalendarPerson extends AppCompatActivity implements OnDateSelectedL
                     contextEditText.setVisibility(View.INVISIBLE);
                     contentTextView.setVisibility(View.VISIBLE);
 
-                    all_Event.put(Users.getUserID(), new EventDecorator(Color.RED, date));
-                    personal_All_Event.put(date, all_Event);
-                    widget.addDecorator(personal_All_Event.get(date).get(Users.getUserID()));
+                    if(!Users.selectedUser.getAllTest().containsKey(date)) {
+                        Users.selectedUser.addTest(date, new Test(str, new EventDecorator(Color.RED, date)));
+                    }
+                    else{
+                        Users.selectedUser.getAllTest().get(date).setContext(str);
+                    }
+                    widget.addDecorator(Users.selectedUser.getTest(date).getDecorator());
                     //widget.addDecorator(all_Event.get(date));
                     //widget.addDecorator(new EventDecorator(Color.RED, date));
                     widget.invalidateDecorators();
@@ -179,7 +182,7 @@ public class CalendarPerson extends AppCompatActivity implements OnDateSelectedL
             {
                 contextEditText.setVisibility(View.VISIBLE);
                 contentTextView.setVisibility(View.INVISIBLE);
-                contextEditText.setText(str);
+                contextEditText.setText(Users.selectedUser.getAllTest().get(date).getContext());
 
                 saveButton.setVisibility(View.VISIBLE);
                 changeButton.setVisibility(View.INVISIBLE);
@@ -200,15 +203,8 @@ public class CalendarPerson extends AppCompatActivity implements OnDateSelectedL
                 saveButton.setVisibility(View.VISIBLE);
                 changeButton.setVisibility(View.INVISIBLE);
                 deleteButton.setVisibility(View.INVISIBLE);
-
-                if(!personal_All_Event.isEmpty() && !all_Event.isEmpty()){
-                    widget.removeDecorator(personal_All_Event.get(date).get(Users.getUserID()));
-                    personal_All_Event.entrySet().removeIf(entry -> entry.getKey().equals(date) && entry.getValue().get(Users.getUserID()).equals(all_Event.get(Users.getUserID())));
-                    all_Event.entrySet().removeIf(entry -> entry.getKey().equals(Users.getUserID()) && entry.getValue().equals(date));
-                    widget.invalidateDecorators();
-                }
-                removeDiary(readDay);
-
+                widget.removeDecorator(Users.selectedUser.getAllTest().remove(date).getDecorator());
+                widget.invalidateDecorators();
             }
         });
 
@@ -224,34 +220,17 @@ public class CalendarPerson extends AppCompatActivity implements OnDateSelectedL
     }
 
 
-    public void checkDay(int cYear, int cMonth, int cDay) //선택한 일자를 readDay 변수에 저장하는 메소드
-    {
-        readDay = Users.getUserID() + "_" + "person_" + cYear + "-" + cMonth + "-" + cDay + ".txt";
-        FileInputStream fis;
 
-        try
-        {
-            fis = openFileInput(readDay);
-
-            byte[] fileData = new byte[fis.available()];
-            fis.read(fileData);
-            fis.close();
-
-            str = new String(fileData);
-
+    public void checkDay(CalendarDay c) {//선택한 일자를 readDay 변수에 저장하는 메소드
+          if(Users.selectedUser.getAllTest().containsKey(c)) {
             contextEditText.setVisibility(View.INVISIBLE);
             contentTextView.setVisibility(View.VISIBLE);
-            contentTextView.setText(str);
+            contentTextView.setText(Users.selectedUser.getAllTest().get(c).getContext());
 
             saveButton.setVisibility(View.INVISIBLE);
             changeButton.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+          }
     }
 
 
@@ -297,14 +276,14 @@ public class CalendarPerson extends AppCompatActivity implements OnDateSelectedL
         private int color;
         private CalendarDay date;
 
-        public EventDecorator(int color, CalendarDay day) {
+        public EventDecorator(int color, CalendarDay date) {
             this.color = color;
-            this.date = day;
+            this.date = date;
         }
 
         @Override
         public boolean shouldDecorate(CalendarDay day) {
-            return date.equals(day);
+            return Users.selectedUser.getAllTest().containsKey(day);
         }
 
         @Override

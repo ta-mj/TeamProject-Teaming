@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -24,15 +25,20 @@ public class TaskAdapter extends BaseAdapter {
     private ImageButton fileUploadButton;
     private CheckBox isTaskComplete;
     private Intent taskUIToFileUpload;
-    public void removeTask(int position){tasks.remove(position);}
     public TaskAdapter(Context context, ArrayList<Task> data) {
         mContext = context;
         tasks = data;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
-    public void setTasks(ArrayList<Task> t){tasks = t;}
+    public void setTasks(ArrayList<Task> t){
+        tasks = t;
+        for(int i = 0 ; i < tasks.size() ; i++){
+            isTaskComplete.setChecked(tasks.get(i).IsComplete());
+        }
+    }
 
     public ArrayList<Task> getTasks(){ return tasks; }
+    public void removeTask(int position){tasks.remove(position);}
     @Override
     public int getCount() {
         return tasks.size();
@@ -57,40 +63,41 @@ public class TaskAdapter extends BaseAdapter {
         TextView deadline = (TextView)view.findViewById(R.id.deadLineText);
         fileUploadButton = (ImageButton)view.findViewById(R.id.commitButton);
         isTaskComplete = (CheckBox)view.findViewById(R.id.isTaskComplete);
-        isTaskComplete.setChecked(Users.selectedProject.getAllTask().get(position).is_complete);
+        isTaskComplete.setChecked(tasks.get(position).IsComplete());
         managerName.setText(tasks.get(position).getManager().getName());
         workName.setText(tasks.get(position).getWorkName());
         deadline.setText(tasks.get(position).getTargetDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
+        fileUploadButton.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View view) {
+                TaskUI.thisTaskUI.removeTask(position);
+                return true;
+            }
+        });
         fileUploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(mContext.getApplicationContext(), tasks.get(position).getManager().getName(),Toast.LENGTH_SHORT).show();
                 taskUIToFileUpload = new Intent(TaskUI.thisTaskUI, FileUpload.class);
-                taskUIToFileUpload.putExtra("담당자", tasks.get(position).getManager().getName());
-                taskUIToFileUpload.putExtra("업무 제목",tasks.get(position).getWorkName());
-                taskUIToFileUpload.putExtra("설명",tasks.get(position).getExplain());
-                taskUIToFileUpload.putExtra("마감일",tasks.get(position).getTargetDate().toString());
-                taskUIToFileUpload.putExtra("파일 이름",tasks.get(position).getFile());
+                taskUIToFileUpload.putExtra("선택업무", tasks.get(position));
                 TaskUI.thisTaskUI.startActivity(taskUIToFileUpload);
-            }
-        });
-
-        fileUploadButton.setOnLongClickListener(new View.OnLongClickListener(){
-            @Override
-            public boolean onLongClick(View view) {
-                Context c = mContext.getApplicationContext();
-                Toast.makeText(mContext.getApplicationContext(),"삭제하시겠습니까",Toast.LENGTH_SHORT).show();
-                RemoveTaskDialog removeTaskDialog = new RemoveTaskDialog(mContext);
-                removeTaskDialog.CallFunction(position);
-                return true;
             }
         });
 
         isTaskComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext.getApplicationContext(), String.valueOf(tasks.get(position).is_complete) , Toast.LENGTH_SHORT).show();
-                tasks.get(position).changeCompleteState();
+                Task t = tasks.get(position);
+                t.changeCompleteState();
+                if(Users.selectedUser.equals(t.getManager())) {
+                    if (t.IsComplete()) {
+                        Users.selectedUser.removeItem(t);
+                    }
+                    else{
+                        Users.selectedUser.addItem(new MainItem(R.drawable.file,t.getWorkName(),t));
+                    }
+                }
             }
         });
         return view;

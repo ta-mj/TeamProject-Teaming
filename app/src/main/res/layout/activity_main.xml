@@ -53,12 +53,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/noItemText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="목록이 없습니다"
-                android:textSize="25dp">
-
+                android:textSize="25dp"
+                android:visibility="gone">
             </TextView>
         </LinearLayout>
 

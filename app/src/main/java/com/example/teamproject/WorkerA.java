@@ -1,12 +1,15 @@
 package com.example.teamproject;
 import android.content.Context;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -48,15 +51,24 @@ public class WorkerA extends Worker {
         // 현재 시각이 알림 범위에 해당여부
         boolean isEventANotifyAvailable = isMorningNotifyRange || isNightNotifyRange;
 
-
+        LocalDate now = LocalDate.now();
+        // 현재 시각이 알림 범위에 해당하면 알림 생성
         if (isEventANotifyAvailable) {
-            // 현재 시각이 알림 범위에 해당하면 알림 생성
-            mNotificationHelper.createNotification(Constants.WORK_A_NAME);
+            //현재 날짜에 완료되지 않은 업무 있는지 판단하여 알람 발생
+            for(int i = 0 ; i < Users.selectedUser.getAllTask().size() ; i++){
+                Task t = Users.selectedUser.getTask(i);
+                if(t.IsComplete() == false){
+                    int between = (int) Duration.between(now.atStartOfDay(),t.getTargetDate().atStartOfDay()).toDays();
+                    if(between <= 1){
+                        mNotificationHelper.createNotification(t);
+                    }
+                }
+            }
         } else {
             // 그 외의 경우 가장 빠른 A 이벤트 예정 시각까지의 notificationDelay 계산하여 딜레이 호출
             long notificationDelay = NotificationHelper.getNotificationDelay(Constants.WORK_A_NAME);
             OneTimeWorkRequest workRequest =
-                    new OneTimeWorkRequest.Builder(WorkerB.class)
+                    new OneTimeWorkRequest.Builder(WorkerA.class)
                             .setInitialDelay(notificationDelay, TimeUnit.MILLISECONDS)
                             .build();
             WorkManager.getInstance(getApplicationContext()).enqueue(workRequest);

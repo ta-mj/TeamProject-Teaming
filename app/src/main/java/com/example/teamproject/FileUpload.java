@@ -12,14 +12,18 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
+import java.nio.file.Path;
 
 
 public class FileUpload extends AppCompatActivity{
@@ -30,6 +34,8 @@ public class FileUpload extends AppCompatActivity{
 
     private View decorView;
     private int uiOption;
+
+    private Task selected_task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,25 +55,31 @@ public class FileUpload extends AppCompatActivity{
         deadline = findViewById(R.id.fileDeadLineText);
         workname = findViewById(R.id.fileWorkNameText);
         explain = findViewById(R.id.fileExplainText);
-        manager.setText(getIntent().getStringExtra("담당자"));
-        deadline.setText(getIntent().getStringExtra("마감일"));
-        workname.setText(getIntent().getStringExtra("업무 제목"));
-        explain.setText(getIntent().getStringExtra("설명"));
+        selected_task = (Task)getIntent().getSerializableExtra("선택업무");
+        manager.setText(selected_task.getManager().getName());
+        deadline.setText(selected_task.getTargetDate().toString());
+        workname.setText(selected_task.getWorkName());
+        explain.setText(selected_task.getExplain());
         fileUploadButton = findViewById(R.id.fileUploadButton);
-        if(getIntent().getParcelableExtra("파일 이름") != null) {
-            Uri uri = getIntent().getParcelableExtra("파일 이름");
-            Cursor returnCursor = getContentResolver().query(uri, null, null, null, null);
+        file = selected_task.getFile();
+        if(file != null) {
+            Cursor returnCursor = getContentResolver().query(file, null, null, null, null);
             returnCursor.moveToFirst();
             int nameindex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
             fileUploadButton.setText(returnCursor.getString(nameindex));
         }
+        else{
+            Toast.makeText(getApplicationContext(),"첨부파일 is null",Toast.LENGTH_SHORT).show();
+        }
         fileUploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent openfile = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                openfile.addCategory(Intent.CATEGORY_OPENABLE);
-                openfile.setType("*/*");
-                openfileLauncher.launch(openfile);
+                if(Users.selectedUser.getName().equals(manager.getText().toString())) {
+                    Intent openfile = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                    openfile.addCategory(Intent.CATEGORY_OPENABLE);
+                    openfile.setType("*/*");
+                    openfileLauncher.launch(openfile);
+                }
 
             }
         });
@@ -75,6 +87,9 @@ public class FileUpload extends AppCompatActivity{
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                selected_task.setFile(file);
+                selected_task.setExplain(explain.getText().toString());
+                selected_task.setWorkName(workname.getText().toString());
                 finish();
             }
         });
@@ -101,6 +116,9 @@ public class FileUpload extends AppCompatActivity{
                     {
                         Intent intent = result.getData();
                         file = intent.getData();
+                        if(file != null){
+                            selected_task.setFile(file);
+                        }
                         Cursor returnCursor = getContentResolver().query(file,null,null,null,null);
                         returnCursor.moveToFirst();
                         int nameindex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
@@ -109,7 +127,6 @@ public class FileUpload extends AppCompatActivity{
                     }
                 }
             });
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {

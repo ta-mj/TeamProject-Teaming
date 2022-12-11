@@ -149,6 +149,9 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
                     all_Event.put(date, eventDecorator);
                     widget.addDecorator(all_Event.get(date));
                     //widget.addDecorator(new EventDecorator(Color.RED, date));
+                    //메인화면에 추가
+                    String mainString = "팀 : " + date.getDate().toString() + "\n" + str;
+                    Users.selectedUser.addItem(new MainItem(R.drawable.calendar,mainString,date));
                     widget.invalidateDecorators();
                 }
 
@@ -169,6 +172,9 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
                 changeButton.setVisibility(View.INVISIBLE);
                 deleteButton.setVisibility(View.INVISIBLE);
                 contentTextView.setText(contextEditText.getText());
+                //메인 화면 아이템 삭제 후 재 등록
+                Users.selectedUser.removeItem(date);
+                Users.selectedUser.addItem(new MainItem(R.drawable.calendar,str,date));
             }
 
         });
@@ -187,6 +193,8 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
                 widget.removeDecorator(all_Event.get(date));
                 all_Event.remove(date);
                 removeDiary(readDay);
+                //메인 화면 아이템 삭제
+                Users.selectedUser.removeItem(date);
                 widget.invalidateDecorators();
             }
         });

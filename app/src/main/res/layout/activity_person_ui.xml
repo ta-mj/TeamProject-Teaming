@@ -23,8 +23,14 @@
     <ListView
         android:id="@+id/person_listview"
         android:layout_width="match_parent"
-        android:layout_height="540dp"
-        android:layout_below="@+id/to_do_search" />
+        android:layout_height="640dp"
+        android:layout_below="@+id/to_do_search"
+        android:divider="@color/white"
+        android:dividerHeight="7dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" />
+
 
     <LinearLayout
         android:id="@+id/linearLayout_text"
