@@ -32,8 +32,11 @@ public class PersonAdapter extends BaseAdapter {
     }
     public void addTodo(ToDo t){ items.add(t); }
     public void removeTodo(int position){items.remove(position);}
+    public ArrayList<ToDo> getAllToDo(){
+        return items;
+    }
     public void setAllToDo(ArrayList<ToDo> data){
-
+        items = data;
     }
     @Override
     public int getCount() {return items.size();}
@@ -51,16 +54,19 @@ public class PersonAdapter extends BaseAdapter {
         TextView todotext = (TextView)view.findViewById(R.id.todotext);
         istodoComplete = (CheckBox)view.findViewById(R.id.istodoComplete);
         todotext.setText(items.get(position).getTodoname());
-        istodoComplete.setChecked(items.get(position).iscomplete);
+        istodoComplete.setChecked(items.get(position).IsComplete());
 
         istodoComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mcontext.getApplicationContext(),String.valueOf(items.get(position).iscomplete),Toast.LENGTH_SHORT).show();
+                Toast.makeText(mcontext.getApplicationContext(),String.valueOf(items.get(position).IsComplete()),Toast.LENGTH_SHORT).show();
                 items.get(position).changecompletestate();
                 //메인 화면 설정
-                if(items.get(position).iscomplete){
+                if(items.get(position).IsComplete()){
                     Users.selectedUser.removeItem(items.get(position));
+                    if(Users.selectedUser.isCompletedToDoHide()){
+                        PersonUI.thisPersonUI.hideCompletedToDo();
+                    }
                 }
                 else{
                     Users.selectedUser.addItem(new MainItem(R.drawable.ic_outline_checklist_24,items.get(position).getTodoname(),items.get(position)));

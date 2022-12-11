@@ -29,6 +29,10 @@ public class Login extends AppCompatActivity {
             Users.makeUser("parkkh9989","125125","125125","박규환","01012345678","parkkh9989@gmail.com");
             Users.makeUser("hyjmex","125125","125125","한단비","01012345678","hyjmex@hanmail.net");
             Users.selectedUser = Users.getUser("taewoo9240");
+            Users.selectedUser.addToDo(new ToDo("토익 교재 구매"));
+            Users.selectedUser.addToDo(new ToDo("설거지 하기"));
+            Users.selectedUser.addToDo(new ToDo("귤 사기"));
+            Users.selectedUser.addToDo(new ToDo("피피티 만들기"));
             TeamProject example = new TeamProject("팀프로젝트1",Users.selectedUser);
             Users.selectedProject.addUser(Users.getUser("ckdtlr2000"));
             Users.selectedProject.addUser(Users.getUser("parkkh9989"));

@@ -63,6 +63,7 @@ public class RemoveProjectDialog extends AppCompatActivity {
                             if(t.getManager().equals(selectedUser)) {
                                 selectedProject.getAllTask().remove(k);
                                 selectedUser.removeTask(t);
+                                selectedUser.removeItem(t);
                                 k--;
                             }
                         }

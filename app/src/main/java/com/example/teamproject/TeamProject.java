@@ -4,7 +4,7 @@ package com.example.teamproject;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-public class TeamProject implements Serializable {
+public class TeamProject{
     //프로젝트 정보
     private String subject;
     //구성원
@@ -13,7 +13,8 @@ public class TeamProject implements Serializable {
     private ArrayList<Task> myTask;
     //브레인스토밍
     //일정
-    //알림
+    //완료 업무 숨기기 기능
+    private boolean isCompletedTaskHide;
     TeamProject(String s, User u){
         subject = s;
         myUser = new ArrayList<>();
@@ -21,6 +22,7 @@ public class TeamProject implements Serializable {
         myUser.add(u);
         Users.selectedUser.addProject(this);
         Users.selectedProject = this;
+        isCompletedTaskHide = false;
     }
     public void setSubject(String s) {
         subject = s;
@@ -33,6 +35,9 @@ public class TeamProject implements Serializable {
         myUser.remove(i);
     }
     public void removeUser(User u){ myUser.remove(u); }
+    public void setCompletedTaskHide(){
+        this.isCompletedTaskHide = !isCompletedTaskHide;
+    }
     public String getSubject() { return this.subject; }
     public ArrayList<User> getAllUser(){ return this.myUser;}
     public ArrayList<Task> getAllTask(){ return this.myTask;}
@@ -46,6 +51,7 @@ public class TeamProject implements Serializable {
     public boolean findUser(User u){
         return myUser.contains(u);
     }
+    public boolean isCompletedTaskHide(){ return this.isCompletedTaskHide; }
     public void sortTaskByStartDate() {
         myTask.sort(new StartDateComparator());
     }

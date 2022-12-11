@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-public class User implements Serializable {
+public class User{
     private int image;
     private String pw;
     private String name;
@@ -18,6 +18,8 @@ public class User implements Serializable {
     private ArrayList<String> myAlram;
     private ArrayList<MainItem> myItem;
     private ArrayList<ToDo> myTodo;
+    //완료된 개인 할 일 숨기기 기능
+    private boolean isCompletedToDoHide;
     //private ArrayList<Test> myTest;
     private HashMap<CalendarDay,Test> myTest;
     //project 객체
@@ -34,6 +36,7 @@ public class User implements Serializable {
         myItem = new ArrayList<>();
         myTodo = new ArrayList<>();
         myTest = new HashMap<>();
+        isCompletedToDoHide = false;
     }
     public String getPW() {
         return pw;
@@ -63,6 +66,7 @@ public class User implements Serializable {
     public HashMap<CalendarDay, Test> getAllTest(){ return myTest; }
     public MainItem getItem(int i){ return myItem.get(i); }
     public Test getTest(CalendarDay c){ return myTest.get(c); }
+    public Boolean isCompletedToDoHide(){ return isCompletedToDoHide; }
     public void addProject(TeamProject t){
         this.myProject.add(t);
     }
@@ -84,4 +88,5 @@ public class User implements Serializable {
             }
         }
     }
+    public void setCompletedToDoHide(){ isCompletedToDoHide = !isCompletedToDoHide; }
 }

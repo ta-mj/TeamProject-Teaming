@@ -133,27 +133,20 @@ public class TaskUI extends AppCompatActivity{
         RemoveTaskDialog removeTaskDialog = new RemoveTaskDialog(TaskUI.this);
         removeTaskDialog.CallFunction(position);
     }
-    //완료 업무 숨기는 함수
-    public void hideCompletedItem(){
-        taskAdapter.setTasks(Users.selectedProject.getAllTask());
-        selectedTask.clear();
-        if(!isCompletedItemHide) {
-            for (int i = 0; i < taskAdapter.getTasks().size(); i++) {
-                Task task = taskAdapter.getTasks().get(i);
-                if(!task.IsComplete()){
-                    selectedTask.add(task);
-                }
-            }
-            taskAdapter.setTasks(selectedTask);
-        }
-        isCompletedItemHide = !isCompletedItemHide;
-        taskAdapter.notifyDataSetChanged();
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.sort_menu, menu);
+        MenuItem item = menu.findItem(R.id.hideCompletedTask);
+        if(item != null){
+            if(Users.selectedProject.isCompletedTaskHide()){
+                hideCompletedTask();
+                item.setTitle("완료된 업무 보이기");
+            }
+            else{
+                item.setTitle("완료된 업무 숨기기");
+            }
+        }
         return true;
     }
 
@@ -173,13 +166,14 @@ public class TaskUI extends AppCompatActivity{
                 onResume();
                 break;
             case R.id.hideCompletedTask: // 완료된 아이템 숨기기/보이기 클릭 시 이벤트 처리
-                hideCompletedItem();
-                if(isCompletedItemHide){
+                Users.selectedProject.setCompletedTaskHide();
+                if(Users.selectedProject.isCompletedTaskHide()){
                     item.setTitle("완료된 업무 보이기");
                 }
                 else{
                     item.setTitle("완료된 업무 숨기기");
                 }
+                hideCompletedTask();
                 break;
             case android.R.id.home:
                 finish();
@@ -188,27 +182,20 @@ public class TaskUI extends AppCompatActivity{
         return true;
     }
 
-
-        /*
-    public void toggleFab(){
-        if(fab_TaskMain_status){
-            //플로팅 액션 버튼 닫기
-            // 애니메이션 추가
-            ObjectAnimator fc_animation = ObjectAnimator.ofFloat(fab_TaskAdd, "translationY", 0f);
-            fc_animation.start();
-            ObjectAnimator fe_animation = ObjectAnimator.ofFloat(fab_TaskDelete, "translationY", 0f);
-            fe_animation.start();
-
-        }else {
-            // 플로팅 액션 버튼 열기
-            ObjectAnimator fc_animation = ObjectAnimator.ofFloat(fab_TaskAdd, "translationY", -175f);
-            fc_animation.start();
-            ObjectAnimator fe_animation = ObjectAnimator.ofFloat(fab_TaskDelete, "translationY", -325f);
-            fe_animation.start();
+    //완료 업무 숨기는 함수
+    public void hideCompletedTask(){
+        taskAdapter.setTasks(Users.selectedProject.getAllTask());
+        selectedTask.clear();
+        if(Users.selectedProject.isCompletedTaskHide()) {
+            for (int i = 0; i < taskAdapter.getTasks().size(); i++) {
+                Task task = taskAdapter.getTasks().get(i);
+                if(!task.IsComplete()){
+                    selectedTask.add(task);
+                }
+            }
+            taskAdapter.setTasks(selectedTask);
         }
-        // 플로팅 버튼 상태 변경
-        fab_TaskMain_status = !fab_TaskMain_status;
+        taskAdapter.notifyDataSetChanged();
     }
-*/
 
 }

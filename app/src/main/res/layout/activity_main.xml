@@ -21,7 +21,7 @@
             layout="@layout/toolbar_bell" />
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView1"
+            android:id="@+id/main_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -35,13 +35,13 @@
             android:id="@+id/main_listview"
             android:layout_width="match_parent"
             android:layout_height="640dp"
-            android:layout_below="@id/searchView1"
+            android:layout_below="@id/main_search"
             android:divider="@color/white"
             android:dividerHeight="7dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/searchView1" />
+            app:layout_constraintTop_toBottomOf="@id/main_search" />
 
         <LinearLayout
             android:id="@+id/linearLayout_text"

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private int uiOption;
     private Intent mainToLogin,mainToProjectUI,mainToTaskUI, mainToPersonUI, mainToTeamCalender;
     private Button projectButton,mainButton,personalButton;
+    private SearchView main_search;
+    private ArrayList<MainItem> selectedItem;
 
     public static MainAdapter mainAdapter;
     @Override
@@ -127,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 mainAdapter = new MainAdapter(this, Users.selectedUser.getAllItem());
             }
             else{
-                mainAdapter.members = Users.selectedUser.getAllItem();
+                mainAdapter.setItems(Users.selectedUser.getAllItem());
             }
             listView.setAdapter(mainAdapter);
             textView.setVisibility(View.GONE);
@@ -150,6 +153,35 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+        selectedItem = new ArrayList<>();
+        //검색 뷰 설정
+        main_search = findViewById(R.id.main_search);
+        main_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                if(s.length() == 0){
+                    mainAdapter.setItems(Users.selectedUser.getAllItem());
+                }
+                else{
+                    mainAdapter.setItems(Users.selectedUser.getAllItem());
+                    selectedItem.clear();
+                    for(int i = 0 ; i < mainAdapter.getItems().size() ; i++){
+                        MainItem m = mainAdapter.getItem(i);
+                        if(m.getContent().contains(s)){
+                            selectedItem.add(m);
+                        }
+                    }
+                    mainAdapter.setItems(selectedItem);
+                }
+                mainAdapter.notifyDataSetChanged();
+                return false;
+            }
+        });
 
         //타이틀 숨기기
         getSupportActionBar().setDisplayShowTitleEnabled(false);

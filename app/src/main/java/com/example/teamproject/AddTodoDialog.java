@@ -37,9 +37,10 @@ public class AddTodoDialog extends AppCompatActivity {
                ToDo t = new ToDo(text);
                Users.selectedUser.addToDo(t);
                Users.selectedUser.addItem(new MainItem(R.drawable.ic_outline_checklist_24,text,t));
-               PersonUI.personadapter.notifyDataSetChanged();
+               PersonUI.personAdapter.notifyDataSetChanged();
                Toast.makeText(context, "할일 추가가 완료되었습니다.", Toast.LENGTH_SHORT).show();
                dlg.dismiss();
+               PersonUI.thisPersonUI.onResume();
            }
        });
 

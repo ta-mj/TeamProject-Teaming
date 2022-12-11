@@ -3,6 +3,8 @@ package com.example.teamproject;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.example.teamproject.CalendarPerson.EventDecorator;
 
+import java.io.Serializable;
+
 public class Test {
     private String context;
     private EventDecorator decorator;
