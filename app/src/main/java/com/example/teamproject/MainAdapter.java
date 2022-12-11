@@ -13,17 +13,22 @@ import java.util.ArrayList;
 public class MainAdapter extends BaseAdapter {
     Context mContext = null;
     LayoutInflater mLayoutInflater = null;
-    ArrayList<MainItem> members;
+    private ArrayList<MainItem> items;
 
     public MainAdapter(Context context, ArrayList<MainItem> data) {
         mContext = context;
-        members = data;
+        items = data;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
-
+    public void setItems(ArrayList<MainItem> items){
+        this.items = items;
+    }
+    public ArrayList<MainItem> getItems(){
+        return this.items;
+    }
     @Override
     public int getCount() {
-        return members.size();
+        return items.size();
     }
 
     @Override
@@ -33,7 +38,7 @@ public class MainAdapter extends BaseAdapter {
 
     @Override
     public MainItem getItem(int position) {
-        return members.get(position);
+        return items.get(position);
     }
 
     @Override
@@ -43,8 +48,8 @@ public class MainAdapter extends BaseAdapter {
         ImageView image = (ImageView) view.findViewById(R.id.main_image);
         TextView content = (TextView) view.findViewById(R.id.main_textview);
 
-        image.setImageResource(members.get(position).getImage());
-        content.setText(members.get(position).getContent());
+        image.setImageResource(items.get(position).getImage());
+        content.setText(items.get(position).getContent());
 
         return view;
     }

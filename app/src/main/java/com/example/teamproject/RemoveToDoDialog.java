@@ -41,13 +41,14 @@ public class RemoveToDoDialog extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 text = messages.getText().toString();
-                ToDo t = PersonUI.personadapter.getItem(position);
+                ToDo t = PersonUI.personAdapter.getItem(position);
                 Users.selectedUser.removeItem(t);
-                PersonUI.personadapter.removeTodo(position);
-                PersonUI.personadapter.notifyDataSetChanged();
+                PersonUI.personAdapter.removeTodo(position);
+                PersonUI.personAdapter.notifyDataSetChanged();
                 // 커스텀 다이얼로그를 종료한다.
                 Toast.makeText(context, "할 일 삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
                 dlgs.dismiss();
+                PersonUI.thisPersonUI.onResume();
             }
         });
         cancelButtons.setOnClickListener(new View.OnClickListener() {

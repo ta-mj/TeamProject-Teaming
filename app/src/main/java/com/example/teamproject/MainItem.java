@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 
-public class MainItem implements Serializable {
+public class MainItem {
     private int image;
     private String content;
     private Object data;//실제 데이터와 연결

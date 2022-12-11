@@ -80,7 +80,7 @@ public class TaskAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Toast.makeText(mContext.getApplicationContext(), tasks.get(position).getManager().getName(),Toast.LENGTH_SHORT).show();
                 taskUIToFileUpload = new Intent(TaskUI.thisTaskUI, FileUpload.class);
-                taskUIToFileUpload.putExtra("선택업무", tasks.get(position));
+                taskUIToFileUpload.putExtra("선택업무 index", position);
                 TaskUI.thisTaskUI.startActivity(taskUIToFileUpload);
             }
         });
@@ -97,6 +97,9 @@ public class TaskAdapter extends BaseAdapter {
                     else{
                         Users.selectedUser.addItem(new MainItem(R.drawable.file,t.getWorkName(),t));
                     }
+                }
+                if(t.IsComplete() && Users.selectedProject.isCompletedTaskHide()){
+                    TaskUI.thisTaskUI.hideCompletedTask();
                 }
             }
         });

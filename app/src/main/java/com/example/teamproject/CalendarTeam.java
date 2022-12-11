@@ -1,9 +1,7 @@
 package com.example.teamproject;
 
-import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -13,7 +11,6 @@ import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,39 +20,23 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateLongClickListener;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
-import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 import com.prolificinteractive.materialcalendarview.spans.DotSpan;
 
 import org.threeten.bp.DayOfWeek;
 import org.threeten.bp.format.DateTimeFormatter;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 
-
-public class Calendar extends AppCompatActivity implements OnDateSelectedListener {
+public class CalendarTeam extends AppCompatActivity implements OnDateSelectedListener {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("EEE, d MMM yyyy");
-    public String readDay = null;  //선택한 일자 읽어오는 변수
+    //public String readDay = null;  //선택한 일자 읽어오는 변수
     public String str = null; //EditText에 입력되는 내용을 저장하는 변수
     //public CalendarView calendarView; //캘린더뷰 변수
     public Button changeButton, deleteButton, saveButton; //수정, 삭제, 저장 버튼
     public TextView diaryTextView, contentTextView; //diaryTextView = 선택한 날짜를 표시해줌, contentTextView = 일정 내용(str변수의 값)을 저장하는 변수
     public EditText contextEditText; //입력 창 관련 변수
 
-    //데코 관련 변수
-    //public static HashSet<CalendarDay> all_Dates = new HashSet<>(); //테스트용
-    public static HashMap<CalendarDay, EventDecorator> all_Event = new HashMap<>();
-    // public static ArrayList<CalendarDay> all_Dates = new ArrayList<>(); //저장 버튼 누를때 일정만 저장
-    private EventDecorator eventDecorator; //점 찍는 용도
 
     @BindView(R.id.calendarView)
     MaterialCalendarView widget;
@@ -66,7 +47,7 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
+        setContentView(R.layout.activity_calendar_team);
         ButterKnife.bind(this);
 
         widget.setOnDateChangedListener(this);
@@ -76,10 +57,7 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
         //Setup initial text
         textView.setText("날짜를 선택해주세요.");
 
-        //MaterialCalendarView calendarView = findViewById(R.id.calendarView);
-        //calendarView.setSelectedDate(CalendarDay.today());
 
-        //calendarView.addDecorators(new SaturdayDecorator(), new SundayDecorator());
         widget.setSelectedDate(CalendarDay.today());
         widget.addDecorators(new SaturdayDecorator(), new SundayDecorator());
 
@@ -101,14 +79,19 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
         deleteButton = findViewById(R.id.deleteButton);
         changeButton = findViewById(R.id.changeButton);
         contentTextView = findViewById(R.id.contentTextView);
-        //textView3 = findViewById(R.id.textView3);
         contextEditText = findViewById(R.id.contextEditText);
 
-        for(CalendarDay key : all_Event.keySet()){
-            widget.addDecorator(all_Event.get(key));
+        init();
+
+    }
+
+    private void init(){
+        //프로젝트로 초기 도트 찍는 반복문
+        //Toast.makeText(getApplicationContext(),String.valueOf(Users.selectedUser.getAllTest().size()),Toast.LENGTH_SHORT).show();
+        for(CalendarDay c : Users.selectedProject.getAllTeamSchedule().keySet()){
+            widget.addDecorator(Users.selectedProject.getTeamSchedule(c).getDecorator());
         }
-
-
+        widget.invalidateDecorators();
     }
 
     @Override
@@ -116,17 +99,13 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
             @NonNull MaterialCalendarView widget,
             @NonNull CalendarDay date,
             boolean selected) {
-        //textView.setText(selected ? FORMATTER.format(date.getDate()) : "날짜를 선택해주세요.");
-        //diaryTextView.setVisibility(View.VISIBLE);
         saveButton.setVisibility(View.VISIBLE);
         contextEditText.setVisibility(View.VISIBLE);
         contentTextView.setVisibility(View.INVISIBLE);
         changeButton.setVisibility(View.INVISIBLE);
         deleteButton.setVisibility(View.INVISIBLE);
-        //diaryTextView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth(), date.getDay()));
-        //textView.setText(String.format("%d / %d / %d", date.getYear(), date.getMonth(), date.getDay()));
         contextEditText.setText("");
-        checkDay(date.getYear(), date.getMonth(), date.getDay());
+        checkDay(date);
 
         saveButton.setOnClickListener(new View.OnClickListener() //저장 버튼을 누르면 입력한 내용을 해당 일자에 저장하는 메소드 / 저장 버튼 클릭 이벤트 처리
         {
@@ -136,7 +115,6 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
                 if(contextEditText.getText().length() == 0){
                     Toast.makeText(getApplicationContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }else{
-                    saveDiary(readDay);
                     str = contextEditText.getText().toString();
                     contentTextView.setText(str);
                     saveButton.setVisibility(View.INVISIBLE);
@@ -145,13 +123,18 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
                     contextEditText.setVisibility(View.INVISIBLE);
                     contentTextView.setVisibility(View.VISIBLE);
 
-                    eventDecorator = new EventDecorator(Color.RED);
-                    all_Event.put(date, eventDecorator);
-                    widget.addDecorator(all_Event.get(date));
-                    //widget.addDecorator(new EventDecorator(Color.RED, date));
-                    //메인화면에 추가
-                    Users.selectedUser.addItem(new MainItem(R.drawable.calendar,str,date));
+                    if(!Users.selectedProject.getAllTeamSchedule().containsKey(date)) {
+                        Users.selectedProject.addTeamSchedule(date, new Schedule(str, new EventDecorator(Color.RED, date)));
+                    }
+                    else{
+                        Users.selectedProject.getAllTeamSchedule().get(date).setContext(str);
+                    }
+
+                    widget.addDecorator(Users.selectedProject.getAllTeamSchedule().get(date).getDecorator());
                     widget.invalidateDecorators();
+                    //메인화면에 추가
+                    String mainString = "팀 : " + date.getDate().toString() + "\n" + str;
+                    Users.selectedUser.addItem(new MainItem(R.drawable.calendar,mainString,date));
                 }
 
 
@@ -165,7 +148,7 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
             {
                 contextEditText.setVisibility(View.VISIBLE);
                 contentTextView.setVisibility(View.INVISIBLE);
-                contextEditText.setText(str);
+                contextEditText.setText(Users.selectedProject.getAllTeamSchedule().get(date).getContext());
 
                 saveButton.setVisibility(View.VISIBLE);
                 changeButton.setVisibility(View.INVISIBLE);
@@ -173,7 +156,6 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
                 contentTextView.setText(contextEditText.getText());
                 //메인 화면 아이템 삭제 후 재 등록
                 Users.selectedUser.removeItem(date);
-                Users.selectedUser.addItem(new MainItem(R.drawable.calendar,str,date));
             }
 
         });
@@ -189,9 +171,7 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
                 saveButton.setVisibility(View.VISIBLE);
                 changeButton.setVisibility(View.INVISIBLE);
                 deleteButton.setVisibility(View.INVISIBLE);
-                widget.removeDecorator(all_Event.get(date));
-                all_Event.remove(date);
-                removeDiary(readDay);
+                widget.removeDecorator(Users.selectedProject.getAllTeamSchedule().remove(date).getDecorator());
                 //메인 화면 아이템 삭제
                 Users.selectedUser.removeItem(date);
                 widget.invalidateDecorators();
@@ -210,94 +190,23 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
     }
 
 
-    public void checkDay(int cYear, int cMonth, int cDay) //선택한 일자를 readDay 변수에 저장하는 메소드
+    public void checkDay(CalendarDay c) //선택한 일자를 readDay 변수에 저장하는 메소드
     {
-        readDay = "" + cYear + "-" + cMonth + "" + "-" + cDay + ".txt";
-        FileInputStream fis;
-
-        try
-        {
-            fis = openFileInput(readDay);
-
-            byte[] fileData = new byte[fis.available()];
-            fis.read(fileData);
-            fis.close();
-
-            str = new String(fileData);
-
+        if (Users.selectedProject.getAllTeamSchedule().containsKey(c)) {
             contextEditText.setVisibility(View.INVISIBLE);
             contentTextView.setVisibility(View.VISIBLE);
-            contentTextView.setText(str);
+            contentTextView.setText(Users.selectedProject.getAllTeamSchedule().get(c).getContext());
 
             saveButton.setVisibility(View.INVISIBLE);
             changeButton.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
         }
     }
 
 
-    @SuppressLint("WrongConstant")
-    public void removeDiary(String readDay) //선택한 일자에 저장한 내용을 삭제하는 메소드
-    {
-        FileOutputStream fos;
-        try
-        {
-            fos = openFileOutput(readDay, MODE_NO_LOCALIZED_COLLATORS);
-            String content = "";
-            fos.write((content).getBytes());
-            fos.close();
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    @SuppressLint("WrongConstant")
-    public void saveDiary(String readDay) //선택한 일자에 입력 내용을 저장하는 메소드
-    {
-        FileOutputStream fos;
-        try
-        {
-            fos = openFileOutput(readDay, MODE_NO_LOCALIZED_COLLATORS);
-            String content = contextEditText.getText().toString();
-            fos.write((content).getBytes());
-            fos.close();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
 
 
-    //캘린더에 도트 찍어주는 클래스
-    class EventDecorator implements DayViewDecorator {
 
-        private int color;
-        //private CalendarDay date;
-
-        public EventDecorator(int color) {
-            this.color = color;
-            //this.date = date;
-        }
-
-        @Override
-        public boolean shouldDecorate(CalendarDay day) {
-            return all_Event.containsKey(day);
-        }
-
-        @Override
-        public void decorate(DayViewFacade view) {
-            view.addSpan(new DotSpan(5, color));
-        }
-    }
 
     class SaturdayDecorator implements DayViewDecorator {
 
@@ -307,7 +216,7 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
         }
 
         @Override
-        public boolean shouldDecorate(CalendarDay day) {;
+        public boolean shouldDecorate(CalendarDay day) {
             //day.copyTo(calendar);
             int weekDay = day.getDate().with(DayOfWeek.SATURDAY).getDayOfMonth();
             return weekDay == day.getDay();
@@ -336,6 +245,7 @@ public class Calendar extends AppCompatActivity implements OnDateSelectedListene
         public void decorate(DayViewFacade view) {
             view.addSpan(new ForegroundColorSpan(Color.RED));
         }
+
     }
 
     @Override

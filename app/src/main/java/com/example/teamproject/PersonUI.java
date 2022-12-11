@@ -1,5 +1,7 @@
 package com.example.teamproject;
 
+import static android.view.View.GONE;
+
 import android.app.Person;
 import android.content.Intent;
 import android.os.Build;
@@ -10,12 +12,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,11 +32,14 @@ public class PersonUI extends AppCompatActivity {
 //    private int uiOption;
     private ListView listView;
     private FloatingActionButton fab_toDoAdd;
-    public static PersonAdapter personadapter;
+    public static PersonAdapter personAdapter;
     public static PersonUI thisPersonUI;
 
     private Button person_toDoButton, person_scheduleButton;
     private Intent personUIToCalendar;
+    //검색 관련 변수
+    private SearchView to_do_search;
+    private ArrayList<ToDo> selectedToDo;
 
     protected void onResume() {
         super.onResume();
@@ -45,6 +54,14 @@ public class PersonUI extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        TextView textView = findViewById(R.id.noToDoList);
+
+        if(Users.selectedUser.getAllToDo().size() == 0){
+            textView.setVisibility(View.VISIBLE);
+        }
+        else{
+            textView.setVisibility(View.GONE);
+        }
         thisPersonUI = this;
         fab_toDoAdd = findViewById(R.id.fab_ToDoAdd);
         person_scheduleButton = findViewById(R.id.person_schedulebutton);
@@ -54,13 +71,43 @@ public class PersonUI extends AppCompatActivity {
 
         ListView listview = (ListView) findViewById(R.id.person_listview);
 
-        personadapter = new PersonAdapter(this,Users.selectedUser.getAllToDo());
+        personAdapter = new PersonAdapter(this,Users.selectedUser.getAllToDo());
 
-        listview.setAdapter(personadapter);
+        listview.setAdapter(personAdapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),personadapter.getItem(position).getTodoname(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),personAdapter.getItem(position).getTodoname(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //검색 뷰 설정
+        to_do_search = findViewById(R.id.to_do_search);
+        selectedToDo = new ArrayList<>();
+        to_do_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                if(s.length() == 0){
+                    personAdapter.setAllToDo(Users.selectedUser.getAllToDo());
+                }
+                else{
+                    personAdapter.setAllToDo(Users.selectedUser.getAllToDo());
+                    selectedToDo.clear();
+                    for(int i = 0 ; i < personAdapter.getAllToDo().size() ; i++){
+                        ToDo todo = personAdapter.getAllToDo().get(i);
+                        if(todo.getTodoname().contains(s)){
+                            selectedToDo.add(todo);
+                        }
+                    }
+                    personAdapter.setAllToDo(selectedToDo);
+                }
+                personAdapter.notifyDataSetChanged();
+                return false;
             }
         });
 
@@ -80,6 +127,7 @@ public class PersonUI extends AppCompatActivity {
                 startActivity(personUIToCalendar);
             }
         });
+
     }
 
     //할 일 삭제 함수
@@ -92,22 +140,56 @@ public class PersonUI extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.todo_sort_menu, menu);
+        MenuItem item = menu.findItem(R.id.hideCompletedToDo);
+        if(item != null){
+            if(Users.selectedUser.isCompletedToDoHide()){
+                hideCompletedToDo();
+                item.setTitle("완료된 할 일 보이기");
+            }
+            else{
+                item.setTitle("완료된 할 일 숨기기");
+            }
+        }
+
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.navigation_notifications: //알림 버튼 클릭 시 이벤트 처리
-                Intent personUIToAlarm = new Intent (this, AlarmUI.class);
-                startActivity(personUIToAlarm);
+            case R.id.hideCompletedToDo: // 완료된 아이템 숨기기/보이기 클릭 시 이벤트 처리
+                Users.selectedUser.setCompletedToDoHide();
+                if(Users.selectedUser.isCompletedToDoHide()){
+                    item.setTitle("완료된 할 일 보이기");
+                }
+                else{
+                    item.setTitle("완료된 할 일 숨기기");
+                }
+                hideCompletedToDo();
                 break;
-            case R.id.hideCompletedToDo: // 완료된 할 일 숨기기 이벤트 처리
-                break;
-            case android.R.id.home: //뒤로가기 버튼 클릭 시 이벤트 처리
+            case android.R.id.home:
                 finish();
                 break;
         }
         return true;
     }
+    public void hideCompletedToDo(){
+        personAdapter.setAllToDo(Users.selectedUser.getAllToDo());
+        selectedToDo.clear();
+        if(Users.selectedUser.isCompletedToDoHide()) {
+            for (int i = 0; i < personAdapter.getAllToDo().size(); i++) {
+                ToDo todo = personAdapter.getAllToDo().get(i);
+                if(!todo.IsComplete()){
+                    selectedToDo.add(todo);
+                }
+            }
+            personAdapter.setAllToDo(selectedToDo);
+        }
+        else{
+
+        }
+        personAdapter.notifyDataSetChanged();
+    }
+
+
+
 }

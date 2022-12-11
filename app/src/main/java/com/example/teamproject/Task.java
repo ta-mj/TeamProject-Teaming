@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Comparator;
 
-public class Task implements Serializable {
+public class Task{
     //업무 이름
     private String catecory;
     //담당자

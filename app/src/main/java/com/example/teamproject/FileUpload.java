@@ -1,5 +1,7 @@
 package com.example.teamproject;
 
+import static android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -55,14 +57,14 @@ public class FileUpload extends AppCompatActivity{
         deadline = findViewById(R.id.fileDeadLineText);
         workname = findViewById(R.id.fileWorkNameText);
         explain = findViewById(R.id.fileExplainText);
-        selected_task = (Task)getIntent().getSerializableExtra("선택업무");
+        selected_task = TaskUI.taskAdapter.getItem(getIntent().getIntExtra("선택업무 index",1));
         manager.setText(selected_task.getManager().getName());
         deadline.setText(selected_task.getTargetDate().toString());
         workname.setText(selected_task.getWorkName());
         explain.setText(selected_task.getExplain());
         fileUploadButton = findViewById(R.id.fileUploadButton);
         file = selected_task.getFile();
-        if(file != null) {
+        if(file != null){
             Cursor returnCursor = getContentResolver().query(file, null, null, null, null);
             returnCursor.moveToFirst();
             int nameindex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
@@ -79,6 +81,11 @@ public class FileUpload extends AppCompatActivity{
                     openfile.addCategory(Intent.CATEGORY_OPENABLE);
                     openfile.setType("*/*");
                     openfileLauncher.launch(openfile);
+                }
+                else{
+                    if(selected_task.getFile() != null){
+                        Toast.makeText(getApplicationContext(),"파일 있음!",Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }
@@ -116,6 +123,13 @@ public class FileUpload extends AppCompatActivity{
                     {
                         Intent intent = result.getData();
                         file = intent.getData();
+
+                        grantUriPermission(getPackageName(),file, FLAG_GRANT_READ_URI_PERMISSION);
+
+                        final int takeFlags = intent.getFlags() & (FLAG_GRANT_READ_URI_PERMISSION);
+
+                        getContentResolver().takePersistableUriPermission(file, FLAG_GRANT_READ_URI_PERMISSION);
+
                         if(file != null){
                             selected_task.setFile(file);
                         }

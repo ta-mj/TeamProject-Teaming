@@ -58,7 +58,7 @@ public class TeamProjectInformation extends AppCompatActivity {
 
         //Intent 설정
         projectInfoToTaskUI = new Intent(TeamProjectInformation.this,TaskUI.class);
-        projectInfoToCalender = new Intent(TeamProjectInformation.this, Calendar.class);
+        projectInfoToCalender = new Intent(TeamProjectInformation.this, CalendarTeam.class);
         projectInfoToBrainstorming = new Intent(TeamProjectInformation.this, Brainstorming.class);
 
         //id로 view 연결
