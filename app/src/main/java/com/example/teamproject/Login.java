@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+
 import java.time.LocalDate;
 
 public class Login extends AppCompatActivity {
@@ -30,14 +32,11 @@ public class Login extends AppCompatActivity {
             Users.makeUser("hyjmex","125125","125125","한단비","01012345678","hyjmex@hanmail.net");
             Users.selectedUser = Users.getUser("taewoo9240");
             Users.selectedUser.addToDo(new ToDo("토익 교재 구매"));
-            Users.selectedUser.addToDo(new ToDo("설거지 하기"));
-            Users.selectedUser.addToDo(new ToDo("귤 사기"));
-            Users.selectedUser.addToDo(new ToDo("피피티 만들기"));
+            Users.selectedUser.addToDo(new ToDo("주말 마트 장보기"));
             TeamProject example = new TeamProject("팀프로젝트1",Users.selectedUser);
             Users.selectedProject.addUser(Users.getUser("ckdtlr2000"));
             Users.selectedProject.addUser(Users.getUser("parkkh9989"));
             Users.selectedProject.addUser(Users.getUser("hyjmex"));
-            example.makeTask("1111",Users.getUser("taewoo9240"),"1111", LocalDate.parse("2022-12-13"),"1111");
             example.makeTask("1111",Users.getUser("taewoo9240"),"최종 보고서 작성", LocalDate.parse("2022-12-12"),"1111");
             example.makeTask("1111",Users.getUser("taewoo9240"),"PPT 작성", LocalDate.parse("2022-12-13"),"1111");
             example.makeTask("2222",Users.getUser("ckdtlr2000"),"2222", LocalDate.parse("2022-12-12"),"2222");

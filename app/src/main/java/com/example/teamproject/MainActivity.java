@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
             //알람 설정
             NotificationHelper.createNotificationChannel(getApplicationContext());
             NotificationHelper.refreshScheduledNotification(getApplicationContext());
-            setAlram(WorkManager.getInstance(getApplicationContext()));
+            //setAlram(WorkManager.getInstance(getApplicationContext()));
         }
         if(Users.selectedUser.getAllItem().size() == 0){
             textView.setVisibility(View.VISIBLE);

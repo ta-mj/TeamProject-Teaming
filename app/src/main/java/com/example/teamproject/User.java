@@ -71,11 +71,11 @@ public class User{
     }
     public void removeProject(int i){ this.myProject.remove(i); }
     public void addTask(Task t){ this.myTask.add(t); }
-    public void addToDo(ToDo t){ this.myTodo.add(t); }
-    public void addSchedule(CalendarDay c, Schedule t){ this.mySchedule.put(c,t); }
-    public void removeToDo(int i){ this.myTodo.remove(i); }
     public void removeTask(int i){ this.myTask.remove(i); }
     public void removeTask(Task t){ this.myTask.remove(t); }
+    public void addToDo(ToDo t){ this.myTodo.add(t); }
+    public void removeToDo(int i){ this.myTodo.remove(i); }
+    public void addSchedule(CalendarDay c, Schedule t){ this.mySchedule.put(c,t); }
     public void addAlram(String s){ this.myAlram.add(s); }
     public void removeAlram(int i){ this.myAlram.remove(i); }
     public void addItem(MainItem i){this.myItem.add(i); }
